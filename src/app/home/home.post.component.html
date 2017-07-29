@@ -1,0 +1,37 @@
+<div fxLayout="column" style="width:1080px; height: 560px; padding-bottom:20px;" >
+    <md-toolbar class="my-post-navbar">
+        <div class="title" fxLayout="row">
+            <div fxLayout="row" class="text-normal text-bold" style="padding-bottom:8px" [innerHTML]="post?.title?.rendered | keepHtml"></div>
+        </div>
+        <span class="fill-remaining-space"></span>
+        <div fxLayout="row" style="padding-bottom:8px">
+            <share-buttons
+                [pinterest]="false"
+                [linkedIn]="false"
+                [google]="false"
+                [tumblr]="false"
+                [facebook]="false"
+                [reddit]="false"
+                [stumbleUpOn]="false"
+                [whatsApp]="false"  [url]="linkToShare" [title]="title"  >
+            </share-buttons>
+            <div fxLayout="row" class="pull-right"> <button md-button md-dialog-close><i class="material-icons md-32">close</i></button> </div>
+        </div>
+    </md-toolbar>
+    <div fxLayout="row" class="post-body">
+        <div fxFlex="75">
+            <div class="margin-top-30" style="margin-right: 24px;">
+                <div class="margin-top-10" style="overflow:auto; margin-bottom:20px"> 
+                    <div id="post-content" [innerHTML]="post?.content?.rendered | keepHtml"></div>
+                </div>            
+            </div>
+        </div>
+        <div fxFlex="25" class="border-left-light-gray">
+            <div class="margin-top-30" style="margin-left: 24px;">
+                <div class="margin-top-10" style="overflow:auto; margin-bottom:20px"> 
+                    <div style="font-weight:600"> Related Posts </div>
+                </div>            
+            </div>
+        </div>
+    </div>
+</div>

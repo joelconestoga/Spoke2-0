@@ -1,0 +1,108 @@
+<div fxLayout="row" style="padding:0px; overflow: hidden;" class="bg-color-blue animated fadeIn" id="section1">
+  <div fxFlex="100" fxFlex.xs="100" style="margin: auto;">
+    <div fxLayout="row" fxLayout.lt-lg="column"  style="margin-top:20px; padding-right:8px; padding-left:5px; padding-bottom:15px">
+      <div fxLayout="column" fxFlex="41" style="width:100%; padding-right:8px; padding-left:8px;" *ngFor="let post of cover.highlight">
+          <div style="width:100%; margin-bottom: 0.5625rem;" *ngFor="let post of cover.highlight">
+            <md-card style="padding:0px !important;" (click)="openPost(post.id, post.title.rendered)" class="cursor-pointer animated fadeIn wow" data-wow-offset="2.0s">
+              <div class="stretchy-wrapper text-title" style="font-size:1.200em; color: white" [style.background-image]="getBackground(post.featured_media_url)" [ngStyle]="{'background-position': 'center', 'background-repeat': 'no-repeat', 'background-color': 'black'}"> 
+                <div class="stretchy-wrapper bx overlay-post"> 
+                  <div [innerHTML]="post.title.rendered | keepHtml" class="overlay-post-title" style="position:absolute;z-index:3;top:65%;left:30px;max-width:55%;"></div>           
+                </div>
+              </div> 
+            </md-card>
+          </div>
+      </div>
+      <div fxLayout="column" fxFlex="38">
+        <div fxLayout="row" fxLayout.lt-sm="column">
+          <div fxFlex="50" style="width:100%; padding-right:8px; padding-left:8px; margin-bottom: 0.5625rem;" *ngFor="let post of cover.rowOne">
+            <md-card style="padding:0px !important;" (click)="openPost(post.id, post.title.rendered)" class="cursor-pointer animated fadeIn">
+              <div class="stretchy-wrapper text-title" style="font-size:1.100em; color: white" [style.background-image]="getBackground(post.featured_media_url)" [ngStyle]="{'background-position': 'center', 'background-repeat': 'no-repeat', 'background-color': 'black'}"> 
+                <div class="stretchy-wrapper bx overlay-post"> 
+                  <div [innerHTML]="post.title.rendered | keepHtml" class="overlay-post-title" style="position:absolute;z-index:3;top:45%; max-width:80%;"></div>
+                </div>
+              </div>       
+            </md-card>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayout.lt-sm="column">
+          <div fxFlex="50" style="width:100%; padding-right:8px; padding-left:8px;" *ngFor="let post of cover.rowTwo">
+            <md-card style="padding:0px !important;" (click)="openPost(post.id, post.title.rendered)" class="cursor-pointer animated fadeIn">
+              <div class="stretchy-wrapper text-title" style="font-size:1.100em; color: white" [style.background-image]="getBackground(post.featured_media_url)" [ngStyle]="{'background-position': 'center', 'background-repeat': 'no-repeat', 'background-color': 'black'}"> 
+                <div class="stretchy-wrapper bx overlay-post"> 
+                  <div [innerHTML]="post.title.rendered | keepHtml" class="overlay-post-title"></div>
+                </div>
+              </div> 
+            </md-card>
+          </div>
+        </div>
+      </div>
+      <div fxLayout="column" fxFlex="21">
+        <div id="twitterFeed">
+          <a class="twitter-timeline" data-height="auto" href="https://twitter.com/SpokeOnline">Tweets by SpokeOnline</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div fxLayout="row" id="stories" class="stories animated fadeInTop">
+  <div fxFlex="100" fxFlex.xs="100" style="margin: auto;">
+    <div *ngFor="let cat of data; let i = index" fxLayout="column" class="animated fadeIn">
+      <div fxFlex *ngIf="i === 2">
+        <h1 class="cat-title padding-left-20">SpokeOnline on YouTube</h1>
+        <iframe  width="100%" height="600" src="https://www.youtube.com/embed/+lastest?list=LLa3gR-CwiJQz_o3m7AUVdjg" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div fxFlex class="animated fadeIn" [id]="cat.name">
+        <h1 fxLayout="row" class="cat-title padding-left-20">{{cat.name}}</h1>            
+        <div fxLayout="row" style="height:inherit;" fxLayout.xs="column" fxLayoutWrap="wrap" fxLayoutGap="auto" fxLayoutGap.xs="0" (mouseenter)='mouseEnter(cat.name)' (mouseleave)='mouseLeave("")'>
+          <div *ngFor="let post of cat.posts, let x = index" fxFlex.gt-xs="50%" [fxFlex.gt-md]="25">
+            <md-card style="padding:0px !important; margin:15px;" (click)="openPost(post.id, post.title.rendered)" class="cursor-pointer animated fadeInRight wow" data-wow-delay="0.4s">
+              <div class="stretchy-wrapper text-title"  style="font-size:1.000em; color: white" [style.background-image]="getBackground(post.featured_media_url)" [ngStyle]="{'background-position': 'center', 'background-repeat': 'no-repeat', 'background-color': 'black'}"> 
+                  <div style="z-index:12; position:absolute; right:0; height:100%" *ngIf="x === 3 && forward === cat.name" (click)='loadMore(cat.id)'> 
+                    <div style="height:inherit; width:50px;" class="post-item-arrow right pull-right cursor-pointer">
+                      <div class="post-item-arrow-navigate"><i class="material-icons md-48">keyboard_arrow_right</i></div>
+                    </div>
+                  </div>
+                  <div style="z-index:12; position:absolute; left:0; height:100%"  *ngIf="x === 0 && backward > 0 && forward === cat.name" (click)='loadPrevious(cat.id)'> 
+                    <div style="height:100%; width:50px;" class="post-item-arrow left pull-left cursor-pointer">
+                      <div class="post-item-arrow-navigate"><i class="material-icons md-48">keyboard_arrow_left</i></div>
+                    </div>
+                  </div>
+                <div class="stretchy-wrapper bx overlay-post"> 
+                  <h3 [innerHTML]="post.title.rendered | keepHtml" class="overlay-post-title"></h3>
+                </div>
+              </div> 
+            </md-card>
+          </div>
+          <div style="z-index:12; position:absolute; left:0; height:35%" *ngIf="backward > 0 && forward === cat.name"> 
+            <div style="height:100%; width:60px;" class="post-item-arrow left pull-left cursor-pointer">
+              <div class="post-item-arrow-navigate" (click)='loadPrevious(cat.id)'><i class="material-icons md-48">keyboard_arrow_left</i></div>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
+<div fxLayout="row" class="bg-color-blue animated fadeIn padding-20 margin-top-30" *ngIf="data">
+  <div fxFlex="70" style="margin: auto; color: white">
+    <div fxLayout="row">
+      <div fxFlex="30" style="padding-left:30px; padding-right: 30px;">
+        <div class="text-large" style="color: white">About Spoke</div>
+        <div class="padding-top-10 text-small color-white">Spoke Online is produced weekly during the school year by Conestoga College second-year journalism print students, faculty adviser Christina Jonas and new media technologist Michael Toll.</div>
+      </div>
+      <div fxFlex="30" style="padding-left:30px; padding-right: 30px;">
+        <div class="text-large" style="color: white">Contact</div>
+        <div class="padding-top-10"><i class="material-icons">email</i>spoke@conestogac.on.ca</div>
+        <div><i class="material-icons">phone</i> 519-748-5220, ext. 3691</div>
+      </div>      
+      <div fxFlex="30" style="padding-left:30px; padding-right: 30px;">
+        <div class="text-large" style="color: white">Social</div>
+        <div class="padding-top-10">
+          <a class="cursor-pointer margin-right-10" href="https://twitter.com/spokeonline" target="_blank"><i class="fa fa-2x fa-twitter-square" aria-hidden="true"></i></a>
+          <a class="cursor-pointer margin-right-10" href="https://www.facebook.com/spokeonline" target="_blank"><i class="fa fa-2x fa-facebook-square" aria-hidden="true"></i></a>
+          <a class="cursor-pointer" href="https://www.youtube.com/user/SpokeOnline" target="_blank"><i class="fa fa-2x fa-youtube-square" aria-hidden="true"></i></a>
+        </div>
+      </div>       
+    </div>    
+  </div>
+</div>

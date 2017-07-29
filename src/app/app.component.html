@@ -1,0 +1,36 @@
+<md-toolbar class="my-navbar">
+  <div class="my-brand cursor-pointer" fxLayout="row" routerLink="">
+    <img src="./assets/images/logo.png" height="30" class="margin-top-5">
+  </div>
+  <div fxLayout="row" class="margin-left-15" fxShow="false" fxShow.gt-sm>
+    <div role="navigation" class="my-navbar-list"  *ngFor="let cat of categories">      
+      <a class="nav-link" scrollTo href="#{{cat.name}}">{{cat.name}}</a>
+    </div>
+  </div>
+  <span class="fill-remaining-space"></span>
+  <div fxLayout="row" fxHide="false" fxHide.gt-sm>
+    <button md-button [md-menu-trigger-for]="menu"><md-icon>menu</md-icon></button>
+  </div>
+  <md-menu class="my-navbar-toggled" x-position="before" y-position="after" [overlapTrigger]="false" #menu="mdMenu">
+    <a class="nav-link" href="#Traction">Top Stories</a>
+    <a class="nav-link" href="#Traction">Top Stories</a>
+  </md-menu>
+  <div fxLayout="row">
+    <a class="color-blue cursor-pointer margin-right-10" href="https://twitter.com/spokeonline" target="_blank"><i class="fa fa-2x fa-twitter-square" aria-hidden="true"></i></a>
+    <a class="color-blue cursor-pointer margin-right-10" href="https://www.facebook.com/spokeonline" target="_blank"><i class="fa fa-2x fa-facebook-square" aria-hidden="true"></i></a>
+    <a class="color-blue cursor-pointer" href="https://www.youtube.com/user/SpokeOnline" target="_blank"><i class="fa fa-2x fa-youtube-square" aria-hidden="true"></i></a>
+  </div>
+</md-toolbar>
+<md-progress-bar class="my-loading-bar" color="accent" [style.visibility]="loading ? 'visible' : 'hidden'" mode="indeterminate"></md-progress-bar>
+<div class="my-content">
+  <md-sidenav-container class="my-sidenav-container">
+    <md-sidenav #sidenav class="my-sidenav" (close)="expanded = ''">
+    </md-sidenav>
+    <div class="my-content-inner">
+      <router-outlet #outlet="outlet"></router-outlet>
+    </div>
+  </md-sidenav-container>
+</div>
+
+
+
