@@ -11,11 +11,13 @@
   <div fxLayout="row" fxHide="false" fxHide.gt-sm>
     <button md-button [md-menu-trigger-for]="menu"><md-icon>menu</md-icon></button>
   </div>
-  <md-menu class="my-navbar-toggled" x-position="before" y-position="after" [overlapTrigger]="false" #menu="mdMenu">
-    <a class="nav-link" href="#Traction">Top Stories</a>
-    <a class="nav-link" href="#Traction">Top Stories</a>
+  <md-menu class="my-navbar-toggled" x-position="before" y-position="after" [overlapTrigger]="false" #menu="mdMenu">      
+    <div *ngFor="let cat of categories">      
+      <a class="nav-link" scrollTo href="#{{cat.name}}"><button md-menu-item>{{cat.name}}</button></a>
+    </div>
   </md-menu>
   <div fxLayout="row">
+    <div class="margin-right-10"><button md-button (click)="stream()">CJIQ FM 88.3</button></div>
     <a class="color-blue cursor-pointer margin-right-10" href="https://twitter.com/spokeonline" target="_blank"><i class="fa fa-2x fa-twitter-square" aria-hidden="true"></i></a>
     <a class="color-blue cursor-pointer margin-right-10" href="https://www.facebook.com/spokeonline" target="_blank"><i class="fa fa-2x fa-facebook-square" aria-hidden="true"></i></a>
     <a class="color-blue cursor-pointer" href="https://www.youtube.com/user/SpokeOnline" target="_blank"><i class="fa fa-2x fa-youtube-square" aria-hidden="true"></i></a>

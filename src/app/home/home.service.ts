@@ -13,15 +13,15 @@ export class HomeService {
 
 
   getCoverHighlight() {   // gets the latest post. In the HTML it's the largest one displayed on top of the TOP STORIES page.  I did this only for design purposes, since I couldnt find a better way to arrange posts through ngFor
-    return this.http.get(this.postsUrl + `posts/?_embed&per_page=1`)
+    return this.http.get(this.postsUrl + `posts/?_embed&per_page=1&offset=3`)
     .map(response => response.json() as any[]);    
   }
   getCoverRowOne() {   // gets posts number 2 and 3 from the latest posts. I did this only for design purposes, since I couldnt find a better way to arrange posts through ngFor
-    return this.http.get(this.postsUrl + `posts/?_embed&per_page=2&offset=1`)
+    return this.http.get(this.postsUrl + `posts/?_embed&per_page=2&offset=5`)
     .map(response => response.json() as any[]);
   }  
   getCoverRowTwo() { // gets posts number 4 and 5 from the latest posts.  I did this only for design purposes, since I couldnt find a better way to arrange posts through ngFor
-    return this.http.get(this.postsUrl + `posts/?_embed&per_page=2&offset=3`)
+    return this.http.get(this.postsUrl + `posts/?_embed&per_page=2&offset=7`)
     .map(response => response.json() as any[]);
   }
   
@@ -54,6 +54,16 @@ export class HomeService {
       });
   }
 
+  updateCategoryPosts(id) {     // it gets the from all categories + category's id + category's name.
+    return this.http.get(`https://public-api.wordpress.com/wp/v2/sites/spoketest.wordpress.com/categories`) // url to the Rest API categories' json
+      .map((response: Response) => response.json() as any[]) // gets the response and store in an arrat
+      .map((id) => {
+          this.data.push({ id: id, offset: 4, per_page:4, posts: [] });
+          this.getData(id, 0, 4).subscribe(posts => this.data = posts); // calls the method 'getData', passing category 'id', 'offset', 'per_page', fetching data from the category id, and assigning the data to that category's 'posts' array          
+        return this.data; // returns 'data' array containing 4 posts from each category
+      });
+  }
+
   getData(id, offset, per_page) { // Offset is initialy set to 0 and it will be increased when loading more data // number of posts loaded is set to 4 (per_page=4)
     return this.http.get(this.postsUrl + `posts/?_embed&categories=${id}&per_page=${per_page}&offset=${offset}`)
       .map((response: Response) => response.json() as any[]);
@@ -64,10 +74,8 @@ export class HomeService {
       .map((response: Response) => response.json() as any[]);
   }
 
-  // loadContent() { 
-  //   this.nextPost = this.nextPost + this.oldPost ;
-  //   return this.http.get(this.postsUrl + `posts/?_embed&per_page=8&offset=${this.nextPost}`)
-  //     .map((response: Response) => response.json());
-  // }
+  getRelatedPosts(){
+
+  }
 }
 

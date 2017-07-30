@@ -37,6 +37,8 @@ body { margin: 0; font-family: Roboto, sans-serif; overflow: hidden; }
 .align-center { text-align: center !important; }
 .align-right { text-align: right !important; }
 .valign-center { vertical-align: middle !important; }
+.left-0 { left: 0; }
+.right-0 { right: 0; }
 
 /* Color Pallete based on Material Design Colors. The project is currently using 'color-blue' as base color */
 .color-white { color: white !important; }
@@ -237,6 +239,7 @@ body { margin: 0; font-family: Roboto, sans-serif; overflow: hidden; }
 .padding-clear { padding: 0px !important; }
 .margin-clear { margin: 0px !important; }
 
+.margin-auto { margin: auto; }
 .margin-15 { margin: 15px; }
 .margin-top-3 { margin-top: 3px; }
 .margin-top-5 { margin-top: 5px; }
@@ -275,6 +278,12 @@ body { margin: 0; font-family: Roboto, sans-serif; overflow: hidden; }
 .padding-left-5 { padding-left: 5px; }
 .padding-left-10 { padding-left: 10px; }
 .padding-left-20 { padding-left: 20px; }
+.padding-left-25 { padding-left: 25px; }
+.padding-left-30 { padding-left: 30px; }
+.margin-left-35 { margin-left: 35px; }
+.margin-left-40 { margin-left: 40px; }
+.margin-left-45 { margin-left: 45px; }
+.margin-left-50 { margin-left: 50px; }
 .padding-right-10 { padding-right: 10px; }
 .padding-top-5 { padding-top: 5px; }
 .padding-top-10 { padding-top: 10px; }
@@ -301,7 +310,9 @@ body { margin: 0; font-family: Roboto, sans-serif; overflow: hidden; }
 
 .my-content { width: 100%; position: fixed; top: 55px; bottom: 0; overflow: auto; }
 .my-content-inner { min-width: 414px; margin-top: 5px; }
-.my-content-inner .stories { padding:0px; overflow: hidden; }
+.my-content-inner .session { padding:0px; overflow: hidden; }
+.my-content-inner .session .cover { margin-top:20px; padding-right:8px; padding-left:5px; padding-bottom:15px }
+.my-content-inner .session .cover .column {padding-right:8px; padding-left:8px;}
 .my-content-auth { min-width: 414px; margin-left: 15px; margin-right: 15px; margin-top: 15px; }
 .my-loading-bar { position: fixed !important; top: 55px; left: 0px; width: 100%; z-index: 5000; }
 .my-navbar { padding-left: 0px !important; min-width: 414px; position: fixed; top: 0px; left: 0px; width: 100%; min-height: 55px !important; background-color: white !important; border-bottom: 1px solid #ddd; z-index: 11; }
@@ -314,6 +325,7 @@ body { margin: 0; font-family: Roboto, sans-serif; overflow: hidden; }
 .my-navbar-menu-text .account-name { position: relative; top: -6px; }
 .my-navbar-menu-btn { font-size: 16px; font-weight: 400; font-family: Roboto,"Helvetica Neue",sans-serif; color: #bdbdbd; text-transform: uppercase; }
 .my-navbar-menu-btn.active, .my-navbar-menu-btn:hover { color: #616161; }
+.row-separator { margin-bottom: 0.5625rem } 
 
 /* Sidebar style for future implementation */
 .my-sidenav-container { width: 100%; height: 100%; }
@@ -333,28 +345,20 @@ body { margin: 0; font-family: Roboto, sans-serif; overflow: hidden; }
 .my-post-navbar.mat-toolbar { padding-left: 0px !important; padding-right:0px !important; margin-top:16px !important; padding-bottom:16px !important;  }
 .my-post-navbar .mat-button { padding-left: 0px !important; padding-right:0px !important; }
 .my-post-navbar .title { text-align: left; padding-left:24px; }
-.mat-dialog-container { padding: 0px !important; }
 .post-body { padding-left: 24px !important; padding-bottom: 24px !important; padding-right: 24px !important; }
 
 .my-brand { height: 100%; padding-left: 16px; padding-top: 7.5px; padding-right: 16px; }
-.my-brand:hover { background-color: #eeeeee !important; }
 .my-icon-text { position: relative; top: -3px; }
 
-.material-icons.md-18 { font-size: 18px; }
-.material-icons.md-24 { font-size: 24px; }
-.material-icons.md-36 { font-size: 36px; }
-.material-icons.md-48 { font-size: 48px; }
 
-.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
-.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
-.material-icons.md-light { color: rgba(255, 255, 255, 1); }
-.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
 .fill-remaining-space {  flex: 1 1 auto; }
 
 .page-gap { position: relative; left: 0; top: 0; width: 100%; height: 40px; }
 
 a { color: inherit; text-decoration: none !important; }
-h3.overlay-post-title { margin: 0 }
+h3.overlay-post-title { margin: 0; color: white; }
+h3.overlay-post-title.post-title.highlight { position:absolute;z-index:3; top:65%; left:30px; max-width:95%; font-size: 1.375em; }
+h3.overlay-post-title.post-title.regular { position:absolute; z-index:3; top:45%; max-width:95%; font-size: 1.200em; }
 
 .text-uppercase { text-transform: uppercase; }
 .text-letter-spacing-2 {letter-spacing: 2px; }
@@ -364,6 +368,8 @@ h3.overlay-post-title { margin: 0 }
 .post-item-image-container { left:0;top:0;width:inherit;max-height:175px; width: inherit; background-repeat:no-repeat;background-size:cover }
 .post-item-border { border-left:1px; border-left-width: 1px; border-left-color: grey; }
 
+.category-navigator { z-index:12; position:absolute !important; height:100% !important; }
+.bar { height:inherit; width:50px }
 .post-item-arrow.right {  
     background: -webkit-linear-gradient(left, rgba(238,238,238,0.4), rgba(255,255,255,1)); 
     background: -o-linear-gradient(right, rgba(238,238,238,0.4), rgba(255,255,255,1)); 
@@ -393,11 +399,12 @@ div.stretchy-wrapper > div { position: relative; }
 .stretchy-wrapper .overlay-post { position: relative; }
 .stretchy-wrapper .overlay-post-title { line-height: 22px;  top: 100%; bottom: 0; padding: 15px;  max-height: 80px;  overflow: hidden; color: #fff; display: block; bottom: 0;}
 
-h1.cat-title { font-size: 1.3em; text-transform: uppercase; font-weight: 600; padding-top:30px }
+h2.cat-title { font-size: 1.375em; text-transform: uppercase; font-weight: 600; padding-top:30px }
 .catOverlay { position: absolute; top: 0; bottom: 0; left: 0; right: 0; height: 100%;  width: 100%; opacity: 0; transition: .5s ease; background-color: #008CBA; }
 .catContainer { position: relative; z-index: 12; }
 .catContainer:hover .overlay { opacity: 1; }
 .catText { color: white; font-size: 20px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); }
+
 
 /* Material Design Overide Styles */ 
 .mat-tab-label.mat-ripple { font-family: Fakt,AvenirNext-Medium,Segoe UI,sans-serif; font-size:18px;font-weight:600; text-transform:uppercase; letter-spacing:1px;}
@@ -406,3 +413,15 @@ h1.cat-title { font-size: 1.3em; text-transform: uppercase; font-weight: 600; pa
 .cdk-overlay-backdrop.cdk-overlay-backdrop-showing { opacity: 1 !important; }
 .material-icons.nav-icons { font-size: 24px !important; color: #808080 !important; padding-left: 16px; padding-right: 16px}
 .material-icons.nav-icons:hover { color:#2196f3 !important; }
+.mat-dialog-container { padding: 0px !important; }
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+

@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit {
   getData(){
     this.service.getCategories(this.load.per_page).subscribe(data => { 
       this.data = data;
-      // this.category = this.data[1];
+      this.category = this.data[1];
     });
   }
 
@@ -82,10 +82,9 @@ export class HomeComponent implements OnInit {
   // }
 
   loadMore(id){
-    let offset = this.load.offset += this.load.more;
-    let per_page = 4;
-    this.service.updateData(id, offset, per_page).subscribe(data => { 
-      this.data[id] = data
+    let offset = 4;
+    this.service.updateCategoryPosts(id).subscribe(data => { 
+      this.data = data;
     });
   }
 

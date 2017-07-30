@@ -21,6 +21,11 @@ export class AppComponent implements OnInit {
     this.service.getCategories().subscribe(resData => this.categories = resData);
   }
 
+  play: false;
+  stream(){
+    this.play = false;
+  }
+
   ngOnInit() {
     this.getCategories();
   }
