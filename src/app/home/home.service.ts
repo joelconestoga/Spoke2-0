@@ -42,11 +42,11 @@ export class HomeService {
 
   getCategories(per_page) {     // it gets the from all categories + category's id + category's name.
     return this.http.get(`https://public-api.wordpress.com/wp/v2/sites/spoketest.wordpress.com/categories`) // url to the Rest API categories' json
-      .map((response: Response) => response.json() as any[]) // gets the response and store in an arrat
+      .map((response: Response) => response.json() as any[]) // gets the response and store in an array
       .map((categories: any[]) => {
         categories = categories.filter(x => x.count > 0);
         for(let x = 0; x < categories.length; x++) { // loops through the json fetched from the Rest API
-          this.data.push({ id: categories[x].id, name: categories[x].name, count: categories[x].count, offset: per_page, posts: [] }); // cleans the array getting only category id and category name, and inserts an empty array 'posts' and 'offset'
+          this.data.push({ id: categories[x].id, name: categories[x].name, offset: per_page, posts: [], forward: true }); // cleans the array getting only category id and category name, and inserts an empty array 'posts' and 'offset'
           // at this point 'data' array has an structure like this: [{id: number, name: string, offset: number, posts: []}]
           this.getData(this.data[x].id, 0, per_page).subscribe(posts => this.data[x].posts = posts); // calls the method 'getData', passing category 'id', 'offset', 'per_page', fetching data from the category id, and assigning the data to that category's 'posts' array          
         }
@@ -54,22 +54,21 @@ export class HomeService {
       });
   }
 
-  updateCategoryPosts(id) {     // it gets the from all categories + category's id + category's name.
-    return this.http.get(`https://public-api.wordpress.com/wp/v2/sites/spoketest.wordpress.com/categories`) // url to the Rest API categories' json
-      .map((response: Response) => response.json() as any[]) // gets the response and store in an arrat
-      .map((id) => {
-          this.data.push({ id: id, offset: 4, per_page:4, posts: [] });
-          this.getData(id, 0, 4).subscribe(posts => this.data = posts); // calls the method 'getData', passing category 'id', 'offset', 'per_page', fetching data from the category id, and assigning the data to that category's 'posts' array          
-        return this.data; // returns 'data' array containing 4 posts from each category
-      });
-  }
+  // updateCategoryPosts(id, i, offset, per_page) {    
+  //   this.http.get(`https://public-api.wordpress.com/wp/v2/sites/spoketest.wordpress.com/categories`)
+  //     .flatMap((data) => data.json()) 
+  //     .filter((categories: any) => categories.id === id)
+  //     .map((categories) => {
+  //       let index = this.data.indexOf(x => x.i);
+  //       this.data[index].push({ id: id, offset: 4, per_page:4, posts: [] });
+  //       this.getData(id, offset, per_page).subscribe(posts => this.data[index].posts = posts);
+  //     }
+         
+  //       return this.data; 
+  //     });
+  // }
 
   getData(id, offset, per_page) { // Offset is initialy set to 0 and it will be increased when loading more data // number of posts loaded is set to 4 (per_page=4)
-    return this.http.get(this.postsUrl + `posts/?_embed&categories=${id}&per_page=${per_page}&offset=${offset}`)
-      .map((response: Response) => response.json() as any[]);
-  }
-
-  updateData(id, offset, per_page){
     return this.http.get(this.postsUrl + `posts/?_embed&categories=${id}&per_page=${per_page}&offset=${offset}`)
       .map((response: Response) => response.json() as any[]);
   }

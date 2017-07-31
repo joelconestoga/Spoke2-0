@@ -357,8 +357,8 @@ body { margin: 0; font-family: Roboto, sans-serif; overflow: hidden; }
 
 a { color: inherit; text-decoration: none !important; }
 h3.overlay-post-title { margin: 0; color: white; }
-h3.overlay-post-title.post-title.highlight { position:absolute;z-index:3; top:65%; left:30px; max-width:95%; font-size: 1.375em; }
-h3.overlay-post-title.post-title.regular { position:absolute; z-index:3; top:45%; max-width:95%; font-size: 1.200em; }
+h3.overlay-post-title.post-title.highlight { position:absolute;z-index:3; top:65%; left:30px; max-width:95%; font-size: 1.375em; line-height: 1.3125em; font-weight: 400; }
+h3.overlay-post-title.post-title.regular { position:absolute; z-index:3; top:50%; max-width:95%; font-size: 1.200em; font-weight: 400; line-height: 1.3125em}
 
 .text-uppercase { text-transform: uppercase; }
 .text-letter-spacing-2 {letter-spacing: 2px; }
@@ -394,8 +394,8 @@ h3.overlay-post-title.post-title.regular { position:absolute; z-index:3; top:45%
 div.stretchy-wrapper { width: 100%; padding-bottom: 56.25%; /* 16:9 */ position: relative; }
 div.stretchy-wrapper > div { position: relative; }
 
-.bx { background: rgba(0,0,0,0.3645); width:100px; height:100px; position: relative; -webkit-transition: background .5s ease-out; -moz-transition: background .5s ease-out; -o-transition: background .5s ease-out; transition: background .5s ease-out; }
-.bx:hover { background: rgba(13,71,161,0.22); }
+.bx { background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2), rgba(0,0,0,0.4), rgba(0,0,0,0.5), rgba(0,0,0,0.7), rgba(0,0,0,75), rgba(0,0,0,85), rgba(0,0,0,9)); width:100px; height:100px; position: relative; -webkit-transition: background .5s ease-out; -moz-transition: background .5s ease-out; -o-transition: background .5s ease-out; transition: background .5s ease-out; }
+.bx:hover { background: linear-gradient(rgba(13,71,161,0.1), rgba(13,71,161,0.25), rgba(0,0,0,0.4), rgba(0,0,0,0.8), rgba(0,0,0,1)); }
 .stretchy-wrapper .overlay-post { position: relative; }
 .stretchy-wrapper .overlay-post-title { line-height: 22px;  top: 100%; bottom: 0; padding: 15px;  max-height: 80px;  overflow: hidden; color: #fff; display: block; bottom: 0;}
 

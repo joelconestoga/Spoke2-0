@@ -38,7 +38,7 @@
       </div>
       <div fxLayout="column" fxFlex="21">
         <div id="twitterFeed" class="column row-separator">
-          <a class="twitter-timeline" data-height="auto" href="https://twitter.com/SpokeOnline">Tweets by SpokeOnline</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+          <a class="twitter-timeline" data-height="458px" href="https://twitter.com/SpokeOnline">Tweets by SpokeOnline</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
       </div>
     </div>
@@ -57,12 +57,12 @@
           <div *ngFor="let post of cat.posts, let x = index" fxFlex.gt-xs="50%" [fxFlex.gt-md]="25">
             <md-card class="padding-clear margin-15 cursor-pointer animated fadeInRight wow" data-wow-delay="0.4s" (click)="openPost(post.id, post.title.rendered)">
               <div class="stretchy-wrapper text-title"  [style.background-image]="getBackground(post.featured_media_url)" [ngStyle]="{'background-position': 'center', 'background-repeat': 'no-repeat', 'background-color': 'black'}"> 
-                  <div class="category-navigator right-0" *ngIf="x === 3 && forward === cat.name" (click)='loadMore(cat.id)'> 
+                  <div class="category-navigator right-0" *ngIf="x === 3 && forward === cat.name && cat.forward" (click)="loadMore($event, cat)"> 
                     <div class="bar post-item-arrow right pull-right cursor-pointer">
                       <div class="post-item-arrow-navigate"><i class="material-icons md-48">keyboard_arrow_right</i></div>
                     </div>
                   </div>
-                  <div class="category-navigator left-0" *ngIf="x === 0 && backward > 0 && forward === cat.name" (click)='loadPrevious(cat.id)'> 
+                  <div class="category-navigator left-0" *ngIf="x === 0 && cat.offset > load.per_page && forward === cat.name" (click)="loadPrevious($event, cat)"> 
                     <div class="bar post-item-arrow left pull-left cursor-pointer">
                       <div class="post-item-arrow-navigate"><i class="material-icons md-48">keyboard_arrow_left</i></div>
                     </div>
