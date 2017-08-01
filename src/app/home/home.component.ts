@@ -14,8 +14,8 @@ export class HomeComponent implements OnInit {
 
   category: any;
   imageUrl: any;
-  // empty array to store initial data from all categories
-  data: any[]; 
+  data: any[];
+  relatedPosts: any[];
   contentLoad;
   forward;
   load: any = { per_page: 4 };
@@ -39,15 +39,18 @@ export class HomeComponent implements OnInit {
       this.service.getCoverRowTwo().subscribe(data => this.cover.rowTwo = data);
   }
 
-  openPost(id, title) {
-    this.service.getPostId(id);
+  openPost(id, title, catId) {
+    this.service.getPostId(id);    
     this.service.getPost().subscribe(data => this.post = data);
-    this.openDialog(id, title);
+    this.service.catId;
+    this.service.getRelatedPosts(id).subscribe(data => {this.relatedPosts = data});
+    this.openDialog(id, title, catId);
   }
 
-  openDialog(id, title){ 
+  openDialog(id, title, catId){ 
     let dialogRef:MdDialogRef<HomePostComponent> = this.dialog.open(HomePostComponent, {disableClose:true});
     dialogRef.componentInstance.id = id;
+    dialogRef.componentInstance.catId = catId;
     dialogRef.componentInstance.title = title;
   }
 

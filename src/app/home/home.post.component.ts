@@ -12,7 +12,9 @@ import { Observable } from 'rxjs/Rx';
 export class HomePostComponent implements OnInit {
   loading: boolean = true;
   post;
+  relatedPosts: any[];
   id;
+  catId;
   title;
   linkToShare;
   
@@ -20,12 +22,18 @@ export class HomePostComponent implements OnInit {
   
   openPost(id) {
     console.log(this.title);
-    this.id = this.service.getPostId(id);
-    this.service.getPost().subscribe(resData => this.post = resData);
+    this.id = this.service.getPostId(id);    
+    this.service.getPost().subscribe(data => this.post = data);
     this.linkToShare = this.service.baseURL + id;
+  }
+
+  getRelatedPosts(catId) {
+    this.catId = this.service.getCategoryId(catId);
+    this.service.getRelatedPosts(catId).subscribe(data => {this.relatedPosts = data});
   }
 
   ngOnInit() {
     this.openPost(this.id);
+    this.getRelatedPosts(this.catId);
   }
 }

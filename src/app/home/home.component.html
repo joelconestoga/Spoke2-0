@@ -54,8 +54,8 @@
       <div fxFlex class="animated fadeIn" [id]="cat.name">
         <h2 fxLayout="row" class="cat-title padding-left-20">{{cat.name}}</h2>            
         <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap="wrap" fxLayoutGap="auto" fxLayoutGap.xs="0" (mouseenter)='mouseEnter(cat.name)' (mouseleave)='mouseLeave("")'>
-          <div *ngFor="let post of cat.posts, let x = index" fxFlex.gt-xs="50%" [fxFlex.gt-md]="25">
-            <md-card class="padding-clear margin-15 cursor-pointer animated fadeInRight wow" data-wow-delay="0.4s" (click)="openPost(post.id, post.title.rendered)">
+          <div *ngFor="let post of cat.posts, let x = index" fxFlex.gt-xs="50" [fxFlex.gt-md]="25">
+            <md-card class="padding-clear margin-15 cursor-pointer animated fadeInRight wow" data-wow-delay="0.4s" (click)="openPost(post.id, post.title.rendered, cat.id)">
               <div class="stretchy-wrapper text-title"  [style.background-image]="getBackground(post.featured_media_url)" [ngStyle]="{'background-position': 'center', 'background-repeat': 'no-repeat', 'background-color': 'black'}"> 
                   <div class="category-navigator right-0" *ngIf="x === 3 && forward === cat.name && cat.forward" (click)="loadMore($event, cat)"> 
                     <div class="bar post-item-arrow right pull-right cursor-pointer">
@@ -73,7 +73,12 @@
               </div> 
             </md-card>
           </div>
-        </div> 
+        </div>
+        <!--<div fxLayout="row" class="margin-top-20" (click)="loadMore($event, cat)">
+            <div class="post-item-arrow cursor-pointer margin-auto">
+              <div class="post-item-arrow-navigate"><i class="material-icons md-48">keyboard_arrow_down</i></div>
+            </div>
+        </div>-->
       </div>
     </div>
   </div>

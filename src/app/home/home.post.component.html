@@ -1,22 +1,28 @@
-<div fxLayout="column" style="width:1080px; height: 560px; padding-bottom:20px;" >
+<div fxLayout="column" style="width:1080px; max-height: 800px; padding-bottom:20px;" >
     <md-toolbar class="my-post-navbar">
         <div class="title" fxLayout="row">
-            <div fxLayout="row" class="text-normal text-bold" style="padding-bottom:8px" [innerHTML]="post?.title?.rendered | keepHtml"></div>
+            <h2 fxLayout="row" class="text-normal text-bold" [innerHTML]="post?.title?.rendered | keepHtml"></h2>
         </div>
         <span class="fill-remaining-space"></span>
+    
         <div fxLayout="row" style="padding-bottom:8px">
-            <share-buttons
-                [pinterest]="false"
-                [linkedIn]="false"
-                [google]="false"
-                [tumblr]="false"
-                [facebook]="false"
-                [reddit]="false"
-                [stumbleUpOn]="false"
-                [whatsApp]="false"  
-                [url]="linkToShare" 
-                [title]="title">
-            </share-buttons>
+            <button md-button [mdMenuTriggerFor]="menu">
+                <div class="material-icons nav-icons cursor-pointer" (click)="sidenav.toggle()">share</div>
+            </button>
+            <md-menu #menu="mdMenu">
+                <share-buttons
+                    [pinterest]="false"
+                    [linkedIn]="false"
+                    [google]="false"
+                    [tumblr]="false"
+                    [facebook]="false"
+                    [reddit]="false"
+                    [stumbleUpOn]="false"
+                    [whatsApp]="false"  
+                    [url]="linkToShare"
+                    [title]="title">
+                </share-buttons>
+            </md-menu>  
             <div fxLayout="row" class="pull-right"> <button md-button md-dialog-close><i class="material-icons md-32">close</i></button> </div>
         </div>
     </md-toolbar>
@@ -32,6 +38,12 @@
             <div class="margin-top-30" style="margin-left: 24px;">
                 <div class="margin-top-10" style="overflow:auto; margin-bottom:20px"> 
                     <div style="font-weight:600"> Related Posts </div>
+                    <div fxLayout="column" *ngFor="let related of relatedPosts" style="margin-bottom: 15px;">
+                        <md-card (click)="openPost(related.id, related.title.rendered)">
+                            <img style="margin-bottom:0" md-card-image src="{{related.featured_media_url}}">
+                            <h3 class="text-small padding-clear" [innerHTML]="related.title.rendered | keepHtml"></h3>
+                        </md-card>
+                    </div>
                 </div>            
             </div>
         </div>
