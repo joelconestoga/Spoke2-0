@@ -6,26 +6,28 @@ import 'rxjs/add/operator/map';
 export class HomeService {
     
   constructor(private http: Http) { }
-  // empty variable to store a post id
-  id; 
-  catId;;
-  baseURL = "http://spokeonline.com/";
-  postsUrl = "https://public-api.wordpress.com/wp/v2/sites/spoketest.wordpress.com/"; // base url of the REST API json file
-  featuredImage = this.postsUrl + "posts._embedded" + "['wp:featuredmedia'][0].source_url"; // path to fetch the featured image of a post
+
+  // website = "http://spokeonline.com/";
+  baseURL = "https://public-api.wordpress.com/wp/v2/sites/spoketest.wordpress.com/";
+  postsUrl = this.baseURL + "posts/"; // url of the REST API json file for POSTS
+  categoriesUrl = this.baseURL + "categories" // url of the REST API json file for CATEGORIES
+  // featuredImage = this.postsUrl + "posts._embedded" + "['wp:featuredmedia'][0].source_url"; // path to fetch the featured image of a post when the WP website is not using the 'Best REST API Featured Images' plugin
+  id; // postId
+  catId; //categoryId
 
   // gets the latest post. In the HTML it's the largest one displayed on top of the TOP STORIES page.  I did this only for design purposes, since I couldnt find a better way to arrange posts through ngFor
   getCoverHighlight() {   
-    return this.http.get(this.postsUrl + `posts/?_embed&per_page=1&offset=3`)
+    return this.http.get(this.postsUrl + `?_embed&per_page=1&offset=3`)
     .map(response => response.json() as any[]);    
   }
   // gets posts number 2 and 3 from the latest posts. I did this only for design purposes, since I couldnt find a better way to arrange posts through ngFor
   getCoverRowOne() {   
-    return this.http.get(this.postsUrl + `posts/?_embed&per_page=2&offset=5`)
+    return this.http.get(this.postsUrl + `?_embed&per_page=2&offset=5`)
     .map(response => response.json() as any[]);
   }  
   // gets posts number 4 and 5 from the latest posts.  I did this only for design purposes, since I couldnt find a better way to arrange posts through ngFor
   getCoverRowTwo() { 
-    return this.http.get(this.postsUrl + `posts/?_embed&per_page=2&offset=7`)
+    return this.http.get(this.postsUrl + `?_embed&per_page=2&offset=7`)
     .map(response => response.json() as any[]);
   }
 
@@ -36,13 +38,13 @@ export class HomeService {
 
   // it throws the id of the selected post into the url to retrieve data of the specific post to an array
   getPost() {      
-    return this.http.get(this.postsUrl + `posts/${this.id}`)
+    return this.http.get(this.postsUrl + `${this.id}`)
     .map((response: Response) => response.json());
   }
  
   // gets the from all categories + category's id + category's name.
   getCategories(per_page) {     
-    return this.http.get(`https://public-api.wordpress.com/wp/v2/sites/spoketest.wordpress.com/categories`) // url to the Rest API categories' json
+    return this.http.get(this.categoriesUrl) // url to the Rest API categories' json
       .map((response: Response) => response.json() as any[]) // gets the response and store in an array
       .map((categories: any[]) => {
         let data: any[] = []; // creates an empty array
@@ -59,7 +61,7 @@ export class HomeService {
   // Offset is initialy set to 0 and it will be increased when loading more data 
   // number of posts loaded is set to 4 (per_page=4)
   getData(id, offset, per_page) { 
-    return this.http.get(this.postsUrl + `posts/?_embed&categories=${id}&per_page=${per_page}&offset=${offset}`)
+    return this.http.get(this.postsUrl + `?_embed&categories=${id}&per_page=${per_page}&offset=${offset}`)
       .map((response: Response) => response.json() as any[]);
   }
 
@@ -67,8 +69,11 @@ export class HomeService {
     this.catId = catId;
   }
   getRelatedPosts(catId){
-    return this.http.get(this.postsUrl + `posts/?_embed&categories=${catId}&per_page=3`)
+    return this.http.get(this.postsUrl + `?_embed&categories=${catId}&per_page=3`)
       .map((response: Response) => response.json() as any[]);
+  }
+  sharedpost(id){
+    return this.http.get(this.postsUrl + `${id}`).map((response: Response) => response.json());
   }
 }
 

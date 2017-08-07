@@ -1,13 +1,14 @@
-<div fxLayout="row" class="session bg-color-blue animated fadeIn" id="section1">
+<md-progress-bar mode="indeterminate" *ngIf="contentLoad==false"></md-progress-bar>
+<div *ngIf="contentLoad==true">
+<div fxLayout="row" class="session bg-color-blue animated fadeIn" id="cover">
   <div fxFlex="100" fxFlex.xs="100" class="margin-auto">
     <div fxLayout="row" fxLayout.lt-lg="column" class="cover">
       <div fxLayout="column" fxFlex="41" class="column" *ngFor="let post of cover.highlight">
           <div class="row-separator" *ngFor="let post of cover.highlight">
-            <md-card (click)="openPost(post.id, post.title.rendered)" class="padding-clear cursor-pointer animated fadeIn wow" data-wow-offset="2.0s">
+            <md-card (click)="openPost(post.id, post.title.rendered, post.categories['0'])" class="padding-clear cursor-pointer animated fadeIn wow" data-wow-offset="2.0s">
               <div class="stretchy-wrapper text-title" [style.background-image]="getBackground(post.featured_media_url)" [ngStyle]="{'background-position': 'center', 'background-repeat': 'no-repeat', 'background-color': 'black'}"> 
-                <div class="stretchy-wrapper bx overlay-post"> 
-                  <h3 [innerHTML]="post.title.rendered | keepHtml" class="overlay-post-title post-title highlight"></h3>           
-                </div>
+                <div style="z-index:15; background-color:white; bottom:0; position:absolute; width:inherit; padding-left:1em; padding-right:1em;"><h3 class="text-normal" [innerHTML]="post.title.rendered | keepHtml"></h3></div>
+                <div class="stretchy-wrapper bx overlay-post"></div>                
               </div> 
             </md-card>
           </div>
@@ -15,22 +16,20 @@
       <div fxLayout="column" fxFlex="38">
         <div fxLayout="row" fxLayout.lt-sm="column">
           <div fxFlex="50" class="column row-separator" *ngFor="let post of cover.rowOne">
-            <md-card class="padding-clear cursor-pointer animated fadeIn" (click)="openPost(post.id, post.title.rendered)">
+            <md-card class="padding-clear cursor-pointer animated fadeIn" (click)="openPost(post.id, post.title.rendered, post.categories['0'])">
               <div class="stretchy-wrapper text-title" [style.background-image]="getBackground(post.featured_media_url)" [ngStyle]="{'background-position': 'center', 'background-repeat': 'no-repeat', 'background-color': 'black'}"> 
-                <div class="stretchy-wrapper bx overlay-post"> 
-                  <h3 class="overlay-post-title post-title regular" [innerHTML]="post.title.rendered | keepHtml"></h3>
-                </div>
-              </div>       
+                <div style="z-index:15; background-color:white; bottom:0; position:absolute; width:inherit; padding-left:1em; padding-right:1em;"><h3 class="text-small" [innerHTML]="post.title.rendered | keepHtml"></h3></div>
+                <div class="stretchy-wrapper bx overlay-post"></div>                
+              </div> 
             </md-card>
           </div>
         </div>
         <div fxLayout="row" fxLayout.lt-sm="column">
           <div fxFlex="50" class="column row-separator" *ngFor="let post of cover.rowTwo">
-            <md-card class="padding-clear cursor-pointer animated fadeIn" (click)="openPost(post.id, post.title.rendered)">
+            <md-card class="padding-clear cursor-pointer animated fadeIn" (click)="openPost(post.id, post.title.rendered, post.categories['0'])">
               <div class="stretchy-wrapper text-title" [style.background-image]="getBackground(post.featured_media_url)" [ngStyle]="{'background-position': 'center', 'background-repeat': 'no-repeat', 'background-color': 'black'}"> 
-                <div class="stretchy-wrapper bx overlay-post"> 
-                  <h3 class="overlay-post-title post-title regular" [innerHTML]="post.title.rendered | keepHtml"></h3>
-                </div>
+                <div style="z-index:15; background-color:white; bottom:0; position:absolute; width:inherit; padding-left:1em; padding-right:1em;"><h3 class="text-small" [innerHTML]="post.title.rendered | keepHtml"></h3></div>
+                <div class="stretchy-wrapper bx overlay-post"></div>                
               </div> 
             </md-card>
           </div>
@@ -38,7 +37,7 @@
       </div>
       <div fxLayout="column" fxFlex="21">
         <div id="twitterFeed" class="column row-separator">
-          <a class="twitter-timeline" data-height="458px" href="https://twitter.com/SpokeOnline">Tweets by SpokeOnline</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+          <a class="twitter-timeline test" data-height="458px" href="https://twitter.com/SpokeOnline">Tweets by SpokeOnline</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
       </div>
     </div>
@@ -48,54 +47,60 @@
   <div fxFlex="100" fxFlex.xs="100" class="margin-auto">
     <div *ngFor="let cat of data; let i = index" fxLayout="column" class="animated fadeIn">
       <div fxFlex *ngIf="i === 2">
-        <h2 class="cat-title padding-left-20">SpokeOnline on YouTube</h2>
+        <h2 class="padding-left-20 cat-video-title">SpokeOnline on YouTube</h2>
         <iframe  width="100%" height="800" src="https://www.youtube.com/embed/+lastest?list=LLa3gR-CwiJQz_o3m7AUVdjg" frameborder="0" allowfullscreen></iframe>
       </div>
       <div fxFlex class="animated fadeIn" [id]="cat.name">
-        <h2 fxLayout="row" class="cat-title padding-left-20">{{cat.name}}</h2>            
-        <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap="wrap" fxLayoutGap="auto" fxLayoutGap.xs="0" (mouseenter)='mouseEnter(cat.name)' (mouseleave)='mouseLeave("")'>
-          <div *ngFor="let post of cat.posts, let x = index" fxFlex.gt-xs="50" [fxFlex.gt-md]="25">
-            <md-card class="padding-clear margin-15 cursor-pointer animated fadeInRight wow" data-wow-delay="0.4s" (click)="openPost(post.id, post.title.rendered, cat.id)">
+        <h2 fxLayout="row" class="cat-title padding-left-20">{{cat.name}}</h2>
+        <div fxLayout="row" fxShow="false" fxShow.lt-md class="margin-top-20" style="height:15px" (click)="loadPrevious($event, cat)" *ngIf="cat.offset > load.per_page">
+            <div class="post-item-arrow cursor-pointer margin-auto" style="margin-bottom:0px;">
+              <div class="post-item-arrow-navigate"><i class="material-icons md-48">keyboard_arrow_up</i></div>
+            </div>
+        </div>            
+        <div fxLayout="row" fxLayoutWrap="wrap" fxLayoutGap.xs="0" (mouseenter)="mouseEnter(cat.name)" (mouseleave)="mouseLeave('')">
+          <div *ngFor="let post of cat.posts, let x = index" fxFlex.lt-md="50" fxFlex.gt-md="25" class="animated fadeIn wow" style="display: block">
+            <md-card class="padding-clear margin-15 cursor-pointer animated bounceInUp wow " data-wow-delay="0.4s" (click)="openPost(post.id, post.title.rendered, cat.id)">
               <div class="stretchy-wrapper text-title"  [style.background-image]="getBackground(post.featured_media_url)" [ngStyle]="{'background-position': 'center', 'background-repeat': 'no-repeat', 'background-color': 'black'}"> 
-                  <div class="category-navigator right-0" *ngIf="x === 3 && forward === cat.name && cat.forward" (click)="loadMore($event, cat)"> 
+                  <div class="category-navigator right-0" fxHide="false" fxHide.lt-md *ngIf="x === 3 && forward === cat.name && cat.forward" (click)="loadMore($event, cat)"> 
                     <div class="bar post-item-arrow right pull-right cursor-pointer">
                       <div class="post-item-arrow-navigate"><i class="material-icons md-48">keyboard_arrow_right</i></div>
                     </div>
                   </div>
-                  <div class="category-navigator left-0" *ngIf="x === 0 && cat.offset > load.per_page && forward === cat.name" (click)="loadPrevious($event, cat)"> 
+                  <div class="category-navigator left-0" fxHide="false" fxHide.lt-md *ngIf="x === 0 && cat.offset > load.per_page && forward === cat.name" (click)="loadPrevious($event, cat)"> 
                     <div class="bar post-item-arrow left pull-left cursor-pointer">
                       <div class="post-item-arrow-navigate"><i class="material-icons md-48">keyboard_arrow_left</i></div>
                     </div>
                   </div>
                 <div class="stretchy-wrapper bx overlay-post"> 
-                  <h3 class="overlay-post-title post-title regular" [innerHTML]="post.title.rendered | keepHtml"></h3>
+                  <h3 class="overlay-post-title post-title regular"></h3>
                 </div>
               </div> 
+              <md-card-title class="custom-title" ><h3 class="text-normal" [innerHTML]="post.title.rendered | keepHtml"></h3></md-card-title>
             </md-card>
           </div>
         </div>
-        <!--<div fxLayout="row" class="margin-top-20" (click)="loadMore($event, cat)">
+        <div fxLayout="row" fxShow="false" fxShow.lt-md class="margin-top-20" (click)="loadMore($event, cat)">
             <div class="post-item-arrow cursor-pointer margin-auto">
               <div class="post-item-arrow-navigate"><i class="material-icons md-48">keyboard_arrow_down</i></div>
             </div>
-        </div>-->
+        </div>
       </div>
     </div>
   </div>
 </div>
-<div fxLayout="row" class="bg-color-blue animated fadeIn padding-20 margin-top-30" *ngIf="data">
-  <div fxFlex="70" class="margin-auto color-white">
-    <div fxLayout="row">
-      <div fxFlex="30" class="padding-left-30 padding-right-30">
+<div fxLayout="row"  class="bg-color-blue animated fadeIn padding-bottom-20 margin-top-30" *ngIf="data">
+  <div fxFlex="70" fxFlex.lt-md="100" class="margin-auto color-white">
+    <div fxLayout="row" fxLayout.lt-sm="column">
+      <div fxFlex="34" fxFlex.lt-sm class="padding-left-30 padding-right-30 margin-top-20">
         <div class="text-large color-white">About Spoke</div>
         <div class="padding-top-10 text-small color-white">Spoke Online is produced weekly during the school year by Conestoga College second-year journalism print students, faculty adviser Christina Jonas and new media technologist Michael Toll.</div>
       </div>
-      <div fxFlex="30" class="padding-left-30 padding-right-30">
+      <div fxFlex="33" fxFlex.lt-sm class="padding-left-30 padding-right-30 margin-top-20">
         <div class="text-large color-white">Contact</div>
         <div class="padding-top-10"><i class="material-icons">email</i><span> spoke@conestogac.on.ca </span></div>
         <div><i class="material-icons">phone</i> 519-748-5220, ext. 3691</div>
       </div>      
-      <div fxFlex="30" class="padding-left-30 padding-right-30">
+      <div fxFlex="33" fxFlex.lt-sm class="padding-left-30 padding-right-30 margin-top-20">
         <div class="text-large color-white">Social</div>
         <div class="padding-top-10">
           <a class="cursor-pointer margin-right-10" href="https://twitter.com/spokeonline" target="_blank"><i class="fa fa-2x fa-twitter-square" aria-hidden="true"></i></a>
@@ -106,3 +111,4 @@
     </div>    
   </div>
 </div>
+<div *ngIf="contentLoad==true">

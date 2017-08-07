@@ -270,23 +270,37 @@ body { margin: 0; font-family: Roboto, sans-serif; overflow: hidden; }
 .margin-right-40 { margin-right: 40px; }
 .margin-right-45 { margin-right: 45px; }
 .margin-right-50 { margin-right: 50px; }
-.margin-top-minus-40 { margin-top: -40px; }
 .margin-left-5 { margin-left: 5px !important; }
 .margin-left-10 { margin-left: 10px !important; }
 .margin-left-15 { margin-left: 15px !important; }
 .margin-left-30 { margin-left: 30px !important; }
+.margin-left-35 { margin-left: 35px; }
+.margin-left-40 { margin-left: 40px; }
+.margin-left-45 { margin-left: 45px; }
+.margin-left-50 { margin-left: 50px; }
 .padding-left-5 { padding-left: 5px; }
 .padding-left-10 { padding-left: 10px; }
 .padding-left-20 { padding-left: 20px; }
 .padding-left-25 { padding-left: 25px; }
 .padding-left-30 { padding-left: 30px; }
-.margin-left-35 { margin-left: 35px; }
-.margin-left-40 { margin-left: 40px; }
-.margin-left-45 { margin-left: 45px; }
-.margin-left-50 { margin-left: 50px; }
+.padding-right-5 { padding-right: 5px; }
 .padding-right-10 { padding-right: 10px; }
+.padding-right-15 { padding-right: 15px; }
+.padding-right-20 { padding-right: 20px; }
+.padding-right-25 { padding-right: 25px; }
+.padding-right-30 { padding-right: 30px; }
+.padding-bottom-5 { padding-bottom: 5px; }
+.padding-bottom-10 { padding-bottom: 10px; }
+.padding-bottom-15 { padding-bottom: 15px; }
+.padding-bottom-20 { padding-bottom: 20px; }
+.padding-bottom-25 { padding-bottom: 25px; }
+.padding-bottom-30 { padding-bottom: 30px; }
 .padding-top-5 { padding-top: 5px; }
 .padding-top-10 { padding-top: 10px; }
+.padding-top-15 { padding-top: 15px; }
+.padding-top-20 { padding-top: 20px; }
+.padding-top-25 { padding-top: 25px; }
+.padding-top-30 { padding-top: 30px; }
 .padding-3 { padding: 3px; }
 .padding-10 { padding: 10px; }
 .padding-20 { padding: 20px; }
@@ -340,7 +354,7 @@ body { margin: 0; font-family: Roboto, sans-serif; overflow: hidden; }
 .my-navbar .my-navbar-toggled a.nav-link { display: inline; margin: 0; padding: 16px 16px; cursor: pointer; text-decoration: none; font-size: 16px; font-weight: 400; font-family: Roboto,"Helvetica Neue",sans-serif; color: #bdbdbd; text-transform: uppercase; }
 .my-navbar .my-navbar-toggled a.nav-link:hover { color: #2196f3  !important; }
 
-.my-post-navbar { width: inherit; position:fixed; min-height: 55px !important; background-color: white !important; border-bottom: 1px solid lightgray !important; z-index: 11; }
+.my-post-navbar { width: inherit; position:fixed; min-height: 55px !important; background-color: #2196f3 !important; border-bottom: 1px solid lightgray !important; z-index: 11; }
 .my-post-navbar.mat-toolbar { width: inherit; padding-left: 0px !important; padding-right:0px !important; padding-top:16px !important; padding-bottom:10px !important;  }
 .my-post-navbar .title { text-align: left; padding-left:24px; }
 .post-body { margin-top:70px; padding-left: 24px !important; padding-bottom: 24px !important; padding-right: 24px !important; }
@@ -397,11 +411,15 @@ div.stretchy-wrapper > div { position: relative; }
 .stretchy-wrapper .overlay-post { position: relative; }
 .stretchy-wrapper .overlay-post-title { line-height: 22px;  top: 100%; bottom: 0; padding: 15px;  max-height: 80px;  overflow: hidden; color: #fff; display: block; bottom: 0;}
 
-h2.cat-title { font-size: 1.375em; text-transform: uppercase; font-weight: 600; padding-top:30px }
+h2.cat-title { font-size: 1.375em; text-transform: uppercase; font-weight: 600; padding-top:30px; margin:0px }
+h2.cat-video-title { font-size: 1.375em; text-transform: uppercase; font-weight: 600; padding-top:30px; }
+
 .catOverlay { position: absolute; top: 0; bottom: 0; left: 0; right: 0; height: 100%;  width: 100%; opacity: 0; transition: .5s ease; background-color: #008CBA; }
 .catContainer { position: relative; z-index: 12; }
 .catContainer:hover .overlay { opacity: 1; }
 .catText { color: white; font-size: 20px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); }
+
+#MusesRadioPlayer-HTML5-player-0 { z-index: 15; float: right !important; margin-right: 150px; margin-top:6px; }
 
 
 /* Material Design Overide Styles */ 
@@ -409,17 +427,28 @@ h2.cat-title { font-size: 1.375em; text-transform: uppercase; font-weight: 600; 
 .mat-tab-label.mat-ripple.mat-tab-label-active { font-family: Fakt,AvenirNext-Medium,Segoe UI,sans-serif; font-size:18px;font-weight:600; text-transform:uppercase; letter-spacing:1px; color:#2196f3;}
 .cdk-overlay-dark-backdrop { background: rgba(0, 0, 0, 0.75) !important; }
 .cdk-overlay-backdrop.cdk-overlay-backdrop-showing { opacity: 1 !important; }
-.material-icons.nav-icons { font-size: 24px !important; color: #808080 !important; padding-left: 16px; padding-right: 16px}
+.material-icons.nav-icons { font-size: 24px !important; color:white !important; }
 .material-icons.nav-icons:hover { color:#2196f3 !important; }
 .mat-dialog-container { padding: 0px !important; }
+.custom-title{ min-height:3.75em; margin-top:0.1em; margin-bottom: 0.2em; margin-left:1em; margin-right:1em; font-size: 1em !important }
 
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }
 .material-icons.md-36 { font-size: 36px; }
 .material-icons.md-48 { font-size: 48px; }
 
+.mat-icon-button:hover { background-color: white !important; color:#2196f3 !important; }
+
 .material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
 .material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
 .material-icons.md-light { color: rgba(255, 255, 255, 1); }
 .material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
 
+/*@media screen and (max-width: 1366px) {
+  .overlay-post-title { margin: 0; color: white; }
+  .overlay-post-title.post-title.highlight { position:absolute;z-index:3; top:65%; left:30px; max-width:95%; font-size: 1.00em; line-height: 1em; font-weight: 400; }
+  .overlay-post-title.post-title.regular { position:absolute; z-index:3; top:50%; max-width:95%; font-size: 1.00em; font-weight: 400; line-height: 1.1em}
+  .custom-title{ min-height:4.75em; margin-top:0.1em; margin-bottom: 0.2em; margin-left:1em; margin-right:1em; font-size: 1em !important }
+}
+
+.test {height: 458px;}*/

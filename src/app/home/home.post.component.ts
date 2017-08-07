@@ -17,11 +17,16 @@ export class HomePostComponent implements OnInit {
   catId;
   title;
   linkToShare;
+  modalLoad = false;
+  fontSize;
   
-  constructor( private service: HomeService, public dialogRef: MdDialogRef<HomePostComponent>) { }
+  constructor( private service: HomeService, public dialogRef: MdDialogRef<HomePostComponent>) {
+      setTimeout(() => {
+          this.modalLoad = true;
+      }, 1000)
+  }
   
   openPost(id) {
-    console.log(this.title);
     this.id = this.service.getPostId(id);    
     this.service.getPost().subscribe(data => this.post = data);
     this.linkToShare = this.service.baseURL + id;
@@ -30,6 +35,14 @@ export class HomePostComponent implements OnInit {
   getRelatedPosts(catId) {
     this.catId = this.service.getCategoryId(catId);
     this.service.getRelatedPosts(catId).subscribe(data => {this.relatedPosts = data});
+  }
+
+  increaseFontSize(){
+    this.fontSize += 1;
+  }
+
+  descreaseFontSize(){
+    this.fontSize += 1;
   }
 
   ngOnInit() {

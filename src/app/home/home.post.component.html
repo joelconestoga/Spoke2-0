@@ -1,15 +1,28 @@
-<div fxLayout="column" style="width:1080px; max-height: 800px; padding-bottom:20px;" >
+<md-progress-bar mode="indeterminate" *ngIf="modalLoad==false"></md-progress-bar>
+<div fxLayout="column" style="width:1080px; max-height: 800px; padding-bottom:20px;">
     <md-toolbar class="my-post-navbar">
         <div class="title" fxLayout="row">
-            <h2 fxLayout="row" class="text-normal text-bold" [innerHTML]="post?.title?.rendered | keepHtml"></h2>
+            <h2 fxLayout="row" class="text-normal color-white" [innerHTML]="post?.title?.rendered | keepHtml"></h2>
         </div>
         <span class="fill-remaining-space"></span>
     
         <div fxLayout="row" style="padding-bottom:8px">
-            <button md-button [mdMenuTriggerFor]="menu">
-                <div class="material-icons nav-icons cursor-pointer" (click)="sidenav.toggle()">share</div>
-            </button>
-            <md-menu #menu="mdMenu">
+            <div> 
+                <button md-icon-button class="color-white" (click)="descreaseFontSize()">
+                    <div class="material-icons md-18 cursor-pointer">font_download</div>
+                </button>
+            </div>
+            <div class="margin-right-10"> 
+                <button md-icon-button class="color-white" (click)="increaseFontSize()">
+                    <div class="material-icons md-24 cursor-pointer">font_download</div>
+                </button>
+            </div>
+            <div class="margin-right-10">
+                <button md-icon-button [mdMenuTriggerFor]="menu" class="color-white">
+                    <div class="material-icons cursor-pointer">share</div>
+                </button>
+            </div>
+            <md-menu #menu="mdMenu" [overlapTrigger]="false">
                 <share-buttons
                     [pinterest]="false"
                     [linkedIn]="false"
@@ -23,21 +36,23 @@
                     [title]="title">
                 </share-buttons>
             </md-menu>  
-            <div fxLayout="row" class="pull-right"> <button md-button md-dialog-close><i class="material-icons md-32">close</i></button> </div>
+            <div class="margin-right-10"> 
+                <button md-icon-button md-dialog-close class="color-white"><i class="material-icons md-32">close</i></button>
+            </div>
         </div>
     </md-toolbar>
-    <div fxLayout="row" class="post-body">
+    <div *ngIf="modalLoad === true" fxLayout="row" class="post-body">
         <div fxFlex="75">
             <div class="margin-top-30" style="margin-right: 24px;">
                 <div class="margin-top-10" style="overflow:auto; margin-bottom:20px"> 
-                    <div id="post-content" [innerHTML]="post?.content?.rendered | keepHtml"></div>
+                    <div id="post-content" [ngStyle]="{'font-size': fontSize + 'px'}" [innerHTML]="post?.content?.rendered | keepHtml"></div>
                 </div>            
             </div>
         </div>
         <div fxFlex="25" class="border-left-light-gray">
             <div class="margin-top-30" style="margin-left: 24px;">
                 <div class="margin-top-10" style="overflow:auto; margin-bottom:20px"> 
-                    <div style="font-weight:600"> Related Posts </div>
+                    <div style="font-weight:600; margin-bottom: 20px"> Related Posts </div>
                     <div fxLayout="column" *ngFor="let related of relatedPosts" style="margin-bottom: 15px;">
                         <md-card (click)="openPost(related.id, related.title.rendered)">
                             <img style="margin-bottom:0" md-card-image src="{{related.featured_media_url}}">
