@@ -23,14 +23,6 @@ body { margin: 0; font-family: Roboto, sans-serif; overflow: hidden; }
 .font-size-smaller { font-size: 0.750em; }
 .font-size-smallest { font-size: 0.625em; }
 
-.font-size-largest-px { font-size: 28px; }
-.font-size-larger-px { font-size: 24px; }
-.font-size-large-px { font-size: 20px; }
-.font-size-normal-px { font-size: 16px; }
-.font-size-small-px { font-size: 12px; }
-.font-size-smaller-px { font-size: 10px; }
-.font-size-smallest-px { font-size: 8px; }
-
 .font-family { font-family: 'Roboto', sans-serif; }
 
 .align-left { text-align: left !important; }
@@ -362,7 +354,6 @@ body { margin: 0; font-family: Roboto, sans-serif; overflow: hidden; }
 .my-brand { height: 100%; padding-left: 16px; padding-top: 7.5px; padding-right: 16px; }
 .my-icon-text { position: relative; top: -3px; }
 
-
 .fill-remaining-space {  flex: 1 1 auto; }
 
 .page-gap { position: relative; left: 0; top: 0; width: 100%; height: 40px; }
@@ -419,9 +410,6 @@ h2.cat-video-title { font-size: 1.375em; text-transform: uppercase; font-weight:
 .catContainer:hover .overlay { opacity: 1; }
 .catText { color: white; font-size: 20px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); }
 
-#MusesRadioPlayer-HTML5-player-0 { z-index: 15; float: right !important; margin-right: 150px; margin-top:6px; }
-
-
 /* Material Design Overide Styles */ 
 .mat-tab-label.mat-ripple { font-family: Fakt,AvenirNext-Medium,Segoe UI,sans-serif; font-size:18px;font-weight:600; text-transform:uppercase; letter-spacing:1px;}
 .mat-tab-label.mat-ripple.mat-tab-label-active { font-family: Fakt,AvenirNext-Medium,Segoe UI,sans-serif; font-size:18px;font-weight:600; text-transform:uppercase; letter-spacing:1px; color:#2196f3;}
@@ -444,11 +432,5 @@ h2.cat-video-title { font-size: 1.375em; text-transform: uppercase; font-weight:
 .material-icons.md-light { color: rgba(255, 255, 255, 1); }
 .material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
 
-/*@media screen and (max-width: 1366px) {
-  .overlay-post-title { margin: 0; color: white; }
-  .overlay-post-title.post-title.highlight { position:absolute;z-index:3; top:65%; left:30px; max-width:95%; font-size: 1.00em; line-height: 1em; font-weight: 400; }
-  .overlay-post-title.post-title.regular { position:absolute; z-index:3; top:50%; max-width:95%; font-size: 1.00em; font-weight: 400; line-height: 1.1em}
-  .custom-title{ min-height:4.75em; margin-top:0.1em; margin-bottom: 0.2em; margin-left:1em; margin-right:1em; font-size: 1em !important }
-}
-
-.test {height: 458px;}*/
+/* styling the html radio player generated automatically by its script */
+#MusesRadioPlayer-HTML5-player-0 { z-index: 15; float: right !important; margin-right: 150px; margin-top:6px; }
