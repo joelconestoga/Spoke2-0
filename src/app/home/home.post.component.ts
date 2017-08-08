@@ -37,14 +37,6 @@ export class HomePostComponent implements OnInit {
     this.service.getRelatedPosts(catId).subscribe(data => {this.relatedPosts = data});
   }
 
-  increaseFontSize(){
-    this.fontSize += 1;
-  }
-
-  descreaseFontSize(){
-    this.fontSize += 1;
-  }
-
   ngOnInit() {
     this.openPost(this.id);
     this.getRelatedPosts(this.catId);

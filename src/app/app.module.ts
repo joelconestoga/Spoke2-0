@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { EscapeHtmlPipe } from './_utils/keep-html.pipe';
 import { HomePostComponent } from './home/home.post.component';
-import { FilterPipe } from './_utils/filter.pipe';
 import { ScrollToModule } from 'ng2-scroll-to';
 import { AngularFontAwesomeModule } from 'angular-font-awesome/angular-font-awesome';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
@@ -25,7 +24,6 @@ import 'hammerjs';
     HomeComponent,
     HomePostComponent,
     EscapeHtmlPipe,
-    FilterPipe
   ],
   imports: [ScrollToModule.forRoot(),
     BrowserModule, RouterModule.forRoot([
