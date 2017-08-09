@@ -18,7 +18,7 @@ export class HomePostComponent implements OnInit {
   title;
   linkToShare;
   modalLoad = false;
-  fontSize;
+  fontSize = 16;
   
   constructor( private service: HomeService, public dialogRef: MdDialogRef<HomePostComponent>) {
     setTimeout(() => {
@@ -35,6 +35,14 @@ export class HomePostComponent implements OnInit {
   getRelatedPosts(catId) {
     this.catId = this.service.getCategoryId(catId);
     this.service.getRelatedPosts(catId).subscribe(data => {this.relatedPosts = data});
+  }
+
+  increaseFontSize(){
+    this.fontSize = this.fontSize + 2;
+  }
+
+  decreaseFontSize(){
+    this.fontSize = this.fontSize - 2;
   }
 
   ngOnInit() {
