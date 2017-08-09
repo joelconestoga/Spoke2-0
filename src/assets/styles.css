@@ -433,4 +433,8 @@ h2.cat-video-title { font-size: 1.375em; text-transform: uppercase; font-weight:
 .material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
 
 /* styling the html radio player generated automatically by its script */
-#MusesRadioPlayer-HTML5-player-0 { z-index: 15; float: right !important; margin-right: 150px; margin-top:6px; }
+#MusesRadioPlayer-HTML5-player-0 { z-index: 15; float: right !important; margin-right: 160px; margin-top:6px; }
+
+@media screen and (max-width: 620px) {
+    #MusesRadioPlayer-HTML5-player-0 { opacity: 0 }
+}

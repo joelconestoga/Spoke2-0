@@ -7,7 +7,7 @@ export class HomeService {
     
   constructor(private http: Http) { }
 
-  // website = "http://spokeonline.com/";
+  website = "http://localhost:4200/"; //this url has to be updated to proper url when the project is to be deployed
   baseURL = "https://public-api.wordpress.com/wp/v2/sites/spoketest.wordpress.com/";
   postsUrl = this.baseURL + "posts/"; // url of the REST API json file for POSTS
   categoriesUrl = this.baseURL + "categories" // url of the REST API json file for CATEGORIES

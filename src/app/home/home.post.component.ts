@@ -21,15 +21,15 @@ export class HomePostComponent implements OnInit {
   fontSize;
   
   constructor( private service: HomeService, public dialogRef: MdDialogRef<HomePostComponent>) {
-      setTimeout(() => {
-          this.modalLoad = true;
-      }, 1000)
+    setTimeout(() => {
+        this.modalLoad = true;
+    }, 1000)
   }
   
   openPost(id) {
     this.id = this.service.getPostId(id);    
     this.service.getPost().subscribe(data => this.post = data);
-    this.linkToShare = this.service.baseURL + id;
+    this.linkToShare = this.service.website + id;
   }
 
   getRelatedPosts(catId) {
