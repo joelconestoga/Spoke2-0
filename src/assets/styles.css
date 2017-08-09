@@ -375,16 +375,16 @@ h3.overlay-post-title.post-title.regular { position:absolute; z-index:3; top:50%
 .category-navigator:hover { color: #2196f3 !important }
 .bar { height:inherit; width:50px }
 .post-item-arrow.right {  
-    background: -webkit-linear-gradient(left, rgba(238,238,238,0.4), rgba(255,255,255,1)); 
-    background: -o-linear-gradient(right, rgba(238,238,238,0.4), rgba(255,255,255,1)); 
-    background: -moz-linear-gradient(right, rgba(238,238,238,0.4), rgba(255,255,255,1)); 
-    background: linear-gradient(to right, rgba(238,238,238,0.00), rgba(255,255,255,0.85)); 
+    background: -webkit-linear-gradient(left, rgba(238,238,238,0), rgba(255,255,255,1)); 
+    background: -o-linear-gradient(right, rgba(238,238,238,0), rgba(255,255,255,1)); 
+    background: -moz-linear-gradient(right, rgba(238,238,238,0), rgba(255,255,255,1)); 
+    background: linear-gradient(to right, rgba(238,238,238,0), rgba(255,255,255,0.85)); 
 }
 .post-item-arrow.left {  
-    background: -webkit-linear-gradient(right, rgba(238,238,238,0.00), rgba(255,255,255,0.85)); 
-    background: -o-linear-gradient(left, rgba(238,238,238,0.00), rgba(255,255,255,0.85)); 
-    background: -moz-linear-gradient(left, rgba(238,238,238,0.00), rgba(255,255,255,0.85)); 
-    background: linear-gradient(to left, rgba(238,238,238,0.00), rgba(255,255,255,0.85)); 
+    background: -webkit-linear-gradient(right, rgba(238,238,238,0), rgba(255,255,255,0.85)); 
+    background: -o-linear-gradient(left, rgba(238,238,238,0), rgba(255,255,255,0.85)); 
+    background: -moz-linear-gradient(left, rgba(238,238,238,0), rgba(255,255,255,0.85)); 
+    background: linear-gradient(to left, rgba(238,238,238,0), rgba(255,255,255,0.85)); 
 }
 .post-item-arrow.right:hover { background: linear-gradient(to right, rgba(238,238,238,0.15), rgba(255,255,255,1)); }
 .post-item-arrow.left:hover { background: linear-gradient(to left, rgba(238,238,238,0.15), rgba(255,255,255,1)); }
