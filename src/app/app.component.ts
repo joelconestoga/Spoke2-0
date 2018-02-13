@@ -50,10 +50,9 @@ export class AppComponent implements OnInit {
     });
   }
 
+  title = "app";  
   play: false;
   stream(){
     this.play = false;
   }
 }
-
-
