@@ -21,6 +21,9 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { AngularFireModule } from 'angularfire2';
+import { AF } from './providers/af';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 // FIREBASE config
 export const firebaseConfig = {
@@ -71,8 +74,11 @@ const routes: Routes = [
     AngularFontAwesomeModule, 
     ShareButtonsModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
+    FormsModule,    
   ],
-  providers: [],
+  providers: [AF],
   bootstrap: [AppComponent],
   entryComponents: [HomePostComponent],
   schemas: [ NO_ERRORS_SCHEMA ],  
