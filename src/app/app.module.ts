@@ -24,6 +24,7 @@ import { AF } from './providers/af';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { PostComponent } from './post/post.component';
+import { AppService } from './app.service';
 
 // FIREBASE config
 export const firebaseConfig = {
@@ -78,7 +79,7 @@ const routes: Routes = [
     AngularFireDatabaseModule,
     FormsModule,    
   ],
-  providers: [AF],
+  providers: [AF, AppService],
   bootstrap: [AppComponent],
   entryComponents: [PostComponent],
   schemas: [ NO_ERRORS_SCHEMA ],  

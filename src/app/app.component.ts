@@ -19,6 +19,8 @@ export class AppComponent implements OnInit {
 
   constructor(private service: AppService, public afService: AF, private router: Router) {
     
+    this.message= service.getMessage();
+
     this.afService.af.authState.subscribe((auth) => {
         if(auth == null) {
           console.log("Not Logged in.");
@@ -43,6 +45,10 @@ export class AppComponent implements OnInit {
   logout() {
     this.afService.logout();
   }
+  
+  title = "app";
+  public message : string;
+
   // loading all categories from the data set
   loadCategoriesForMenu() {
     this.service.getCategories().subscribe(resData => { 
@@ -50,8 +56,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  title = "app";  
-
+ 
   play: false;
   stream(){
     this.play = false;
