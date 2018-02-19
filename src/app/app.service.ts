@@ -9,10 +9,13 @@ export class AppService {
   // base url of the REST API json file
   apiCategoriesURL = "https://public-api.wordpress.com/wp/v2/sites/spoketest.wordpress.com/categories"; 
 
+  getMessage() {
+    return 'real service';
+  }
+
   // gets all categories from the REST API
   getCategories() {
     return this.http.get(this.apiCategoriesURL)
     .map((response: Response) => response.json());
   }
 }
-

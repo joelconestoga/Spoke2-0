@@ -17,6 +17,7 @@ import { ShareButtonsModule } from 'ngx-sharebuttons';
 import { UrlparamComponent } from './urlparam/urlparam.component';
 
 import 'hammerjs';
+import { AppService } from './app.service';
 
 
 @NgModule({
@@ -34,7 +35,7 @@ import 'hammerjs';
     ]), HttpModule, BrowserAnimationsModule, FormsModule,
         FlexLayoutModule, MdButtonModule, MdTooltipModule, MdDialogModule, MdMenuModule, MdIconModule, MdToolbarModule, MdProgressBarModule, MdProgressSpinnerModule, MaterialModule, MDBBootstrapModule.forRoot(), AngularFontAwesomeModule, ShareButtonsModule.forRoot()
   ],
-  providers: [],
+  providers: [AppService],
   bootstrap: [AppComponent],
   entryComponents: [HomePostComponent],
   schemas: [ NO_ERRORS_SCHEMA ],  

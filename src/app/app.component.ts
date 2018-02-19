@@ -13,15 +13,21 @@ export class AppComponent implements OnInit {
 
   // variable to assign selected category
   public categoryId;
+  title = "app";
+  public message : string;
 
-  constructor(private service: AppService) { }
+  constructor(private service: AppService) { 
+    this.message= service.getMessage();
+  }
 
   // loading all categories from the data set
   getCategories() {
     this.service.getCategories().subscribe(resData => this.categories = resData);
   }
 
-  title = "app";
+ 
+
+  
   
 
   play: false;
@@ -34,6 +40,4 @@ export class AppComponent implements OnInit {
     //this.title
   }
 }
-
-
 ;
