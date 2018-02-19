@@ -20,6 +20,16 @@ import 'hammerjs';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { FavoritesComponent } from './favorites/favorites.component';
+import { AngularFireModule } from 'angularfire2';
+
+// FIREBASE config
+export const firebaseConfig = {
+  apiKey: 'xxx',
+  authDomain: 'xxx',
+  databaseURL: 'xxx',
+  storageBucket: 'xxx',
+  messagingSenderId: 'xxx'
+};
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -59,7 +69,8 @@ const routes: Routes = [
     MaterialModule, 
     MDBBootstrapModule.forRoot(), 
     AngularFontAwesomeModule, 
-    ShareButtonsModule.forRoot()
+    ShareButtonsModule.forRoot(),
+    AngularFireModule.initializeApp(firebaseConfig),
   ],
   providers: [],
   bootstrap: [AppComponent],
