@@ -11,7 +11,7 @@ import * as firebase from 'firebase/app';
 export class AF {
 
 //   public messages: Observable<any>;
-//   public users: Observable<any>;
+  public users: Observable<any>;
   public displayName: string;
   public email: string;
 
@@ -37,14 +37,14 @@ export class AF {
 //     this.afd.list('messages').push(message);
 //   }
 
-//   registerUser(email, password) {
-//     console.log(email)
-//     return this.af.auth.createUserAndRetrieveDataWithEmailAndPassword(email, password);
-//   }
+  registerUser(email, password) {
+    console.log(email)
+    return this.af.auth.createUserWithEmailAndPassword(email, password);
+  }
 
-//   saveUserInfoFromForm(uid, name, email) {
-//     return this.afd.object('registeredUsers/' + uid).set( { name: name, email: email, displayName: name } );
-//   }
+  saveUserInfoFromForm(uid, name, email) {
+    return this.afd.object('registeredUsers/' + uid).set( { name: name, email: email, displayName: name } );
+  }
 
   loginWithEmail(email, password) {
     return this.af.auth.signInWithEmailAndPassword (email, password);
