@@ -23,6 +23,10 @@ export class AF {
     return this.af.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
   
+  loginWithFacebook() {
+    return this.af.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
+  }
+
   logout() {
     return this.af.auth.signOut();
   }
