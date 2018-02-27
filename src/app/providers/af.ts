@@ -10,13 +10,13 @@ import * as firebase from 'firebase/app';
 @Injectable()
 export class AF {
 
-//   public messages: Observable<any>;
   public users: Observable<any>;
+  public favorites: Observable<any>;
   public displayName: string;
   public email: string;
 
   constructor(public af: AngularFireAuth, public afd: AngularFireDatabase) {
-   //  this.messages = this.afd.list('messages').valueChanges();
+    this.favorites = this.afd.list('favorites').valueChanges();
   }
 
   loginWithGoogle() {
@@ -31,15 +31,25 @@ export class AF {
     return this.af.auth.signOut();
   }
 
-//   sendMessage(text) {
-//     var message = {
-//       message: text,
-//       displayName: this.displayName,
-//       email: this.email,
-//       timestamp: Date.now()
-//     };
-//     this.afd.list('messages').push(message);
-//   }
+  setFavorite(id, callback) {
+    var ref = this.afd.database.ref("favorites");
+    ref.child(id).set( { timestamp: Date.now() }, callback);
+  }
+
+  removeFromFavorites(id, callback) {
+    var ref = this.afd.database.ref("favorites");
+    ref.child(id).remove(callback);
+  }
+
+  checkFavorite(id, callback) {
+    var ref = this.afd.database.ref("favorites");
+    ref.once("value").then(
+      function(snapshot) {
+        var hasFavorite = snapshot.hasChild(id.toString());
+        callback(hasFavorite);
+      }
+    );
+  }
 
   registerUser(email, password) {
     console.log(email)

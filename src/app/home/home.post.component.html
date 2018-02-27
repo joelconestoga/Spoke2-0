@@ -24,6 +24,11 @@
                     <div class="material-icons cursor-pointer">share</div>
                 </button>
             </div>
+            <div class="margin-right-10"> 
+                <button md-icon-button ng-disabled='favoriteIcon == ""' class="color-white" (click)="setOrRemoveFromFavorites(post)">
+                    <div class="material-icons md-24 cursor-pointer">{{favoriteIcon}}</div>
+                </button>
+            </div>
             <md-menu #menu="mdMenu" [overlapTrigger]="false">
                 <share-buttons
                     [pinterest]="false"
