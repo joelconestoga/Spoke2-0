@@ -14,7 +14,7 @@ import { fadeInOutAnimation } from '../_animations/index';
 })
 export class HomeComponent implements OnInit {
 
-  data: any[];
+  categories: any[];
   load: any = { per_page: 4 };
   category: any;
   imageUrl: any;
@@ -28,13 +28,36 @@ export class HomeComponent implements OnInit {
   constructor(private service: HomeService, private sanitizer: DomSanitizer, public dialog: MdDialog) {
   }
 
+  ngOnInit() {
+    this.loadCover();
+    this.loadCategoriesWithPosts();
+    setTimeout(() => {
+        this.contentLoad = true;
+        (<any>window).twttr = (function (d, s, id) {
+            let js: any, fjs = d.getElementsByTagName(s)[0],
+                t = (<any>window).twttr || {};
+            if (d.getElementById(id)) return t;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+
+            t._e = [];
+            t.ready = function (f: any) {
+                t._e.push(f);
+            };
+            return t;
+        }(document, "script", "twitter-wjs"));
+    }, 1500)
+  }
+
   // function for Angular to sanitize background images from Wordpress 
   getBackground(image) { 
     return this.sanitizer.bypassSecurityTrustStyle(`url(${image})`);
   }
 
   // method to subscribe to posts to be displayed in the cover section
-  getCover() {
+  loadCover() {
       this.service.getCoverHighlight().subscribe(data => this.cover.highlight = data);
       this.service.getCoverRowOne().subscribe(data => this.cover.rowOne = data);
       this.service.getCoverRowTwo().subscribe(data => this.cover.rowTwo = data);
@@ -66,15 +89,15 @@ export class HomeComponent implements OnInit {
   }
 
   
-  getData(){
-    this.service.getCategories(this.load.per_page).subscribe(data => { 
-      this.data = data;
+  loadCategoriesWithPosts(){
+    this.service.getCategoriesWithPosts(this.load.per_page).subscribe(data => { 
+      this.categories = data;
     });
   }
 
   loadMore(event, category){
     event.stopPropagation();
-    this.service.getData(category.id, category.offset, this.load.per_page).subscribe(data => {
+    this.service.getCategoryPosts(category.id, category.offset, this.load.per_page).subscribe(data => {
       category.offset = data && data.length > 0 ? category.offset + this.load.per_page : category.offset;
       category.posts = data && data.length > 0 ? data : category.posts;
       category.forward = data && data.length === this.load.per_page;
@@ -83,7 +106,7 @@ export class HomeComponent implements OnInit {
 
   loadPrevious(event, category) {
     event.stopPropagation();
-    this.service.getData(category.id, category.offset - (this.load.per_page * 2), this.load.per_page).subscribe(data => {
+    this.service.getCategoryPosts(category.id, category.offset - (this.load.per_page * 2), this.load.per_page).subscribe(data => {
       category.offset -= this.load.per_page;
       category.posts = data && data.length > 0 ? data : category.posts;
       category.forward = true;
@@ -96,28 +119,5 @@ export class HomeComponent implements OnInit {
 
   mouseLeave(name) {
     this.forward = name;
-  }
-
-  ngOnInit() {
-    this.getCover();
-    this.getData();
-    setTimeout(() => {
-        this.contentLoad = true;
-        (<any>window).twttr = (function (d, s, id) {
-            let js: any, fjs = d.getElementsByTagName(s)[0],
-                t = (<any>window).twttr || {};
-            if (d.getElementById(id)) return t;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "https://platform.twitter.com/widgets.js";
-            fjs.parentNode.insertBefore(js, fjs);
-
-            t._e = [];
-            t.ready = function (f: any) {
-                t._e.push(f);
-            };
-            return t;
-        }(document, "script", "twitter-wjs"));
-    }, 1500)
   }
 }

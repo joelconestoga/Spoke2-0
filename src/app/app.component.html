@@ -28,6 +28,9 @@
     <a class="color-blue cursor-pointer margin-right-10" href="https://www.facebook.com/spokeonline" target="_blank"><i class="fa fa-2x fa-facebook-square" aria-hidden="true"></i></a>
     <a class="color-blue cursor-pointer margin-right-10" href="https://www.youtube.com/user/SpokeOnline" target="_blank"><i class="fa fa-2x fa-youtube-square" aria-hidden="true"></i></a>
   </div>
+  <div>
+    <a class="nav-link" href="favorites"><button md-menu-item>Favorites</button></a>
+  </div>
   <div *ngIf="!isLoggedIn">
     <a class="nav-link" href="login"><button md-menu-item>Login</button></a>
   </div>
@@ -35,6 +38,8 @@
     <a class="nav-link"><button md-menu-item (click)="logout()">Logout</button></a>
   </div>
 </md-toolbar>
+
+
 <div class="my-content">
   <md-sidenav-container class="my-sidenav-container">
     <md-sidenav #sidenav class="my-sidenav">

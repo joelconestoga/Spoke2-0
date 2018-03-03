@@ -27,11 +27,11 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 // FIREBASE config
 export const firebaseConfig = {
-  apiKey: 'AIzaSyB8ItaMdPPasjmcNLpjPJpgQNYGBXjRGek',
-  authDomain: 'spoke-on-fire.firebaseapp.com',
-  databaseURL: 'https://spoke-on-fire.firebaseio.com',
-  storageBucket: 'spoke-on-fire.appspot.com',
-  messagingSenderId: '282028460968'
+  apiKey: 'xxx',
+  authDomain: 'xxx',
+  databaseURL: 'xxx',
+  storageBucket: 'xxx',
+  messagingSenderId: 'xxx'
 };
 
 const routes: Routes = [

@@ -36,21 +36,23 @@ export class AppComponent implements OnInit {
     );
   }
   
+  ngOnInit() {
+    this.loadCategoriesForMenu();
+  }
+
   logout() {
     this.afService.logout();
   }
   // loading all categories from the data set
-  getCategories() {
-    this.service.getCategories().subscribe(resData => this.categories = resData);
+  loadCategoriesForMenu() {
+    this.service.getCategories().subscribe(resData => { 
+      this.categories = resData;
+    });
   }
 
   play: false;
   stream(){
     this.play = false;
-  }
-
-  ngOnInit() {
-    this.getCategories();
   }
 }
 
