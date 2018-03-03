@@ -1,20 +1,20 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MdDialogRef, MdDialog } from '@angular/material';
-import { HomeService } from './home.service';
 import { Observable } from 'rxjs/Rx';
 import { AF } from '../providers/af';
+import { HomeService } from '../home/home.service';
 
 const FAVORITE: string = "favorite";
 const NOT_FAVORITE: string = "favorite_border";
 
 @Component({
   moduleId: module.id,
-  selector: 'home-post-component',
+  selector: 'post-component',
   providers: [HomeService],
-  templateUrl: 'home.post.component.html'
+  templateUrl: 'post.component.html'
 })
 
-export class HomePostComponent implements OnInit {
+export class PostComponent implements OnInit {
   loading: boolean = true;
   post;
   relatedPosts: any[];
@@ -26,26 +26,30 @@ export class HomePostComponent implements OnInit {
   fontSize = 16;
   favoriteIcon = NOT_FAVORITE;
   
-  constructor( private service: HomeService, public dialogRef: MdDialogRef<HomePostComponent>, public afService: AF) {
+  constructor( private service: HomeService, public dialogRef: MdDialogRef<PostComponent>, public afService: AF) {
     setTimeout(() => { this.modalLoad = true }, 1000);
   }
-  
-  ngOnInit() {
-    this.openPost(this.id);
-    this.getRelatedPosts(this.catId);
+
+  initialize(postId, categoryId, title) {
+    this.id = postId;
+    this.catId = categoryId;
+    this.title = title;
   }
 
-  openPost(id) {
-    this.id = this.service.getPostId(id);    
-    this.service.getPost().subscribe(data => {
+  ngOnInit() {
+    this.loadPost(this.id);
+    this.loadRelatedPost(this.catId);
+  }
+
+  loadPost(id) {
+    this.service.getPost(id).subscribe(data => {
       this.post = data;
       this.reloadFavoriteIcon(this.post.id);
     });
     this.linkToShare = this.service.website + id;
   }
 
-  getRelatedPosts(catId) {
-    this.catId = this.service.getCategoryId(catId);
+  loadRelatedPost(catId) {
     this.service.getRelatedPosts(catId).subscribe(data => {this.relatedPosts = data});
   }
 

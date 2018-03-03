@@ -12,8 +12,6 @@ export class HomeService {
   postsUrl = this.baseURL + "posts/"; // url of the REST API json file for POSTS
   categoriesUrl = this.baseURL + "categories" // url of the REST API json file for CATEGORIES
   // featuredImage = this.postsUrl + "posts._embedded" + "['wp:featuredmedia'][0].source_url"; // path to fetch the featured image of a post when the WP website is not using the 'Best REST API Featured Images' plugin
-  id; // postId
-  catId; //categoryId
 
   // gets the latest post. In the HTML it's the largest one displayed on top of the TOP STORIES page.  I did this only for design purposes, since I couldnt find a better way to arrange posts through ngFor
   getCoverHighlight() {   
@@ -31,14 +29,9 @@ export class HomeService {
     .map(response => response.json() as any[]);
   }
 
-  // receives the id of the selected postf rom HomeComponent and attributes it to the "id" variable, to be used in the getPost() function
-  getPostId(id) {   
-    this.id = id; 
-  }
-
   // it throws the id of the selected post into the url to retrieve data of the specific post to an array
-  getPost() {      
-    return this.http.get(this.postsUrl + `${this.id}`)
+  getPost(id) {      
+    return this.http.get(this.postsUrl + `${id}`)
     .map((response: Response) => response.json());
   }
  
@@ -65,9 +58,6 @@ export class HomeService {
       .map((response: Response) => response.json() as any[]);
   }
 
-  getCategoryId(catId) {
-    this.catId = catId;
-  }
   getRelatedPosts(catId){
     return this.http.get(this.postsUrl + `?_embed&categories=${catId}&per_page=3`)
       .map((response: Response) => response.json() as any[]);

@@ -9,7 +9,6 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { EscapeHtmlPipe } from './_utils/keep-html.pipe';
-import { HomePostComponent } from './home/home.post.component';
 import { ScrollToModule } from 'ng2-scroll-to';
 import { AngularFontAwesomeModule } from 'angular-font-awesome/angular-font-awesome';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
@@ -24,6 +23,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AF } from './providers/af';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { PostComponent } from './post/post.component';
 
 // FIREBASE config
 export const firebaseConfig = {
@@ -46,7 +46,7 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    HomePostComponent,
+    PostComponent,
     EscapeHtmlPipe,
     // UrlparamComponent,
     LoginComponent,
@@ -80,7 +80,7 @@ const routes: Routes = [
   ],
   providers: [AF],
   bootstrap: [AppComponent],
-  entryComponents: [HomePostComponent],
+  entryComponents: [PostComponent],
   schemas: [ NO_ERRORS_SCHEMA ],  
 })
 export class AppModule { }
