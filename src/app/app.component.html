@@ -1,4 +1,5 @@
 <md-toolbar class="my-navbar">
+
   <div fxLayout="row" fxHide="false" fxHide.gt-sm>
     <button md-button [md-menu-trigger-for]="menu"><md-icon>menu</md-icon></button>
   </div>
@@ -12,6 +13,7 @@
       <a class="color-blue cursor-pointer margin-left-15 margin-right-10" href="https://www.youtube.com/user/SpokeOnline" target="_blank"><i class="fa fa-2x fa-youtube-square" aria-hidden="true"></i></a>
     </div>
   </md-menu>
+ 
   <div class="my-brand cursor-pointer" fxLayout="row">
     <a  href="#cover"><img src="./assets/logo.png" height="30" class="margin-top-5"></a>
   </div>
@@ -26,7 +28,18 @@
     <a class="color-blue cursor-pointer margin-right-10" href="https://www.facebook.com/spokeonline" target="_blank"><i class="fa fa-2x fa-facebook-square" aria-hidden="true"></i></a>
     <a class="color-blue cursor-pointer margin-right-10" href="https://www.youtube.com/user/SpokeOnline" target="_blank"><i class="fa fa-2x fa-youtube-square" aria-hidden="true"></i></a>
   </div>
+  <div>
+    <a class="nav-link" href="favorites"><button md-menu-item>Favorites</button></a>
+  </div>
+  <div *ngIf="!isLoggedIn">
+    <a class="nav-link" href="login"><button md-menu-item>Login</button></a>
+  </div>
+  <div *ngIf="isLoggedIn">
+    <a class="nav-link"><button md-menu-item (click)="logout()">Logout</button></a>
+  </div>
 </md-toolbar>
+
+
 <div class="my-content">
   <md-sidenav-container class="my-sidenav-container">
     <md-sidenav #sidenav class="my-sidenav">

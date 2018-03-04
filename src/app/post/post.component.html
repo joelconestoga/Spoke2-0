@@ -24,6 +24,11 @@
                     <div class="material-icons cursor-pointer">share</div>
                 </button>
             </div>
+            <div class="margin-right-10"> 
+                <button md-icon-button ng-disabled='favoriteIcon == ""' class="color-white" (click)="setOrRemoveFromFavorites(post)">
+                    <div class="material-icons md-24 cursor-pointer">{{favoriteIcon}}</div>
+                </button>
+            </div>
             <md-menu #menu="mdMenu" [overlapTrigger]="false">
                 <share-buttons
                     [pinterest]="false"
@@ -56,7 +61,7 @@
                 <div class="margin-top-10" style="overflow:auto; margin-bottom:20px"> 
                     <div style="font-weight:600; margin-bottom: 20px"> Related Posts </div>
                     <div fxLayout="column" *ngFor="let related of relatedPosts" style="margin-bottom: 15px;">
-                        <md-card (click)="openPost(related.id, related.title.rendered)">
+                        <md-card (click)="loadPost(related.id, related.title.rendered)">
                             <img style="margin-bottom:0" md-card-image src="{{related.featured_media_url}}">
                             <h3 class="text-small padding-clear" [innerHTML]="related.title.rendered | keepHtml"></h3>
                         </md-card>
