@@ -11,13 +11,16 @@ import { Mock } from 'protractor/built/driverProviders';
 import { connect } from 'net';
 import { Jsonp } from '@angular/http/src/http';
 import { EscapeHtmlPipe } from '../_utils/keep-html.pipe';
+import { HomePostComponent } from './home.post.component';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
+  let comp:HomePostComponent;
   let fixture: ComponentFixture<HomeComponent>;
   let service: HomeService;
   let spy: any;
   let backend: MockBackend;
+  let fontSize:14;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -47,9 +50,14 @@ describe('HomeComponent', () => {
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));
-  it('Post Id: ', async(() => {
-    // const fixture = TestBed.createComponent(HomeComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  }));
+  // this should be in the spec file of HomePostComponent not HomeCompoent got it? hmm
+  // it('Increase Font Size By 2', async(() => {
+    
+  //   expect(comp.increaseFontSize()).toEqual('18'); //not able to call component method here
+  // }));
+
+  // it('Decrease Font Size By 2', async(()=> {
+  //   expect(comp.decreaseFontSize()).toEqual('14'); //not able to call component method here
+  // }));
 });
+

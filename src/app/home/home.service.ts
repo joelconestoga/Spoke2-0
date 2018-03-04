@@ -59,6 +59,7 @@ export class HomeService {
   }
 
   getRelatedPosts(catId){
+    //console.log(catId);
     return this.http.get(this.postsUrl + `?_embed&categories=${catId}&per_page=3`)
       .map((response: Response) => response.json() as any[]);
   }
