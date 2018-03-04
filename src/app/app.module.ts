@@ -14,7 +14,6 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome/angular-font-awes
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ShareButtonsModule } from 'ngx-sharebuttons';
 // import { UrlparamComponent } from './urlparam/urlparam.component';
-import { UrlparamComponent } from './urlparam/urlparam.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
@@ -33,11 +32,11 @@ import { AppService } from './app.service';
 
 // FIREBASE config
 export const firebaseConfig = {
-  apiKey: 'xxx',
-  authDomain: 'xxx',
-  databaseURL: 'xxx',
-  storageBucket: 'xxx',
-  messagingSenderId: 'xxx'
+  apiKey: 'AIzaSyB8ItaMdPPasjmcNLpjPJpgQNYGBXjRGek',
+  authDomain: 'spoke-on-fire.firebaseapp.com',
+  databaseURL: 'https://spoke-on-fire.firebaseio.com',
+  storageBucket: 'spoke-on-fire.appspot.com',
+  messagingSenderId: '282028460968'
 };
 
 const routes: Routes = [
@@ -63,10 +62,9 @@ export const appRoutingProviders: any[] = []
   ],
   imports: [
     ScrollToModule.forRoot(),
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent }, // Home component is called on root URL
-      { path: ':id', component: UrlparamComponent }
-    ]), 
+    RouterModule.forRoot(routes),
+    //   [{ path: '', component: HomeComponent }, // Home component is called on root URL
+    // ]), 
     BrowserModule, 
     HttpModule, 
     BrowserAnimationsModule, 
