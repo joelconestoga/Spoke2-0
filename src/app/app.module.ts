@@ -3,7 +3,7 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule, MdTooltipModule, MdButtonModule, MdDialogModule, MdMenuModule, MdIconModule, MdToolbarModule, MdProgressBarModule, MdProgressSpinnerModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule, Routes } from '@angular/router';
+
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
@@ -14,6 +14,11 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome/angular-font-awes
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ShareButtonsModule } from 'ngx-sharebuttons';
 // import { UrlparamComponent } from './urlparam/urlparam.component';
+import { UrlparamComponent } from './urlparam/urlparam.component';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+import { ModuleWithProviders } from '@angular/core';
+
 
 import 'hammerjs';
 import { LoginComponent } from './login/login.component';
@@ -42,6 +47,8 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationComponent },  
   { path: 'favorites', component: FavoritesComponent },  
 ];
+  
+export const appRoutingProviders: any[] = []
 
 @NgModule({
   declarations: [
@@ -56,7 +63,10 @@ const routes: Routes = [
   ],
   imports: [
     ScrollToModule.forRoot(),
-    RouterModule.forRoot(routes), 
+    RouterModule.forRoot([
+      { path: '', component: HomeComponent }, // Home component is called on root URL
+      { path: ':id', component: UrlparamComponent }
+    ]), 
     BrowserModule, 
     HttpModule, 
     BrowserAnimationsModule, 
@@ -77,9 +87,10 @@ const routes: Routes = [
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    FormsModule,    
+    FormsModule,
+    CommonModule,
   ],
-  providers: [AF, AppService],
+  providers: [AF, AppService, appRoutingProviders],
   bootstrap: [AppComponent],
   entryComponents: [PostComponent],
   schemas: [ NO_ERRORS_SCHEMA ],  

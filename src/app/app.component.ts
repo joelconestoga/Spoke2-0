@@ -40,6 +40,7 @@ export class AppComponent implements OnInit {
   
   ngOnInit() {
     this.loadCategoriesForMenu();
+    this.message = this.getMessage();
   }
 
   logout() {
@@ -55,8 +56,11 @@ export class AppComponent implements OnInit {
       this.categories = resData;
     });
   }
-
  
+  getMessage() {
+    return this.service.getMessage();
+  }
+
   play: false;
   stream(){
     this.play = false;
