@@ -48,5 +48,6 @@ export class HomePostComponent implements OnInit {
   ngOnInit() {
     this.openPost(this.id);
     this.getRelatedPosts(this.catId);
+    this.decreaseFontSize();
   }
 }

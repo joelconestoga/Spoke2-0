@@ -43,7 +43,7 @@ export class HomeService {
   }
  
   // gets the from all categories + category's id + category's name.
-  getCategories(per_page) {     
+  getCategories(per_page) {
     return this.http.get(this.categoriesUrl) // url to the Rest API categories' json
       .map((response: Response) => response.json() as any[]) // gets the response and store in an array
       .map((categories: any[]) => {
@@ -52,7 +52,7 @@ export class HomeService {
         for(let x = 0; x < categories.length; x++) { // loops through the json fetched from the Rest API
           data.push({ id: categories[x].id, name: categories[x].name, offset: per_page, posts: [], forward: true }); // cleans the array getting only category id and category name, and inserts an empty array 'posts' and 'offset'
           // at this point 'data' array has an structure like this: [{id: number, name: string, offset: number, posts: []}]
-          this.getData(data[x].id, 0, per_page).subscribe(posts => data[x].posts = posts); // calls the method 'getData', passing category 'id', 'offset', 'per_page', fetching data from the category id, and assigning the data to that category's 'posts' array          
+         this.getData(data[x].id, 0, per_page).subscribe(posts => data[x].posts = posts); // calls the method 'getData', passing category 'id', 'offset', 'per_page', fetching data from the category id, and assigning the data to that category's 'posts' array          
         }
         return data;
       });
@@ -69,6 +69,7 @@ export class HomeService {
     this.catId = catId;
   }
   getRelatedPosts(catId){
+    //console.log(catId);
     return this.http.get(this.postsUrl + `?_embed&categories=${catId}&per_page=3`)
       .map((response: Response) => response.json() as any[]);
   }
