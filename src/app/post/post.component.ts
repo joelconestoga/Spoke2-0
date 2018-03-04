@@ -76,13 +76,13 @@ export class PostComponent implements OnInit {
 
   setOrRemoveFromFavorites(post) {    
     if (this.favoriteIcon == FAVORITE) {
-      this.setAsFavorite(post);
-    } else {
       this.removeFromFavorites(post);
+    } else {
+      this.setAsFavorite(post);
     }
   }
 
-  setAsFavorite(post) {
+  removeFromFavorites(post) {
     var self = this;
     var callback = function(error) {
       if (!error) {
@@ -96,7 +96,7 @@ export class PostComponent implements OnInit {
     this.afService.removeFromFavorites(this.post.id, callback);
   }
 
-  removeFromFavorites(post) {
+  setAsFavorite(post) {
     var self = this;
     var callback = function(error) {
       if (!error) {
@@ -107,7 +107,7 @@ export class PostComponent implements OnInit {
       }
     };
     this.disableFavoriteButton();
-    this.afService.setFavorite(this.post.id, callback);
+    this.afService.setFavorite(this.post, callback);
   }
 
   disableFavoriteButton() {

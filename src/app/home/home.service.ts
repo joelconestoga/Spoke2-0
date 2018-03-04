@@ -62,6 +62,12 @@ export class HomeService {
     return this.http.get(this.postsUrl + `?_embed&categories=${catId}&per_page=3`)
       .map((response: Response) => response.json() as any[]);
   }
+  
+  getPostsForIds(ids) {   
+    return this.http.get(this.postsUrl + `?include=` + ids.toString())
+    .map(response => response.json() as any[]);
+  }    
+  
   sharedpost(id){
     return this.http.get(this.postsUrl + `${id}`).map((response: Response) => response.json());
   }

@@ -31,9 +31,17 @@ export class AF {
     return this.af.auth.signOut();
   }
 
-  setFavorite(id, callback) {
+  setFavorite(post, callback) {
     var ref = this.afd.database.ref("favorites");
-    ref.child(id).set( { timestamp: Date.now() }, callback);
+    ref.child(post.id).set(
+      { 
+        id: post.id,
+        title: post.title.rendered,
+        category: post.categories['0'],
+        background: post.featured_media_url,
+        timestamp: Date.now() 
+      }, 
+      callback);
   }
 
   removeFromFavorites(id, callback) {
@@ -47,6 +55,15 @@ export class AF {
       function(snapshot) {
         var hasFavorite = snapshot.hasChild(id.toString());
         callback(hasFavorite);
+      }
+    );
+  }
+
+  getFavoritesKeys(callback) {
+    var ref = this.afd.database.ref("favorites");
+    ref.once("value").then(
+      function(snapshot) {
+        callback(snapshot);
       }
     );
   }
