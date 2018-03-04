@@ -90,7 +90,7 @@ it('this must return me the categories method', fakeAsync(() => {
       }));
     });
  
-  service.getCategories(4).subscribe(result => {
+  service.getCategoriesWithPosts(4).subscribe(result => {
       expect(result[0].id).toBe(5580); 
       expect(result[0].name).toBe("Diversions");
     });

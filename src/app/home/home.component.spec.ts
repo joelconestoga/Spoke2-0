@@ -11,11 +11,9 @@ import { Mock } from 'protractor/built/driverProviders';
 import { connect } from 'net';
 import { Jsonp } from '@angular/http/src/http';
 import { EscapeHtmlPipe } from '../_utils/keep-html.pipe';
-import { HomePostComponent } from './home.post.component';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
-  let comp:HomePostComponent;
   let fixture: ComponentFixture<HomeComponent>;
   let service: HomeService;
   let spy: any;
