@@ -1,9 +1,8 @@
 import { TestBed, async, fakeAsync } from '@angular/core/testing';
 import { MaterialModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
-//mocking 
+//mocking
 import { Injectable, Injector } from '@angular/core';
-// import {async, fakeAsync, tick} from '@angular/core/testing';
 import { BaseRequestOptions, ConnectionBackend, Http, RequestOptions } from '@angular/http';
 import { Response, ResponseOptions } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
@@ -87,6 +86,6 @@ describe('AppComponent', () => {
   it('should attach message from service to component', async(() => {
     let fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    expect(fixture.componentInstance.message).toBe('fake service');
+    expect(fixture.componentInstance.message).toBe('real service'); 
   }));
 });

@@ -10,6 +10,7 @@ import { HomeComponent } from './home.component';
 import { Mock } from 'protractor/built/driverProviders';
 import { connect } from 'net';
 import { Jsonp } from '@angular/http/src/http';
+import { EscapeHtmlPipe } from '../_utils/keep-html.pipe';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -21,7 +22,7 @@ describe('HomeComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ MaterialModule],
-      declarations: [ HomeComponent ],
+      declarations: [ HomeComponent, EscapeHtmlPipe ],
       providers: [ 
         HomeService,
         MockBackend,
@@ -42,7 +43,12 @@ describe('HomeComponent', () => {
   });
 
   it('should be created', async(() => {
-    const fixture = TestBed.createComponent(HomeComponent);
+    // const fixture = TestBed.createComponent(HomeComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(app).toBeTruthy();
+  }));
+  it('Post Id: ', async(() => {
+    // const fixture = TestBed.createComponent(HomeComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));

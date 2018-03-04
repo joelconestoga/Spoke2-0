@@ -16,18 +16,15 @@ export class AppComponent implements OnInit {
   title = "app";
   public message : string;
 
-  constructor(private service: AppService) { 
-    this.message= service.getMessage();
-  }
+  constructor(private service: AppService) { }
 
   // loading all categories from the data set
   getCategories() {
     this.service.getCategories().subscribe(resData => this.categories = resData);
   }
-
- 
-
-  
+  getMessage() {
+    return this.service.getMessage();
+  }
   
 
   play: false;
@@ -37,7 +34,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.getCategories();
-    //this.title
+    this.message = this.getMessage();
   }
 }
 ;
