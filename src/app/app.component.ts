@@ -16,6 +16,8 @@ export class AppComponent implements OnInit {
   // variable to assign selected category
   public categoryId;
   public isLoggedIn: boolean;
+  title = "app";
+  public message : string;
 
   constructor(private service: AppService, public afService: AF, private router: Router) {
     
@@ -47,9 +49,6 @@ export class AppComponent implements OnInit {
     this.afService.logout();
   }
   
-  title = "app";
-  public message : string;
-
   // loading all categories from the data set
   loadCategoriesForMenu() {
     this.service.getCategories().subscribe(resData => { 
@@ -59,7 +58,7 @@ export class AppComponent implements OnInit {
  
   getMessage() {
     return this.service.getMessage();
-  }
+  }  
 
   play: false;
   stream(){
