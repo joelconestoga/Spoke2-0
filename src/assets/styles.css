@@ -392,7 +392,7 @@ h3.overlay-post-title.post-title.regular { position:absolute; z-index:3; top:50%
 .post-item-arrow-navigate { position: relative; top: 50%; transform: translateY(-50%); text-align: center; align-content: center; }
 .post-item-arrow-bottom { position: relative; left: 50%; transform: translate(-50%); text-align: center; align-content: center; color: #999 !important; width: 36px; height:36px;}
 
-.text-title { overflow: hidden; text-overflow:ellipsis; word-wrap: break-word; display: -webkit-box; max-height: 32px; font-size: 1.100em; -webkit-line-clamp: 2; /* number of lines to show */ -webkit-box-orient: vertical; }
+.text-title { overflow: hidden; text-overflow:ellipsis; word-wrap: break-word; display: -webkit-box; max-height: 32px; font-size: 1em; -webkit-line-clamp: 2; /* number of lines to show */ -webkit-box-orient: vertical; }
 
 #openedPost { max-height: 800px; padding-bottom:20px; }
 #post-content p { margin-top: 0 !important; }
