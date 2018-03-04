@@ -1,7 +1,8 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway:500");
 html, body { height: 100%; width: 100%; }
-body { margin: 0; font-family: Roboto, sans-serif; overflow: hidden; }
+body { margin: 0; font-family: Raleway, sans-serif; overflow: hidden; }
 
-.text-largest, .text-larger, .text-large, .text-normal, .text-small, .text-smaller, .text-smallest { font-family: 'Roboto', sans-serif; text-align: inherit; color: black; font-weight: 400; }
+.text-largest, .text-larger, .text-large, .text-normal, .text-small, .text-smaller, .text-smallest { font-family: 'Raleway', sans-serif; text-align: inherit; color: black; font-weight: 400; }
 .text-largest { font-size: 2.250em; }
 .text-larger { font-size: 1.750em; }
 .text-large { font-size: 1.375em; }
@@ -23,7 +24,7 @@ body { margin: 0; font-family: Roboto, sans-serif; overflow: hidden; }
 .font-size-smaller { font-size: 0.750em; }
 .font-size-smallest { font-size: 0.625em; }
 
-.font-family { font-family: 'Roboto', sans-serif; }
+.font-family { font-family: 'Raleway', sans-serif; }
 
 .align-left { text-align: left !important; }
 .align-center { text-align: center !important; }
@@ -323,13 +324,13 @@ body { margin: 0; font-family: Roboto, sans-serif; overflow: hidden; }
 .my-loading-bar { position: fixed !important; top: 55px; left: 0px; width: 100%; z-index: 5000; }
 .my-navbar { padding-left: 0px !important; min-width: 414px; position: fixed; top: 0px; left: 0px; width: 100%; min-height: 55px !important; background-color: white !important; border-bottom: 1px solid #ddd; z-index: 11; }
 .my-navbar .mat-toolbar-row { height: 60px; }
-.my-navbar .my-navbar-list { font-size: 24px; font-weight: 600; font-family: Roboto,"Helvetica Neue",sans-serif; list-style-position: inside; padding-top: 5px; margin: 0; }
+.my-navbar .my-navbar-list { font-size: 24px; font-weight: 600; font-family: Raleway,"Helvetica Neue",sans-serif; list-style-position: inside; padding-top: 5px; margin: 0; }
 .my-navbar .my-navbar-list .active { color: #2196f3 !important; }
-.my-navbar .my-navbar-list a.nav-link { display: inline; margin: 0; padding: 1.000em 0.500em; cursor: pointer; text-decoration: none; font-size: 16px; font-weight: 600; font-family: Roboto,"Helvetica Neue",sans-serif; color: #bdbdbd; text-transform: uppercase; }
+.my-navbar .my-navbar-list a.nav-link { display: inline; margin: 0; padding: 1.000em 0.500em; cursor: pointer; text-decoration: none; font-size: 16px; font-weight: 600; font-family: Raleway,"Helvetica Neue",sans-serif; color: #bdbdbd; text-transform: uppercase; }
 .my-navbar .my-navbar-list a.nav-link:hover { color: #2196f3   !important; }
 .my-navbar-menu-text { cursor: default; padding-left: 16px; padding-right: 16px; padding-top: 4px; padding-bottom: 4px; }
 .my-navbar-menu-text .account-name { position: relative; top: -6px; }
-.my-navbar-menu-btn { font-size: 16px; font-weight: 400; font-family: Roboto,"Helvetica Neue",sans-serif; color: #bdbdbd; text-transform: uppercase; }
+.my-navbar-menu-btn { font-size: 16px; font-weight: 400; font-family: Raleway,"Helvetica Neue",sans-serif; color: #bdbdbd; text-transform: uppercase; }
 .my-navbar-menu-btn.active, .my-navbar-menu-btn:hover { color: #616161; }
 .row-separator { margin-bottom: 0.5625rem } 
 
@@ -337,19 +338,19 @@ body { margin: 0; font-family: Roboto, sans-serif; overflow: hidden; }
 .my-sidenav-container { width: 100%; height: 100%; }
 .my-sidenav { width: 185px; }
 .my-sidenav .item { cursor: pointer; color: #616161; }
-.my-sidenav .item a { text-decoration: none !important; outline: 0 !important; color: #616161; cursor: pointer; font-weight: 400; font-family: Roboto,"Helvetica Neue",sans-serif; }
+.my-sidenav .item a { text-decoration: none !important; outline: 0 !important; color: #616161; cursor: pointer; font-weight: 400; font-family: Raleway,"Helvetica Neue",sans-serif; }
 .my-sidenav .item a:hover { color: #1976d2 !important; }
 .my-sidenav .item .site-link { height: 100%; padding: 10px; font-size: 16px; }
 .my-sidenav .item .detail { text-align: center; padding-top: 7px; cursor: pointer; }
 .my-sidenav .item .detail:hover { color: #1976d2 !important; }
 .my-sidenav .item .page-link { height: 100%; font-size: 15px; padding-left: 20px; padding-top: 4px; padding-bottom: 4px; }
-.my-navbar .my-navbar-toggled a.nav-link { display: inline; margin: 0; padding: 16px 16px; cursor: pointer; text-decoration: none; font-size: 16px; font-weight: 400; font-family: Roboto,"Helvetica Neue",sans-serif; color: #bdbdbd; text-transform: uppercase; }
+.my-navbar .my-navbar-toggled a.nav-link { display: inline; margin: 0; padding: 16px 16px; cursor: pointer; text-decoration: none; font-size: 16px; font-weight: 400; font-family: Raleway,"Helvetica Neue",sans-serif; color: #bdbdbd; text-transform: uppercase; }
 .my-navbar .my-navbar-toggled a.nav-link:hover { color: #2196f3  !important; }
 
 .my-post-navbar { width: inherit; min-height: 55px !important; background-color: #2196f3 !important; border-bottom: 1px solid lightgray !important; z-index: 11; }
 .my-post-navbar.mat-toolbar { width: inherit; padding-left: 0px !important; padding-right:0px !important; padding-top:16px !important; padding-bottom:10px !important;  }
 .my-post-navbar .title { text-align: left; padding-left:24px; }
-.post-body { overflow: auto; max-height:700px; padding-left: 24px !important; }
+.post-body { overflow: auto; max-height: calc(100vh - 210px); overflow-y: auto; padding-left: 24px; padding-bottom: 20px; line-height:1.6; !important; }
 
 .my-brand { height: 100%; padding-left: 16px; padding-top: 7.5px; padding-right: 16px; }
 .my-icon-text { position: relative; top: -3px; }
@@ -391,7 +392,7 @@ h3.overlay-post-title.post-title.regular { position:absolute; z-index:3; top:50%
 .post-item-arrow-navigate { position: relative; top: 50%; transform: translateY(-50%); text-align: center; align-content: center; }
 .post-item-arrow-bottom { position: relative; left: 50%; transform: translate(-50%); text-align: center; align-content: center; color: #999 !important; width: 36px; height:36px;}
 
-.text-title { overflow: hidden; text-overflow: ellipsis; display: -webkit-box; max-height: 32px; font-size: 1.100em; -webkit-line-clamp: 2; /* number of lines to show */ -webkit-box-orient: vertical; }
+.text-title { overflow: hidden; text-overflow:ellipsis; word-wrap: break-word; display: -webkit-box; max-height: 32px; font-size: 1.100em; -webkit-line-clamp: 2; /* number of lines to show */ -webkit-box-orient: vertical; }
 
 #openedPost { max-height: 800px; padding-bottom:20px; }
 #post-content p { margin-top: 0 !important; }

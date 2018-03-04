@@ -7,7 +7,9 @@
             <div class="row-separator" *ngFor="let post of cover.highlight">
               <md-card (click)="openPost(post.id, post.title.rendered, post.categories['0'])" class="padding-clear cursor-pointer animated fadeIn wow" data-wow-offset="2.0s">
                 <div class="stretchy-wrapper text-title" [style.background-image]="getBackground(post.featured_media_url)" [ngStyle]="{'background-position': 'center', 'background-repeat': 'no-repeat', 'background-color': 'black'}"> 
-                  <div style="z-index:15; background-color:white; bottom:0; position:absolute; width:inherit; padding-left:1em; padding-right:1em;"><h3 class="text-normal" [innerHTML]="post.title.rendered | keepHtml"></h3></div>
+                  <div style="z-index:15; background-color:white; bottom:0; position:absolute; width:inherit; padding-left:1em; padding-right:1em;">
+                    <h3 class="text-normal" [innerHTML]="post.title.rendered | keepHtml"></h3>
+                  </div>
                   <div class="stretchy-wrapper bx overlay-post"></div>                
                 </div> 
               </md-card>
