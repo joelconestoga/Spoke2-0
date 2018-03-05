@@ -3,7 +3,7 @@
 <div>
     <md-toolbar class="my-post-navbar">
         <div class="title" fxLayout="row">
-            <h2 fxLayout="row" class="text-normal color-white" [innerHTML]="post?.title?.rendered | keepHtml"></h2>
+            <h2 fxLayout="row" class="text-normal color-white" [innerHTML]="post?.title?.rendered | slice:0:85 | keepHtml"></h2>
         </div>
         <span class="fill-remaining-space"></span>
     
