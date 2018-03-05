@@ -10,18 +10,16 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   public error: any;
   
-  constructor(public afService: AF, private router: Router) { }
+  constructor(private afService: AF, private router: Router) { }
 
   loginWithGoogle() {
     this.afService.loginWithGoogle().then((data) => {
-      // this.afService.addUserInfo();
       this.router.navigate(['']);
     })
   }
 
   loginWithFacebook() {
     this.afService.loginWithFacebook().then((data) => {
-      // this.afService.addUserInfo();
       this.router.navigate(['']);
     })
   }
