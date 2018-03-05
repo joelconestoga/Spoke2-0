@@ -14,14 +14,12 @@ export class LoginComponent {
 
   loginWithGoogle() {
     this.afService.loginWithGoogle().then((data) => {
-      // this.afService.addUserInfo();
       this.router.navigate(['']);
     })
   }
 
   loginWithFacebook() {
     this.afService.loginWithFacebook().then((data) => {
-      // this.afService.addUserInfo();
       this.router.navigate(['']);
     })
   }

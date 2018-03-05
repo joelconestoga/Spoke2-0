@@ -16,37 +16,35 @@ export class AppComponent implements OnInit {
   public categoryId;
   public isLoggedIn: boolean;
 
-  constructor(private service: AppService, public afService: AF, private router: Router) {
-    
-    this.afService.af.authState.subscribe((auth) => {
-        if(auth == null) {
-          console.log("Not Logged in.");
-          this.isLoggedIn = false;
-          // this.router.navigate(['login']);
-        }
-        else {
-          console.log("Successfully Logged in.");
-          this.afService.displayName = auth.displayName;
-          this.afService.email = auth.email;          
-          this.isLoggedIn = true;
-          // this.router.navigate(['']);
-        }
-      }
-    );
-  }
+  constructor(private service: AppService, public afService: AF, private router: Router) {}
   
   ngOnInit() {
     this.loadCategoriesForMenu();
+    this.checkUserSession();
   }
 
   logout() {
-    this.afService.logout();
+    var self = this;
+    var callback = function(isLoggedId) {
+      self.router.navigate(['']);
+    }
+    this.afService.logout(callback);
   }
+  
   // loading all categories from the data set
   loadCategoriesForMenu() {
     this.service.getCategories().subscribe(resData => { 
       this.categories = resData;
     });
+  }
+
+  checkUserSession() {
+    this.isLoggedIn = false;
+    var self = this;
+    var callback = function(isLoggedId) {
+      self.isLoggedIn = isLoggedId;
+    }
+    this.afService.checkUserSession(callback);
   }
 
   play: false;

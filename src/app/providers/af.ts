@@ -17,11 +17,32 @@ export class AF {
   public email: string;
 
   public userUid: string;
+  public isLoggedIn: boolean;
 
   constructor(public af: AngularFireAuth, private afd: AngularFireDatabase) {
     this.favorites = this.afd.list('favorites').valueChanges();
     this.userUid = "";
   }
+
+  checkUserSession(callback) {
+    var self = this;
+    return this.af.authState.subscribe((auth) => {
+      if(auth == null) {
+        console.log("Not Logged in.");
+        self.isLoggedIn = false;
+      }
+      else {
+        console.log("Successfully Logged in.");
+        console.log(auth);
+        self.displayName = auth.displayName;
+        self.email = auth.email;
+        self.userUid = auth.uid;          
+        self.isLoggedIn = true;
+      }
+      callback(this.isLoggedIn);
+    }
+  );
+}
 
   loginWithGoogle() {
     var self = this;
@@ -51,11 +72,12 @@ export class AF {
     );
   }
 
-  logout() {
+  logout(callback) {
     var self = this;
     return this.af.auth.signOut().then(
       function(result) {
         self.userUid = "";
+        callback();
       }
     );
   }
@@ -119,7 +141,7 @@ export class AF {
   }
 
   saveUserInfoFromOAuth(uid, firstName, lastName, email, provider) {
-    return this.afd.object('registeredUsers/' + uid).set( 
+    return this.afd.object('registeredUsers/' + uid).update( 
       { 
         firstName: firstName, 
         lastName: lastName, 
@@ -130,15 +152,12 @@ export class AF {
 
   loginWithEmail(email, password) {
     var self = this;
-    return this.af.auth.signInWithEmailAndPassword (email, password).then(
+    return this.af.auth.signInWithEmailAndPassword(email, password).then(
       function(user) {
         self.userUid = user.uid;
       }
     );
   }
 
-  addUserInfo(){
-    this.afd.list('users').push( { email: this.email, displayName: this.displayName } );
-  }
 }
 

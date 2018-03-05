@@ -7,12 +7,12 @@
 <div class="modal-dialog">
   <div class="loginmodal-container">
     
-    <h1>Login to Your Account</h1><br>
+    <h1>Sign in to your account</h1><br>
     
     <form class="form-signin" (submit)="loginWithEmail($event, email.value, password.value)">
     
       <label for="email" class="sr-only">Email address</label>
-      <input #email type="email" id="email" class="form-control" placeholder="Email address">
+      <input #email type="email" id="email" class="form-control" placeholder="Email address" autofocus="">
     
       <label for="password" class="sr-only">Password</label>
       <input #password type="password" id="password" class="form-control" placeholder="Password" required="">
@@ -23,9 +23,9 @@
     </form>
     
     <hr>
-    <button class="login loginmodal-submit" (click)="loginWithGoogle()">Login With Google</button>
+    <button class="login loginmodal-submit" (click)="loginWithGoogle()">Sign in with Google</button>
     <hr>
-    <button class="login loginmodal-submit" (click)="loginWithFacebook()">Login With Facebook</button>
+    <button class="login loginmodal-submit" (click)="loginWithFacebook()">Sign in with Facebook</button>
     <hr>
     <a [routerLink]="['/registration']" style="cursor: pointer;">Don't have an account? Sign up now.</a>
   </div>
