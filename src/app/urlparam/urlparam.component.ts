@@ -3,7 +3,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Subscription} from "rxjs/Subscription";
 import { HomeService } from '../home/home.service'
 import { MdDialogRef, MdDialog, MdDialogConfig } from '@angular/material';
-import { HomePostComponent } from '../home/home.post.component'
+import { PostComponent } from '../post/post.component';
 
 @Component({
     selector: 'app-urlparam',
@@ -49,7 +49,7 @@ export class UrlparamComponent implements OnInit, OnDestroy {
     }
 
     openDialog(id, title, catId){
-        let dialogRef:MdDialogRef<HomePostComponent> = this.dialog.open(HomePostComponent, {disableClose:true});
+        let dialogRef:MdDialogRef<PostComponent> = this.dialog.open(PostComponent, {disableClose:true});
         dialogRef.componentInstance.id = id;
         console.log(this.title)
         dialogRef.componentInstance.catId = catId;
