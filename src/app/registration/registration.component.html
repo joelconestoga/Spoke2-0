@@ -6,16 +6,39 @@
 
 <div class="modal-dialog">
   <div class="registermodal-container">
-    <h1>Register</h1><br>
-    <form class="form-signin" (submit)="register($event, name.value, email.value, password.value)">
-      <label for="name" class="sr-only">Name</label>
-      <input #name type="text" id="name" class="form-control" placeholder="Name" required="">
+    <h1>Sign Up</h1><br>
+    <form class="form-signin" (submit)="register($event)">
+      
+      <label for="firstName" class="sr-only">First Name</label>
+      <input name="firstName" [(ngModel)]="firstName" (blur)="validate($event,'firstName')" (keyup)="validate($event,'firstName')" type="text" id="firstName" class="form-control" placeholder="First Name" autofocus="">
+      <div *ngIf="firstNameInvalid" class="alert alert-danger">First Name is required.</div>
+
+      <label for="lastName" class="sr-only">Last Name</label>
+      <input name="lastName" [(ngModel)]="lastName" (blur)="validate($event,'lastName')" (keyup)="validate($event,'lastName')" type="text" id="lastName" class="form-control" placeholder="Last Name">
+      <div *ngIf="lastNameInvalid" class="alert alert-danger">Last Name is required.</div>
+      
       <label for="email" class="sr-only">Email address</label>
-      <input #email type="email" id="email" class="form-control" placeholder="Email address" required="" autofocus="">
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input #password type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+      <input name="email" [(ngModel)]="email" (blur)="validate($event,'email')" (keyup)="validate($event,'email')" type="email" id="email" class="form-control" placeholder="Email address">
+      <div *ngIf="emailInvalid" class="alert alert-danger">Invalid Email.</div>
+      
+      <label for="password" class="sr-only">Password</label>
+      <input name="password" [(ngModel)]="password" (blur)="validate($event,'password')" (keyup)="validate($event,'password')" type="password" id="password" class="form-control" placeholder="Password" required="">
+      <div *ngIf="passwordInvalid" class="alert alert-danger">Invalid Password.</div>
+      
+      <label for="confirmation" class="sr-only">Password Confirmation</label>
+      <input name="confirmation" [(ngModel)]="confirmation" (blur)="validate($event,'confirmation')" (keyup)="validate($event,'confirmation')" type="password" id="confirmation" class="form-control" placeholder="Password Confirmation" required="">
+      <div *ngIf="confirmationInvalid" class="alert alert-danger">Invalid Confirmation.</div>
+
+      <div *ngIf="isConestogaEmail">
+        <label for="program" class="sr-only">Program Name</label>
+        <input name="program" [(ngModel)]="program" type="text" id="program" class="form-control" placeholder="Program Name">
+  
+        <label for="campus" class="sr-only">Campus Name</label>
+        <input name="campus" [(ngModel)]="campus" type="text" id="lastName" class="form-control" placeholder="Campus Name">
+      </div>
+
       <br>
-      <button  class="btn btn-md btn-primary btn-block" type="submit">Register</button>
+      <button [disabled]="!fieldsOk" class="btn btn-md btn-primary btn-block" type="submit">Sign Up</button>
     </form>
   </div>
 </div>

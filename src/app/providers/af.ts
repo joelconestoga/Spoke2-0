@@ -73,8 +73,15 @@ export class AF {
     return this.af.auth.createUserWithEmailAndPassword(email, password);
   }
 
-  saveUserInfoFromForm(uid, name, email) {
-    return this.afd.object('registeredUsers/' + uid).set( { name: name, email: email, displayName: name } );
+  saveUserInfoFromForm(uid, firstName, lastName, email, program, campus) {
+    return this.afd.object('registeredUsers/' + uid).set( 
+      { 
+        firstName: firstName, 
+        lastName: lastName, 
+        email: email,
+        program: program,
+        campus: campus,
+      } );
   }
 
   loginWithEmail(email, password) {
