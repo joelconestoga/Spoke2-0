@@ -10,7 +10,6 @@ const NOT_FAVORITE: string = "favorite_border";
 @Component({
   moduleId: module.id,
   selector: 'post-component',
-  providers: [HomeService],
   templateUrl: 'post.component.html'
 })
 
@@ -26,7 +25,7 @@ export class PostComponent implements OnInit {
   fontSize = 16;
   favoriteIcon = NOT_FAVORITE;
   
-  constructor( private service: HomeService, public dialogRef: MdDialogRef<PostComponent>, public afService: AF) {
+  constructor( private service: HomeService, private dialogRef: MdDialogRef<PostComponent>, private afService: AF) {
     setTimeout(() => { this.modalLoad = true }, 1000);
   }
 

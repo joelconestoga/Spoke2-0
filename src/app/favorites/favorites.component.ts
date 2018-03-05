@@ -10,13 +10,12 @@ import { PostComponent } from '../post/post.component';
   selector: 'app-favorites',
   templateUrl: './favorites.component.html',
   styleUrls: ['./favorites.component.scss'],
-  providers: [HomeService]  
 })
 export class FavoritesComponent implements OnInit {
 
   public favorites: any[];
 
-  constructor(private service: HomeService, public afService: AF, private sanitizer: DomSanitizer, public dialog: MdDialog) {}
+  constructor(private service: HomeService, private afService: AF, private sanitizer: DomSanitizer, private dialog: MdDialog) {}
 
   ngOnInit() {
     this.loadFavorites();
