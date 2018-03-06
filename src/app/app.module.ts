@@ -29,11 +29,11 @@ import { HomeService } from './home/home.service';
 
 // FIREBASE config
 export const firebaseConfig = {
-  apiKey: 'xxx',
-  authDomain: 'xxx',
-  databaseURL: 'xxx',
-  storageBucket: 'xxx',
-  messagingSenderId: 'xxx'
+  apiKey: "xxx",
+  authDomain: "xxx",
+  databaseURL: "xxx",
+  storageBucket: "xxx",
+  messagingSenderId: "xxx"
 };
 
 const routes: Routes = [

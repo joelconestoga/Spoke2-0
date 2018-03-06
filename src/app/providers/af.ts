@@ -50,8 +50,9 @@ export class AF {
       function(result) {
         self.userUid = result.user.uid;
         self.saveUserInfoFromOAuth(result.user.uid, 
-                                  result.additionalUserInfo.profile.given_name,
-                                  result.additionalUserInfo.profile.family_name,
+                                  // result.additionalUserInfo.profile.given_name,
+                                  // result.additionalUserInfo.profile.family_name,
+                                  result.user.displayName,
                                   result.user.email,
                                   result.additionalUserInfo.providerId);
       }
@@ -62,11 +63,13 @@ export class AF {
     var self = this;
     return this.af.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then(
       function(result) {
+        console.log(result);
         self.userUid = result.user.uid;
         self.saveUserInfoFromOAuth(result.user.uid, 
-          result.additionalUserInfo.profile.first_name,
-          result.additionalUserInfo.profile.last_name,
-          result.additionalUserInfo.profile.email,
+          // result.additionalUserInfo.profile.first_name,
+          // result.additionalUserInfo.profile.last_name,
+          result.user.displayName,
+          result.user.email,
           result.additionalUserInfo.providerId);
 }
     );
@@ -140,11 +143,12 @@ export class AF {
       } );
   }
 
-  saveUserInfoFromOAuth(uid, firstName, lastName, email, provider) {
+  saveUserInfoFromOAuth(uid, displayName, email, provider) {
     return this.afd.object('registeredUsers/' + uid).update( 
       { 
-        firstName: firstName, 
-        lastName: lastName, 
+        // firstName: firstName, 
+        // lastName: lastName, 
+        displayName: displayName,
         email: email,
         provider: provider,
       } );
