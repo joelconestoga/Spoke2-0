@@ -3,6 +3,7 @@ import { MdDialogRef, MdDialog } from '@angular/material';
 import { Observable } from 'rxjs/Rx';
 import { AF } from '../providers/af';
 import { HomeService } from '../home/home.service';
+import { Router } from '@angular/router';
 
 const FAVORITE: string = "favorite";
 const NOT_FAVORITE: string = "favorite_border";
@@ -25,7 +26,8 @@ export class PostComponent implements OnInit {
   fontSize = 16;
   favoriteIcon = NOT_FAVORITE;
   
-  constructor( private service: HomeService, private dialogRef: MdDialogRef<PostComponent>, private afService: AF) {
+  constructor( private service: HomeService, private dialogRef: MdDialogRef<PostComponent>, 
+    private afService: AF, private router: Router) {
     setTimeout(() => { this.modalLoad = true }, 1000);
   }
 
@@ -65,6 +67,9 @@ export class PostComponent implements OnInit {
   }
 
   reloadFavoriteIcon(id) {
+    if(!this.afService.isLoggedIn) {
+      return;
+    }
     var self = this;
     var callback = function(isFavorite) {
       self.setFavoriteIcon(isFavorite);
@@ -73,7 +78,13 @@ export class PostComponent implements OnInit {
     this.afService.checkFavorite(id, callback);        
   }
 
-  setOrRemoveFromFavorites(post) {    
+  setOrRemoveFromFavorites(post) {
+    if(!this.afService.isLoggedIn) {
+      this.dialogRef.close();
+      this.router.navigate(['/login']);
+      return;
+    }
+    
     if (this.favoriteIcon == FAVORITE) {
       this.removeFromFavorites(post);
     } else {
