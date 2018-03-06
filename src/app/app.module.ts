@@ -27,11 +27,11 @@ import { PostComponent } from './post/post.component';
 
 // FIREBASE config
 export const firebaseConfig = {
-  apiKey: 'xxx',
-  authDomain: 'xxx',
-  databaseURL: 'xxx',
-  storageBucket: 'xxx',
-  messagingSenderId: 'xxx'
+  apiKey: 'AIzaSyB8ItaMdPPasjmcNLpjPJpgQNYGBXjRGek',
+  authDomain: 'spoke-on-fire.firebaseapp.com',
+  databaseURL: 'https://spoke-on-fire.firebaseio.com',
+  storageBucket: 'spoke-on-fire.appspot.com',
+  messagingSenderId: '282028460968'
 };
 
 const routes: Routes = [

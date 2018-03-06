@@ -208,6 +208,7 @@ body { margin: 0; font-family: Raleway, sans-serif; overflow: hidden; }
 .bg-color-blue-grey-light { background-color: #90a4ae !important; }
 .bg-color-blue-grey-lighter { background-color: #b0bec5 !important; }
 .bg-color-inherit { background-color: inherit !important; }
+.bg-color-gold { background-color: #bf9a64 !important; }
 
 .border-top-clay { border-top: 1px solid #B9B0A9 !important; }
 .border-top-light-gray { border-top: 1px solid lightgray !important; }
@@ -325,9 +326,9 @@ body { margin: 0; font-family: Raleway, sans-serif; overflow: hidden; }
 .my-navbar { padding-left: 0px !important; min-width: 414px; position: fixed; top: 0px; left: 0px; width: 100%; min-height: 55px !important; background-color: white !important; border-bottom: 1px solid #ddd; z-index: 11; }
 .my-navbar .mat-toolbar-row { height: 60px; }
 .my-navbar .my-navbar-list { font-size: 24px; font-weight: 600; font-family: Raleway,"Helvetica Neue",sans-serif; list-style-position: inside; padding-top: 5px; margin: 0; }
-.my-navbar .my-navbar-list .active { color: #2196f3 !important; }
+.my-navbar .my-navbar-list .active { color: #b88e52 !important; }
 .my-navbar .my-navbar-list a.nav-link { display: inline; margin: 0; padding: 1.000em 0.500em; cursor: pointer; text-decoration: none; font-size: 16px; font-weight: 600; font-family: Raleway,"Helvetica Neue",sans-serif; color: #bdbdbd; text-transform: uppercase; }
-.my-navbar .my-navbar-list a.nav-link:hover { color: #2196f3   !important; }
+.my-navbar .my-navbar-list a.nav-link:hover { color: #b88e52   !important; }
 .my-navbar-menu-text { cursor: default; padding-left: 16px; padding-right: 16px; padding-top: 4px; padding-bottom: 4px; }
 .my-navbar-menu-text .account-name { position: relative; top: -6px; }
 .my-navbar-menu-btn { font-size: 16px; font-weight: 400; font-family: Raleway,"Helvetica Neue",sans-serif; color: #bdbdbd; text-transform: uppercase; }

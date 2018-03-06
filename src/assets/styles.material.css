@@ -261,7 +261,7 @@
   top: calc(100% - 1.72917em); }
 
 .mat-menu-item {
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Raleway, "Helvetica Neue", sans-serif;
   font-size: 16px; }
 
 .mat-radio-button {
@@ -847,7 +847,9 @@ input.mat-input-element:-webkit-autofill + .mat-input-placeholder .mat-placehold
     color: rgba(0, 0, 0, 0.54);
     vertical-align: middle; }
   .mat-menu-item:hover:not([disabled]), .mat-menu-item:focus:not([disabled]) {
-    background: rgba(0, 0, 0, 0.04); }
+    background: #b88e52}
+  .mat-menu-item:hover:not([disabled]), .mat-menu-item:focus:not([disabled]) {
+    color: white}
 
 .mat-progress-bar-background {
   background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%271.1%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20xmlns%3Axlink%3D%27http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%27%20x%3D%270px%27%20y%3D%270px%27%20enable-background%3D%27new%200%200%205%202%27%20xml%3Aspace%3D%27preserve%27%20viewBox%3D%270%200%205%202%27%20preserveAspectRatio%3D%27none%20slice%27%3E%3Ccircle%20cx%3D%271%27%20cy%3D%271%27%20r%3D%271%27%20fill%3D%27%23c5cae9%27%2F%3E%3C%2Fsvg%3E"); }
