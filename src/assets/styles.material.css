@@ -153,7 +153,9 @@
 .mat-button, .mat-raised-button, .mat-icon-button {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   font-size: 14px;
-  font-weight: 500; }
+  font-weight: 500; 
+  color: lightgray;
+}
 
 .mat-button-toggle {
   font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -564,7 +566,8 @@
     color: rgba(0, 0, 0, 0.87); }
 
 .mat-button, .mat-icon-button {
-  background: transparent; }
+  background: transparent;
+  color: #b88e52 !important; }
   .mat-button.mat-primary .mat-button-focus-overlay, .mat-icon-button.mat-primary .mat-button-focus-overlay {
     background-color: rgba(63, 81, 181, 0.12); }
   .mat-button.mat-accent .mat-button-focus-overlay, .mat-icon-button.mat-accent .mat-button-focus-overlay {
@@ -840,7 +843,7 @@ input.mat-input-element:-webkit-autofill + .mat-input-placeholder .mat-placehold
 
 .mat-menu-item {
   background: transparent;
-  color: rgba(0, 0, 0, 0.87); }
+  color: lightgrey; }
   .mat-menu-item[disabled] {
     color: rgba(0, 0, 0, 0.38); }
   .mat-menu-item .mat-icon {
