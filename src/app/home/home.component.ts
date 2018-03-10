@@ -10,7 +10,6 @@ import { PostComponent } from '../post/post.component';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  providers: [HomeService]
 })
 export class HomeComponent implements OnInit {
 

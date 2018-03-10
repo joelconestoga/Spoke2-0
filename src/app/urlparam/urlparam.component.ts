@@ -9,7 +9,6 @@ import { PostComponent } from '../post/post.component';
     selector: 'app-urlparam',
     templateUrl: './urlparam.component.html',
     styleUrls: ['./urlparam.component.scss'],
-    providers: [HomeService]
 })
 export class UrlparamComponent implements OnInit, OnDestroy {
     public singlePost;
@@ -17,7 +16,7 @@ export class UrlparamComponent implements OnInit, OnDestroy {
     public catId
     private id : number;
     private route$ : Subscription;
-    constructor(private route : ActivatedRoute, private service: HomeService, private router: Router, public dialog: MdDialog) {}
+    constructor(private route : ActivatedRoute, private service: HomeService, private router: Router, private dialog: MdDialog) {}
 
     ngOnInit() {
 

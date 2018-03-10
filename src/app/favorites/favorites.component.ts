@@ -10,23 +10,25 @@ import { PostComponent } from '../post/post.component';
   selector: 'app-favorites',
   templateUrl: './favorites.component.html',
   styleUrls: ['./favorites.component.scss'],
-  providers: [HomeService]  
 })
 export class FavoritesComponent implements OnInit {
 
   public favorites: any[];
 
-  constructor(private service: HomeService, public afService: AF, private sanitizer: DomSanitizer, public dialog: MdDialog) {}
+  constructor(private service: HomeService, private afService: AF, private sanitizer: DomSanitizer, private dialog: MdDialog) {}
 
   ngOnInit() {
     this.loadFavorites();
   }
 
   loadFavorites() {
+    this.favorites = [];
     var self = this;
     var callback = function(snapshot) {
-      var keys = Object.keys(snapshot.val());
-      self.loadPostsForIds(keys);      
+      if (snapshot.val()) {
+        var keys = Object.keys(snapshot.val());
+        self.loadPostsForIds(keys);      
+      }
     }
     
     this.afService.getFavoritesKeys(callback);            
@@ -35,7 +37,21 @@ export class FavoritesComponent implements OnInit {
   loadPostsForIds(keys) {
     var self = this;
     this.service.getPostsForIds(keys).subscribe(data => { 
-      self.favorites = data;
+      var row = [];
+      for (let i = 0; i < data.length; i++) {
+        if (i % 4 == 0 && i > 0) {
+          self.favorites.push(row);
+          row = [];
+          row.push(data[i]);        
+        } else {
+          row.push(data[i]);        
+        }
+      }
+      if (row.length > 0) {
+        self.favorites.push(row);
+      }
+      console.log(self.favorites);
+      // self.favorites = data;
     });      
   }
 

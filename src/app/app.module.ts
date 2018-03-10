@@ -3,7 +3,7 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule, MdTooltipModule, MdButtonModule, MdDialogModule, MdMenuModule, MdIconModule, MdToolbarModule, MdProgressBarModule, MdProgressSpinnerModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, Router } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
@@ -21,17 +21,20 @@ import { RegistrationComponent } from './registration/registration.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { AngularFireModule } from 'angularfire2';
 import { AF } from './providers/af';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 import { PostComponent } from './post/post.component';
+import { AppService } from './app.service';
+import { HomeService } from './home/home.service';
 
 // FIREBASE config
 export const firebaseConfig = {
-  apiKey: 'AIzaSyB8ItaMdPPasjmcNLpjPJpgQNYGBXjRGek',
-  authDomain: 'spoke-on-fire.firebaseapp.com',
-  databaseURL: 'https://spoke-on-fire.firebaseio.com',
-  storageBucket: 'spoke-on-fire.appspot.com',
-  messagingSenderId: '282028460968'
+  apiKey: "AIzaSyBGLlzVoj93DtEhxgg4dyuBcnQwKOBJook",
+  authDomain: "spoke-digital-edition.firebaseapp.com",
+  databaseURL: "https://spoke-digital-edition.firebaseio.com",
+  projectId: "spoke-digital-edition",
+  storageBucket: "spoke-digital-edition.appspot.com",
+  messagingSenderId: "958175156248"
 };
 
 const routes: Routes = [
@@ -78,7 +81,7 @@ const routes: Routes = [
     AngularFireDatabaseModule,
     FormsModule,    
   ],
-  providers: [AF],
+  providers: [AppService, HomeService, AF],
   bootstrap: [AppComponent],
   entryComponents: [PostComponent],
   schemas: [ NO_ERRORS_SCHEMA ],  
