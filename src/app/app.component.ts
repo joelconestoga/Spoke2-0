@@ -15,6 +15,8 @@ export class AppComponent implements OnInit {
   // variable to assign selected category
   public categoryId;
   public isLoggedIn: boolean;
+  public userTooltip: string;
+  public favoriteTooltip: string;
 
   constructor(private service: AppService, public afService: AF, private router: Router) {}
   
@@ -23,12 +25,17 @@ export class AppComponent implements OnInit {
     this.checkUserSession();
   }
 
-  logout() {
-    var self = this;
-    var callback = function(isLoggedId) {
-      self.router.navigate(['']);
+  toggleAuthentication() {
+    if (this.isLoggedIn) {
+      var self = this;
+      var callback = function(isLoggedId) {
+        self.isLoggedIn = false;
+        self.router.navigate(['']);
+      }
+      this.afService.logout(callback);
+    } else {
+      this.router.navigate(['/login']);      
     }
-    this.afService.logout(callback);
   }
   
   // loading all categories from the data set
@@ -40,10 +47,16 @@ export class AppComponent implements OnInit {
 
   checkUserSession() {
     this.isLoggedIn = false;
+    this.userTooltip = "Log in";
+    this.favoriteTooltip = "Favourites (login required)";
+    
     var self = this;
-    var callback = function(isLoggedId) {
-      self.isLoggedIn = isLoggedId;
+    var callback = function(isLoggedIn, email = "") {
+      self.isLoggedIn = isLoggedIn;
+      self.userTooltip = isLoggedIn ? "Logout (" + email + ")" : "Log in";
+      self.favoriteTooltip = isLoggedIn ? "My favourites" : "Favourites (login required)";
     }
+    
     this.afService.checkUserSession(callback);
   }
 

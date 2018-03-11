@@ -39,7 +39,7 @@ export class AF {
         self.userUid = auth.uid;          
         self.isLoggedIn = true;
       }
-      callback(this.isLoggedIn);
+      callback(this.isLoggedIn, this.email);
     }
   );
 }

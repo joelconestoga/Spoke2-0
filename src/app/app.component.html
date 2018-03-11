@@ -11,6 +11,22 @@
       <a class="color-blue cursor-pointer margin-left-15 margin-right-10" href="https://twitter.com/spokeonline" target="_blank"><i class="fa fa-2x fa-twitter-square" aria-hidden="true"></i></a>
       <a class="color-blue cursor-pointer margin-left-15 margin-right-10" href="https://www.facebook.com/spokeonline" target="_blank"><i class="fa fa-2x fa-facebook-square" aria-hidden="true"></i></a>
       <a class="color-blue cursor-pointer margin-left-15 margin-right-10" href="https://www.youtube.com/user/SpokeOnline" target="_blank"><i class="fa fa-2x fa-youtube-square" aria-hidden="true"></i></a>
+
+      <a class="color-blue cursor-pointer margin-left-15 margin-right-10" routerLink="{{isLoggedIn ? '/favorites' : '/login'}}">
+        <i class="fa fa-2x {{isLoggedIn ? 'fa-heart' : 'fa-heart-o'}}" aria-hidden="true"></i>
+      </a>
+      
+      <div *ngIf="!isLoggedIn">
+        <a class="color-blue cursor-pointer margin-left-15 margin-right-10" routerLink="/login">
+          <i class="fa fa-2x fa-user-o" aria-hidden="true"></i>
+        </a>
+      </div>
+      <div *ngIf="isLoggedIn">
+        <a class="color-blue cursor-pointer margin-left-15 margin-right-10" (click)="toggleAuthentication()">
+          <i class="fa fa-2x fa-user" aria-hidden="true"></i>
+        </a>
+      </div>
+  
     </div>
   </md-menu>
  
@@ -29,12 +45,15 @@
     <a class="color-blue cursor-pointer margin-right-10" href="https://twitter.com/spokeonline" target="_blank"><i class="fa fa-2x fa-twitter-square" aria-hidden="true"></i></a>
     <a class="color-blue cursor-pointer margin-right-10" href="https://www.facebook.com/spokeonline" target="_blank"><i class="fa fa-2x fa-facebook-square" aria-hidden="true"></i></a>
     <a class="color-blue cursor-pointer margin-right-10" href="https://www.youtube.com/user/SpokeOnline" target="_blank"><i class="fa fa-2x fa-youtube-square" aria-hidden="true"></i></a>
-    <a class="color-blue cursor-pointer margin-right-10" routerLink="{{isLoggedIn ? '/favorites' : '/login'}}"><i class="fa fa-2x {{isLoggedIn ? 'fa-heart' : 'fa-heart-o'}}" aria-hidden="true"></i></a>
-    <div *ngIf="!isLoggedIn">
-      <a class="color-blue cursor-pointer margin-right-10" routerLink="/login"><i class="fa fa-2x fa-user-o" aria-hidden="true"></i></a>
-    </div>
-    <div *ngIf="isLoggedIn">
-      <a class="color-blue cursor-pointer margin-right-10" (click)="logout()"><i class="fa fa-2x fa-user" aria-hidden="true"></i></a>
+    
+    <a class="color-blue cursor-pointer margin-right-10" title="{{favoriteTooltip}}" routerLink="{{isLoggedIn ? '/favorites' : '/login'}}">
+      <i class="fa fa-2x {{isLoggedIn ? 'fa-heart' : 'fa-heart-o'}}" aria-hidden="true"></i>
+    </a>
+    
+    <div title="{{userTooltip}}" >
+      <a class="color-blue cursor-pointer margin-right-10" (click)="toggleAuthentication()">
+        <i class="{{isLoggedIn ? 'fa fa-2x fa-user' : 'fa fa-2x fa-user-o'}}" aria-hidden="true"></i>
+      </a>
     </div>
   </div>
   
