@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild, HostBinding, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, HostBinding, HostListener, Inject, PLATFORM_ID } from '@angular/core';
 import { MdDialogRef, MdDialog, MdDialogConfig } from '@angular/material';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HomeService } from './home.service'
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { fadeInOutAnimation } from '../_animations/index';
 import { PostComponent } from '../post/post.component';
+import { isPlatformBrowser } from '@angular/common';
 
 
 @Component({
@@ -17,35 +18,46 @@ export class HomeComponent implements OnInit {
   load: any = { per_page: 4 };
   category: any;
   imageUrl: any;
-  contentLoad = false;
+  contentLoaded = true;
   forward; // controller of navigation arrows inside categories  
   cover = { highlight: [], rowOne: [], rowTwo: [] }; // array which contains last published pots in the json form. // ** We still have to make it display the posts most viewed instead of the last posts published **
   private mediaContentUrl = "http://spoketest.wordpress.com/wp-content/uploads/"; // base link to fetch media content  
 
-  constructor(private service: HomeService, private sanitizer: DomSanitizer, public dialog: MdDialog) {
+  constructor(private service: HomeService, private sanitizer: DomSanitizer, public dialog: MdDialog,
+    @Inject(PLATFORM_ID) private platformId: Object) {
   }
 
   ngOnInit() {
     this.loadCover();
     this.loadCategoriesWithPosts();
-    setTimeout(() => {
-        this.contentLoad = true;
-        (<any>window).twttr = (function (d, s, id) {
-            let js: any, fjs = d.getElementsByTagName(s)[0],
-                t = (<any>window).twttr || {};
-            if (d.getElementById(id)) return t;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "https://platform.twitter.com/widgets.js";
-            fjs.parentNode.insertBefore(js, fjs);
+  }
+  
+  ngAfterViewInit() {    
+    this.loadTwitter();
+  }
 
-            t._e = [];
-            t.ready = function (f: any) {
-                t._e.push(f);
-            };
-            return t;
-        }(document, "script", "twitter-wjs"));
-    }, 1500)
+  loadTwitter() {
+    if (isPlatformBrowser(this.platformId)) {
+      setTimeout(function() { 
+        (<any>window).twttr = (function(d, s, id) {
+          let js, fjs = d.getElementsByTagName(s)[0],
+            t = (<any>window).twttr || {};
+          if (d.getElementById(id)) return t;
+          js = d.createElement(s);
+          js.id = id;
+          js.src = 'https://platform.twitter.com/widgets.js';
+          fjs.parentNode.insertBefore(js, fjs);
+    
+          t._e = [];
+          t.ready = function(f) {
+            t._e.push(f);
+          };
+    
+          return t;
+        }(document, 'script', 'twitter-wjs'));
+        (<any>window).twttr.widgets.load();
+      }, 100);
+    }
   }
 
   // function for Angular to sanitize background images from Wordpress 
