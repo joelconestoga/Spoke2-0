@@ -1,62 +1,89 @@
 
-import { Injectable } from "@angular/core";
+import { Injectable, Inject } from "@angular/core";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
 import { Observable } from 'rxjs/Observable';
 import { AngularFireModule } from "angularfire2";
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import { Persistence } from "./i.persistence";
+import { Auth } from "./i.auth";
+import { Database } from "./i.db";
 
 
 @Injectable()
-export class AF {
+export class AF implements Persistence {
 
-  public users: Observable<any>;
-  public favorites: Observable<any>;
   public displayName: string;
   public email: string;
 
   public userUid: string;
   public isLoggedIn: boolean;
 
-  constructor(public af: AngularFireAuth, private afd: AngularFireDatabase) {
-    this.favorites = this.afd.list('favorites').valueChanges();
+  public af: AngularFireAuth;
+  public af2: Auth;
+  public afd: AngularFireDatabase;
+  public afd2: Database;
+
+  constructor(af: AngularFireAuth, afd: AngularFireDatabase, 
+    @Inject('Auth') af2: Auth, @Inject('Database') afd2: Database) {
+    
+    this.af = af;
+    this.af2 = af2;
+    this.afd = afd;
+    this.afd2 = afd2;
+    
     this.userUid = "";
+  }
+
+  getAf() {
+    return this.af2;
+  }
+
+  getAfd() {
+    return this.afd2;
   }
 
   checkUserSession(callback) {
     var self = this;
-    return this.af.authState.subscribe((auth) => {
-      if(auth == null) {
-        console.log("Not Logged in.");
-        self.isLoggedIn = false;
-      }
-      else {
-        console.log("Successfully Logged in.");
-        console.log(auth);
-        self.displayName = auth.displayName;
-        self.email = auth.email;
-        self.userUid = auth.uid;          
-        self.isLoggedIn = true;
-      }
-      callback(this.isLoggedIn, this.email);
-    }
-  );
-}
 
-  loginWithGoogle() {
+    var callbackLoggedIn = function(auth) {
+      console.log("Successfully Logged in.");
+      console.log(auth);
+      self.displayName = auth.displayName;
+      self.email = auth.email;
+      self.userUid = auth.uid;          
+      self.isLoggedIn = true;
+      callback(self.isLoggedIn, self.email);
+    }
+
+    var callbackNotLogged = function(auth) {
+      console.log("Not Logged in.");
+      self.isLoggedIn = false;
+      callback(self.isLoggedIn, self.email);
+    }
+
+    this.getAf().checkUserSession(callbackLoggedIn, callbackNotLogged);
+  }
+
+  loginWithGoogle(callback) {
     var self = this;
-    return this.af.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(
-      function(result) {
-        self.userUid = result.user.uid;
-        self.saveUserInfoFromOAuth(result.user.uid, 
-                                  // result.additionalUserInfo.profile.given_name,
-                                  // result.additionalUserInfo.profile.family_name,
-                                  result.user.displayName,
-                                  result.user.email,
-                                  result.additionalUserInfo.providerId);
-      }
-    );
+    
+    var myCallback = function(result) {
+      self.userUid = result.user.uid;
+      self.saveUserInfoFromOAuth(result.user.uid, 
+                                // result.additionalUserInfo.profile.given_name,
+                                // result.additionalUserInfo.profile.family_name,
+                                result.user.displayName,
+                                result.user.email,
+                                result.additionalUserInfo.providerId);
+    }
+    
+    this.getAf().loginWithGoogle(myCallback);
+    
+    if (callback) {
+      callback(self.isLoggedIn);
+    }
   }
   
   loginWithFacebook() {
@@ -144,14 +171,7 @@ export class AF {
   }
 
   saveUserInfoFromOAuth(uid, displayName, email, provider) {
-    return this.afd.object('registeredUsers/' + uid).update( 
-      { 
-        // firstName: firstName, 
-        // lastName: lastName, 
-        displayName: displayName,
-        email: email,
-        provider: provider,
-      } );
+    this.getAfd().saveUserInfoFromOAuth(uid, displayName, email, provider);
   }
 
   loginWithEmail(email, password) {

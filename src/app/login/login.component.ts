@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { AF } from '../providers/af';
 import { Router } from '@angular/router';
+import { Persistence } from '../providers/i.persistence';
 
 @Component({
   selector: 'app-login',
@@ -10,12 +11,16 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   public error: any;
   
-  constructor(private afService: AF, private router: Router) { }
+  constructor(@Inject('Persistence') private afService: Persistence, private router: Router) { }
 
   loginWithGoogle() {
-    this.afService.loginWithGoogle().then((data) => {
-      this.router.navigate(['']);
-    })
+    var self = this;
+
+    var callback = function(isLoggedIn) {
+      self.router.navigate(['']);
+    }
+
+    this.afService.loginWithGoogle(callback);
   }
 
   loginWithFacebook() {
