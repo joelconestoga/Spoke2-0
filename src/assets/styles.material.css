@@ -567,7 +567,7 @@
 
 .mat-button, .mat-icon-button {
   background: transparent;
-  color: #b88e52 !important; }
+  color: black !important; }
   .mat-button.mat-primary .mat-button-focus-overlay, .mat-icon-button.mat-primary .mat-button-focus-overlay {
     background-color: rgba(63, 81, 181, 0.12); }
   .mat-button.mat-accent .mat-button-focus-overlay, .mat-icon-button.mat-accent .mat-button-focus-overlay {
