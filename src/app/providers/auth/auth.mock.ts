@@ -1,6 +1,6 @@
-import { Auth } from "./i.auth";
+import { IAuth } from "./i.auth";
 
-export class AFAuthMock implements Auth {
+export class AuthMock implements IAuth {
 
    public auth = null;
    public result = null;

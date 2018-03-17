@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AF } from '../providers/af';
+import { User } from '../providers/user/user';
 import { Observable } from 'rxjs/Observable';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HomeService } from '../home/home.service';
@@ -15,7 +15,7 @@ export class FavoritesComponent implements OnInit {
 
   public favorites: any[];
 
-  constructor(private service: HomeService, private afService: AF, private sanitizer: DomSanitizer, private dialog: MdDialog) {}
+  constructor(private service: HomeService, private afService: User, private sanitizer: DomSanitizer, private dialog: MdDialog) {}
 
   ngOnInit() {
     this.loadFavorites();

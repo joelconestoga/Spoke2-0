@@ -1,4 +1,4 @@
-export interface Auth {
+export interface IAuth {
 
    checkUserSession(callbackLoggedIn, callbackNotLogged);
    loginWithGoogle(callback);

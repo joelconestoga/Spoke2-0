@@ -1,6 +1,6 @@
-import { Database } from "./i.db";
+import { IDatabase } from "./i.database";
 
-export class AFDbMock implements Database {
+export class DatabaseMock implements IDatabase {
 
    public uid;
    public displayName;

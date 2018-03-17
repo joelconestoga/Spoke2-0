@@ -1,10 +1,10 @@
 import { AngularFireAuth } from "angularfire2/auth";
 import { Injectable } from "@angular/core";
-import { Auth } from "./i.auth";
+import { IAuth } from "./i.auth";
 import * as firebase from 'firebase/app';
 
 @Injectable()
-export class AFAuth implements Auth {
+export class Auth implements IAuth {
 
   constructor(private af: AngularFireAuth) {}
 

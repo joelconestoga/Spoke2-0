@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from './app.service';
-import { AF } from './providers/af';
+import { User } from './providers/user/user';
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   public userTooltip: string;
   public favoriteTooltip: string;
 
-  constructor(private service: AppService, public afService: AF, private router: Router) {}
+  constructor(private service: AppService, public afService: User, private router: Router) {}
   
   ngOnInit() {
     this.loadCategoriesForMenu();

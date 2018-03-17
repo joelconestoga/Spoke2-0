@@ -1,4 +1,4 @@
-export interface Persistence {
+export interface IUser {
 
   getAf();
 

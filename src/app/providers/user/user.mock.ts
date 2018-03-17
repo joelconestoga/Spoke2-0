@@ -1,6 +1,6 @@
-import { Persistence } from "../providers/i.persistence";
+import { IUser } from "./i.user";
 
-export class AFMock implements Persistence {
+export class UserMock implements IUser {
    getAf() {
       new AngularFireAuthMock;
    }

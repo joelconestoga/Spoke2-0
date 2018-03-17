@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
-import { AF } from '../providers/af';
+import { User } from '../providers/user/user';
 import { Router } from '@angular/router';
-import { Persistence } from '../providers/i.persistence';
+import { IUser } from '../providers/user/i.user';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +11,7 @@ import { Persistence } from '../providers/i.persistence';
 export class LoginComponent {
   public error: any;
   
-  constructor(@Inject('Persistence') private afService: Persistence, private router: Router) { }
+  constructor(@Inject('Persistence') private afService: IUser, private router: Router) { }
 
   loginWithGoogle() {
     var self = this;

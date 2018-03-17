@@ -20,14 +20,14 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { AngularFireModule } from 'angularfire2';
-import { AF } from './providers/af';
+import { User } from './providers/user/user';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 import { PostComponent } from './post/post.component';
 import { AppService } from './app.service';
 import { HomeService } from './home/home.service';
-import { AFAuth } from './providers/af.auth';
-import { AFDb } from './providers/af.db';
+import { Auth } from './providers/auth/auth';
+import { Database } from './providers/database/database';
 
 // FIREBASE config
 export const firebaseConfig = {
@@ -83,10 +83,10 @@ const routes: Routes = [
     AngularFireDatabaseModule,
     FormsModule,    
   ],
-  providers: [AppService, HomeService, AF,
-    {provide: 'Persistence', useClass: AF}, 
-    {provide: 'Auth', useClass: AFAuth}, 
-    {provide: 'Database', useClass: AFDb}, 
+  providers: [AppService, HomeService, User,
+    {provide: 'Persistence', useClass: User}, 
+    {provide: 'Auth', useClass: Auth}, 
+    {provide: 'Database', useClass: Database}, 
   ],
   bootstrap: [AppComponent],
   entryComponents: [PostComponent],

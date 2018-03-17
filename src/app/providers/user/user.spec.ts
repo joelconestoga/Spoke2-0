@@ -1,15 +1,14 @@
-import { AF } from "./af";
-import { AFMock } from "../login/afMock";
-import { AFAuthMock } from "./af.auth.mock";
-import { AFDbMock } from "./af.db.mock";
+import { User } from "./user";
+import { AuthMock } from "../auth/auth.mock";
+import { DatabaseMock } from "../database/database.mock";
 
-describe('AFService', () => {
+describe('User', () => {
 
-   let component: AF;
+   let component: User;
 
    it('Should login with google', () => {
       
-    let afAuthMock = new AFAuthMock;
+    let afAuthMock = new AuthMock;
     afAuthMock.result = { "user": {
                                     "uid":"xxx",
                                     "displayName":"yyy",
@@ -20,9 +19,9 @@ describe('AFService', () => {
                                                 }
                         };
       
-    let afdbMock = new AFDbMock;
+    let afdbMock = new DatabaseMock;
       
-    component = new AF(null, null, afAuthMock, afdbMock);
+    component = new User(null, null, afAuthMock, afdbMock);
     
     component.loginWithGoogle(null);
 

@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { AngularFireDatabase } from "angularfire2/database";
-import { Database } from "./i.db";
+import { IDatabase } from "./i.database";
 
 @Injectable()
-export class AFDb implements Database {
+export class Database implements IDatabase {
 
    constructor(private afd: AngularFireDatabase) {}
 

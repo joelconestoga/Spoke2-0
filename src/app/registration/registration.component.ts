@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AF } from '../providers/af';
+import { User } from '../providers/user/user';
 import { Router } from '@angular/router';
 
 @Component({
@@ -26,7 +26,7 @@ export class RegistrationComponent {
   public fieldsOk: boolean = false;
   public isConestogaEmail: boolean = false;
   
-  constructor(private afService: AF, private router: Router) { 
+  constructor(private afService: User, private router: Router) { 
     this.firstName = "";
     this.lastName = "";
     this.email = "";

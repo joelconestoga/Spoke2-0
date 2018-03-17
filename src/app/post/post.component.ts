@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MdDialogRef, MdDialog } from '@angular/material';
 import { Observable } from 'rxjs/Rx';
-import { AF } from '../providers/af';
+import { User } from '../providers/user/user';
 import { HomeService } from '../home/home.service';
 import { Router } from '@angular/router';
 
@@ -27,7 +27,7 @@ export class PostComponent implements OnInit {
   favoriteIcon = NOT_FAVORITE;
   
   constructor( private service: HomeService, private dialogRef: MdDialogRef<PostComponent>, 
-    private afService: AF, private router: Router) {
+    private afService: User, private router: Router) {
     setTimeout(() => { this.modalLoad = true }, 1000);
   }
 

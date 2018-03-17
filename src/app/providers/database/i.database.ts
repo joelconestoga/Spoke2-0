@@ -1,4 +1,4 @@
-export interface Database {
+export interface IDatabase {
 
    saveUserInfoFromOAuth(uid, displayName, email, provider);
 

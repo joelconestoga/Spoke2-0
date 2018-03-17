@@ -6,13 +6,13 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireModule } from "angularfire2";
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import { Persistence } from "./i.persistence";
-import { Auth } from "./i.auth";
-import { Database } from "./i.db";
+import { IAuth } from "../auth/i.auth";
+import { IDatabase } from "../database/i.database";
+import { IUser } from "./i.user";
 
 
 @Injectable()
-export class AF implements Persistence {
+export class User implements IUser {
 
   public displayName: string;
   public email: string;
@@ -21,12 +21,12 @@ export class AF implements Persistence {
   public isLoggedIn: boolean;
 
   public af: AngularFireAuth;
-  public af2: Auth;
+  public af2: IAuth;
   public afd: AngularFireDatabase;
-  public afd2: Database;
+  public afd2: IDatabase;
 
   constructor(af: AngularFireAuth, afd: AngularFireDatabase, 
-    @Inject('Auth') af2: Auth, @Inject('Database') afd2: Database) {
+    @Inject('Auth') af2: IAuth, @Inject('Database') afd2: IDatabase) {
     
     this.af = af;
     this.af2 = af2;
