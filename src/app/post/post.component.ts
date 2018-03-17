@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MdDialogRef, MdDialog } from '@angular/material';
-import { Observable } from 'rxjs/Rx';
 import { User } from '../providers/user/user';
-import { HomeService } from '../home/home.service';
 import { Router } from '@angular/router';
+import { WordPress } from '../providers/wordpress';
 
 const FAVORITE: string = "favorite";
 const NOT_FAVORITE: string = "favorite_border";
@@ -26,8 +25,8 @@ export class PostComponent implements OnInit {
   fontSize = 16;
   favoriteIcon = NOT_FAVORITE;
   
-  constructor( private service: HomeService, private dialogRef: MdDialogRef<PostComponent>, 
-    private afService: User, private router: Router) {
+  constructor( private wordpress: WordPress, private dialogRef: MdDialogRef<PostComponent>, 
+    private user: User, private router: Router) {
     setTimeout(() => { this.modalLoad = true }, 1000);
   }
 
@@ -43,15 +42,15 @@ export class PostComponent implements OnInit {
   }
 
   loadPost(id) {
-    this.service.getPost(id).subscribe(data => {
+    this.wordpress.getPost(id).subscribe(data => {
       this.post = data;
       this.reloadFavoriteIcon(this.post.id);
     });
-    this.linkToShare = this.service.website + id;
+    this.linkToShare = this.wordpress.website + id;
   }
 
   loadRelatedPost(catId) {
-    this.service.getRelatedPosts(catId).subscribe(data => {this.relatedPosts = data});
+    this.wordpress.getRelatedPosts(catId).subscribe(data => {this.relatedPosts = data});
   }
 
   increaseFontSize(){
@@ -67,7 +66,7 @@ export class PostComponent implements OnInit {
   }
 
   reloadFavoriteIcon(id) {
-    if(!this.afService.isLoggedIn) {
+    if(!this.user.isLoggedIn) {
       return;
     }
     var self = this;
@@ -75,11 +74,11 @@ export class PostComponent implements OnInit {
       self.setFavoriteIcon(isFavorite);
     }
     
-    this.afService.checkFavorite(id, callback);        
+    this.user.isFavorite(id, callback);        
   }
 
   setOrRemoveFromFavorites(post) {
-    if(!this.afService.isLoggedIn) {
+    if(!this.user.isLoggedIn) {
       this.dialogRef.close();
       this.router.navigate(['/login']);
       return;
@@ -103,7 +102,7 @@ export class PostComponent implements OnInit {
       }
     };
     this.disableFavoriteButton();
-    this.afService.removeFromFavorites(this.post.id, callback);
+    this.user.removeFromFavorites(this.post.id, callback);
   }
 
   setAsFavorite(post) {
@@ -117,7 +116,7 @@ export class PostComponent implements OnInit {
       }
     };
     this.disableFavoriteButton();
-    this.afService.setFavorite(this.post, callback);
+    this.user.setFavorite(this.post, callback);
   }
 
   disableFavoriteButton() {

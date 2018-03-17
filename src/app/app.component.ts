@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AppService } from './app.service';
 import { User } from './providers/user/user';
 import { Router } from '@angular/router';
+import { WordPress } from './providers/wordpress';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   public userTooltip: string;
   public favoriteTooltip: string;
 
-  constructor(private service: AppService, public afService: User, private router: Router) {}
+  constructor(private wordpress: WordPress, public user: User, private router: Router) {}
   
   ngOnInit() {
     this.loadCategoriesForMenu();
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
         self.isLoggedIn = false;
         self.router.navigate(['']);
       }
-      this.afService.logout(callback);
+      this.user.logout(callback);
     } else {
       this.router.navigate(['/login']);      
     }
@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
   
   // loading all categories from the data set
   loadCategoriesForMenu() {
-    this.service.getCategories().subscribe(resData => { 
+    this.wordpress.getCategories().subscribe(resData => { 
       this.categories = resData;
     });
   }
@@ -57,7 +57,7 @@ export class AppComponent implements OnInit {
       self.favoriteTooltip = isLoggedIn ? "My favourites" : "Favourites (login required)";
     }
     
-    this.afService.checkUserSession(callback);
+    this.user.checkUserSession(callback);
   }
 
   play: false;

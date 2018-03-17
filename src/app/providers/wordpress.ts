@@ -3,7 +3,7 @@ import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class HomeService {
+export class WordPress {
     
   constructor(private http: Http) { }
 
@@ -35,6 +35,12 @@ export class HomeService {
     .map((response: Response) => response.json());
   }
  
+  // gets all categories from the REST API
+  getCategories() {
+    return this.http.get(this.categoriesUrl)
+    .map((response: Response) => response.json());
+  }
+
   // gets the from all categories + category's id + category's name.
   getCategoriesWithPosts(per_page) {     
     return this.http.get(this.categoriesUrl) // url to the Rest API categories' json

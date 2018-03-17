@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../providers/user/user';
-import { Observable } from 'rxjs/Observable';
 import { DomSanitizer } from '@angular/platform-browser';
-import { HomeService } from '../home/home.service';
 import { MdDialogRef, MdDialog } from '@angular/material';
 import { PostComponent } from '../post/post.component';
+import { WordPress } from '../providers/wordpress';
 
 @Component({
   selector: 'app-favorites',
@@ -15,7 +14,7 @@ export class FavoritesComponent implements OnInit {
 
   public favorites: any[];
 
-  constructor(private service: HomeService, private afService: User, private sanitizer: DomSanitizer, private dialog: MdDialog) {}
+  constructor(private wordpress: WordPress, private user: User, private sanitizer: DomSanitizer, private dialog: MdDialog) {}
 
   ngOnInit() {
     this.loadFavorites();
@@ -31,12 +30,12 @@ export class FavoritesComponent implements OnInit {
       }
     }
     
-    this.afService.getFavoritesKeys(callback);            
+    this.user.getFavoritesKeys(callback);            
   }
 
   loadPostsForIds(keys) {
     var self = this;
-    this.service.getPostsForIds(keys).subscribe(data => { 
+    this.wordpress.getPostsForIds(keys).subscribe(data => { 
       var row = [];
       for (let i = 0; i < data.length; i++) {
         if (i % 4 == 0 && i > 0) {

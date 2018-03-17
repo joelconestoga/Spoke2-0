@@ -9,6 +9,10 @@ export class AuthMock implements IAuth {
       callback(this.result);
    }
      
+   loginWithFacebook(callback) {
+      callback(this.result);
+   }
+     
    checkUserSession(callbackLoggedIn, callbackNotLogged) {
       if(this.auth == null) {
          callbackNotLogged(this.auth);
@@ -18,4 +22,15 @@ export class AuthMock implements IAuth {
       }
    }
 
+   logout(callback: any) {
+      throw new Error("Method not implemented.");
+   }  
+
+   registerUser(email: any, password: any, callback: any) {
+      throw new Error("Method not implemented.");
+   }
+
+   loginWithEmail(email: any, password: any, callback: any) {
+      throw new Error("Method not implemented.");
+   }
 }

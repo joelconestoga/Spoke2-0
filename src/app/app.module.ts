@@ -24,10 +24,9 @@ import { User } from './providers/user/user';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 import { PostComponent } from './post/post.component';
-import { AppService } from './app.service';
-import { HomeService } from './home/home.service';
 import { Auth } from './providers/auth/auth';
 import { Database } from './providers/database/database';
+import { WordPress } from './providers/wordpress';
 
 // FIREBASE config
 export const firebaseConfig = {
@@ -83,7 +82,7 @@ const routes: Routes = [
     AngularFireDatabaseModule,
     FormsModule,    
   ],
-  providers: [AppService, HomeService, User,
+  providers: [WordPress, User,
     {provide: 'Persistence', useClass: User}, 
     {provide: 'Auth', useClass: Auth}, 
     {provide: 'Database', useClass: Database}, 

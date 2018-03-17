@@ -26,7 +26,7 @@ export class RegistrationComponent {
   public fieldsOk: boolean = false;
   public isConestogaEmail: boolean = false;
   
-  constructor(private afService: User, private router: Router) { 
+  constructor(private user: User, private router: Router) { 
     this.firstName = "";
     this.lastName = "";
     this.email = "";
@@ -39,18 +39,17 @@ export class RegistrationComponent {
   register(event) {
     event.preventDefault();
     
-    this.afService.registerUser(this.email, this.password).then((user) => {
-      this.afService.saveUserInfoFromForm(user.uid, this.firstName, this.lastName, this.email, this.program, this.campus).then(() => {
-        this.router.navigate(['']);
-      })
-        .catch((error) => {
-          this.error = error;
-        });
-    })
-      .catch((error) => {
-        this.error = error;
-        console.log(this.error);
-      });
+    var self = this;
+
+    var finalCallback = function(user) {
+      self.router.navigate(['']);
+    }
+    
+    var registrationCallback = function(user) {
+      self.user.saveUserInfoFromForm(user.uid, self.firstName, self.lastName, self.email, self.program, self.campus, finalCallback);
+    }
+
+    this.user.registerUser(self.email, self.password, registrationCallback);
   }
 
   validate(event, field) {

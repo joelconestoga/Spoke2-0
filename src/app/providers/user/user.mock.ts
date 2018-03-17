@@ -1,7 +1,7 @@
 import { IUser } from "./i.user";
 
 export class UserMock implements IUser {
-   getAf() {
+   getAuth() {
       new AngularFireAuthMock;
    }
    checkUserSession(callback: any) {
@@ -22,7 +22,7 @@ export class UserMock implements IUser {
    removeFromFavorites(id: any, callback: any) {
       throw new Error("Method not implemented.");
    }
-   checkFavorite(id: any, callback: any) {
+   isFavorite(id: any, callback: any) {
       throw new Error("Method not implemented.");
    }
    getFavoritesKeys(callback: any) {

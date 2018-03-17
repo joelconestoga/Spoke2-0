@@ -1,11 +1,5 @@
 
 import { Injectable, Inject } from "@angular/core";
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
-import { Observable } from 'rxjs/Observable';
-import { AngularFireModule } from "angularfire2";
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
 import { IAuth } from "../auth/i.auth";
 import { IDatabase } from "../database/i.database";
 import { IUser } from "./i.user";
@@ -20,28 +14,25 @@ export class User implements IUser {
   public userUid: string;
   public isLoggedIn: boolean;
 
-  public af: AngularFireAuth;
-  public af2: IAuth;
-  public afd: AngularFireDatabase;
-  public afd2: IDatabase;
+  public auth: IAuth;
+  public database: IDatabase;
 
-  constructor(af: AngularFireAuth, afd: AngularFireDatabase, 
-    @Inject('Auth') af2: IAuth, @Inject('Database') afd2: IDatabase) {
+  public shouldCallThisBack;
+
+  constructor(@Inject('Auth') auth: IAuth, @Inject('Database') database: IDatabase) {
     
-    this.af = af;
-    this.af2 = af2;
-    this.afd = afd;
-    this.afd2 = afd2;
+    this.auth = auth;
+    this.database = database;
     
     this.userUid = "";
   }
 
-  getAf() {
-    return this.af2;
+  getAuth() {
+    return this.auth;
   }
 
-  getAfd() {
-    return this.afd2;
+  getDatabase() {
+    return this.database;
   }
 
   checkUserSession(callback) {
@@ -63,7 +54,7 @@ export class User implements IUser {
       callback(self.isLoggedIn, self.email);
     }
 
-    this.getAf().checkUserSession(callbackLoggedIn, callbackNotLogged);
+    this.getAuth().checkUserSession(callbackLoggedIn, callbackNotLogged);
   }
 
   loginWithGoogle(callback) {
@@ -79,108 +70,92 @@ export class User implements IUser {
                                 result.additionalUserInfo.providerId);
     }
     
-    this.getAf().loginWithGoogle(myCallback);
+    this.getAuth().loginWithGoogle(myCallback);
     
     if (callback) {
       callback(self.isLoggedIn);
     }
   }
   
-  loginWithFacebook() {
+  loginWithFacebook(callback) {
     var self = this;
-    return this.af.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then(
-      function(result) {
-        console.log(result);
-        self.userUid = result.user.uid;
-        self.saveUserInfoFromOAuth(result.user.uid, 
-          // result.additionalUserInfo.profile.first_name,
-          // result.additionalUserInfo.profile.last_name,
-          result.user.displayName,
-          result.user.email,
-          result.additionalUserInfo.providerId);
-}
-    );
+
+    var myCallback = function(result) {
+      self.userUid = result.user.uid;
+      self.saveUserInfoFromOAuth(result.user.uid, 
+                                // result.additionalUserInfo.profile.given_name,
+                                // result.additionalUserInfo.profile.family_name,
+                                result.user.displayName,
+                                result.user.email,
+                                result.additionalUserInfo.providerId);
+    }
+
+    this.getAuth().loginWithFacebook(myCallback);
+    
+    if (callback) {
+      callback(self.isLoggedIn);
+    }
   }
 
   logout(callback) {
     var self = this;
-    return this.af.auth.signOut().then(
-      function(result) {
-        self.userUid = "";
-        callback();
-      }
-    );
+
+    var myCallback = function(result) {
+      self.userUid = "";      
+    }
+
+    this.getAuth().logout(callback);
+
+    callback();
   }
 
   setFavorite(post, callback) {
-    var ref = this.afd.database.ref("registeredUsers/" + this.userUid + "/favorites");
-    ref.child(post.id).set(
-      { 
-        id: post.id,
-        title: post.title.rendered,
-        category: post.categories['0'],
-        background: post.featured_media_url,
-        timestamp: Date.now() 
-      }, 
-      callback);
+    this.getDatabase().setFavorite(this.userUid, post, callback);
   }
 
   removeFromFavorites(id, callback) {
-    var ref = this.afd.database.ref("registeredUsers/" + this.userUid + "/favorites");
-    ref.child(id).remove(callback);
+    this.getDatabase().removeFromFavorites(this.userUid, id, callback);
   }
 
-  checkFavorite(id, callback) {
-    var ref = this.afd.database.ref("registeredUsers/" + this.userUid + "/favorites");
-    ref.once("value").then(
-      function(snapshot) {
-        var hasFavorite = snapshot.hasChild(id.toString());
-        callback(hasFavorite);
-      }
-    );
+  isFavorite(id, callback) {
+    this.getDatabase().isFavorite(this.userUid, id, callback);
   }
 
   getFavoritesKeys(callback) {
-    var ref = this.afd.database.ref("registeredUsers/" + this.userUid + "/favorites");
-    ref.once("value").then(
-      function(snapshot) {
-        callback(snapshot);
-      }
-    );
+    this.getDatabase().getFavoritesKeys(this.userUid, callback);
   }
 
-  registerUser(email, password) {
+  registerUser(email, password, callback) {
     var self = this;
-    return this.af.auth.createUserWithEmailAndPassword(email, password).then(
-      function(user) {
-        self.userUid = user.uid;
-        return user;
-      }
-    );
+    self.shouldCallThisBack = callback;
+
+    var myCallback = function(user) {
+      self.userUid = user.uid;
+      self.shouldCallThisBack(user);
+    }
+
+    this.getAuth().registerUser(email, password, myCallback);
   }
 
-  saveUserInfoFromForm(uid, firstName, lastName, email, program, campus) {
-    return this.afd.object('registeredUsers/' + uid).set( 
-      { 
-        firstName: firstName, 
-        lastName: lastName, 
-        email: email,
-        program: program,
-        campus: campus,
-      } );
+  saveUserInfoFromForm(uid, firstName, lastName, email, program, campus, callback) {
+    var self = this;
+    this.getDatabase().saveUserInfoFromForm(uid, firstName, lastName, email, program, campus, callback);
   }
 
   saveUserInfoFromOAuth(uid, displayName, email, provider) {
-    this.getAfd().saveUserInfoFromOAuth(uid, displayName, email, provider);
+    this.getDatabase().saveUserInfoFromOAuth(uid, displayName, email, provider);
   }
 
-  loginWithEmail(email, password) {
+  loginWithEmail(email, password, callback) {
     var self = this;
-    return this.af.auth.signInWithEmailAndPassword(email, password).then(
-      function(user) {
-        self.userUid = user.uid;
-      }
-    );
+    this.shouldCallThisBack = callback;
+
+    var myCallback = function(user) {
+      self.userUid = user.uid;
+      self.shouldCallThisBack(user);
+    }
+
+    this.getAuth().loginWithEmail(email, password, myCallback);
   }
 
 }

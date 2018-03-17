@@ -21,7 +21,7 @@ describe('User', () => {
       
     let afdbMock = new DatabaseMock;
       
-    component = new User(null, null, afAuthMock, afdbMock);
+    component = new User(afAuthMock, afdbMock);
     
     component.loginWithGoogle(null);
 

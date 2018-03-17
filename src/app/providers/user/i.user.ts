@@ -1,12 +1,12 @@
 export interface IUser {
 
-  getAf();
+  getAuth();
 
   checkUserSession(callback);
 
   loginWithGoogle(callback);
   
-  loginWithFacebook();
+  loginWithFacebook(callback);
 
   logout(callback);
 
@@ -14,17 +14,17 @@ export interface IUser {
 
   removeFromFavorites(id, callback);
 
-  checkFavorite(id, callback);
+  isFavorite(id, callback);
 
   getFavoritesKeys(callback);
 
-  registerUser(email, password);
+  registerUser(email, password, callback);
 
-  saveUserInfoFromForm(uid, firstName, lastName, email, program, campus);
+  saveUserInfoFromForm(uid, firstName, lastName, email, program, campus, callback);
 
   saveUserInfoFromOAuth(uid, displayName, email, provider);
 
-  loginWithEmail(email, password);
+  loginWithEmail(email, password, callback);
 
 }
 

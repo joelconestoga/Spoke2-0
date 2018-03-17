@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Subscription} from "rxjs/Subscription";
-import { HomeService } from '../home/home.service'
 import { MdDialogRef, MdDialog, MdDialogConfig } from '@angular/material';
 import { PostComponent } from '../post/post.component';
+import { WordPress } from '../providers/wordpress';
 
 @Component({
     selector: 'app-urlparam',
@@ -16,7 +16,7 @@ export class UrlparamComponent implements OnInit, OnDestroy {
     public catId
     private id : number;
     private route$ : Subscription;
-    constructor(private route : ActivatedRoute, private service: HomeService, private router: Router, private dialog: MdDialog) {}
+    constructor(private route : ActivatedRoute, private wordpress: WordPress, private router: Router, private dialog: MdDialog) {}
 
     ngOnInit() {
 
@@ -25,7 +25,7 @@ export class UrlparamComponent implements OnInit, OnDestroy {
                 this.id = +params["id"]; // cast to number
             }
         );
-        this.service.sharedpost(this.id).subscribe(resData => this.singlePost = resData);
+        this.wordpress.sharedpost(this.id).subscribe(resData => this.singlePost = resData);
 
         setTimeout(() => {
 
