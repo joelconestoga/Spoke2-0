@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MdDialogRef, MdDialog } from '@angular/material';
 import { User } from '../providers/user/user';
 import { Router } from '@angular/router';
-import { WordPress } from '../providers/wordpress';
+import { WordPress } from '../providers/wordpress/wordpress';
 
 const FAVORITE: string = "favorite";
 const NOT_FAVORITE: string = "favorite_border";

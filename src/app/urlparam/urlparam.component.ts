@@ -3,7 +3,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Subscription} from "rxjs/Subscription";
 import { MdDialogRef, MdDialog, MdDialogConfig } from '@angular/material';
 import { PostComponent } from '../post/post.component';
-import { WordPress } from '../providers/wordpress';
+import { WordPress } from '../providers/wordpress/wordpress';
 
 @Component({
     selector: 'app-urlparam',

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from './providers/user/user';
 import { Router } from '@angular/router';
-import { WordPress } from './providers/wordpress';
+import { WordPress } from './providers/wordpress/wordpress';
 
 @Component({
   selector: 'app-root',

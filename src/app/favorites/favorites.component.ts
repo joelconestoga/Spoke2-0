@@ -3,7 +3,7 @@ import { User } from '../providers/user/user';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MdDialogRef, MdDialog } from '@angular/material';
 import { PostComponent } from '../post/post.component';
-import { WordPress } from '../providers/wordpress';
+import { WordPress } from '../providers/wordpress/wordpress';
 
 @Component({
   selector: 'app-favorites',

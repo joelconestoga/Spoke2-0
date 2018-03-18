@@ -104,7 +104,7 @@ export class User implements IUser {
       self.userUid = "";      
     }
 
-    this.getAuth().logout(callback);
+    this.getAuth().logout(myCallback);
 
     callback();
   }

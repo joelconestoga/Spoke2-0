@@ -1,5 +1,6 @@
 import { IAuth } from "./i.auth";
 
+
 export class AuthMock implements IAuth {
 
    public auth = null;
@@ -22,9 +23,9 @@ export class AuthMock implements IAuth {
       }
    }
 
-   logout(callback: any) {
-      throw new Error("Method not implemented.");
-   }  
+   logout(callback) {
+      callback();
+   }
 
    registerUser(email: any, password: any, callback: any) {
       throw new Error("Method not implemented.");

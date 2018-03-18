@@ -26,7 +26,7 @@ import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/dat
 import { PostComponent } from './post/post.component';
 import { Auth } from './providers/auth/auth';
 import { Database } from './providers/database/database';
-import { WordPress } from './providers/wordpress';
+import { WordPress } from './providers/wordpress/wordpress';
 
 // FIREBASE config
 export const firebaseConfig = {

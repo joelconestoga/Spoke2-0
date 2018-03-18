@@ -5,7 +5,7 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browse
 import { fadeInOutAnimation } from '../_animations/index';
 import { PostComponent } from '../post/post.component';
 import { isPlatformBrowser } from '@angular/common';
-import { WordPress } from '../providers/wordpress';
+import { WordPress } from '../providers/wordpress/wordpress';
 
 
 @Component({
