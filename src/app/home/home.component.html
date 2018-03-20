@@ -1,4 +1,4 @@
-<md-progress-bar class="margin-top-30" mode="indeterminate" *ngIf="contentLoaded==false"></md-progress-bar>
+<md-progress-bar class="margin-top-50" mode="indeterminate" *ngIf="contentLoaded==false"></md-progress-bar>
 <div *ngIf="contentLoaded == true">
   
   <!-- row 1 - cover with highlight, small images and twitter -->
@@ -7,7 +7,7 @@
       
       <div fxLayout="row" fxLayout.lt-lg="column" class="cover">
         
-        <div fxLayout="column" fxFlex="41" class="column" *ngFor="let post of cover.highlight">
+        <div fxLayout="column" fxFlex="41" class="column inner-row" *ngFor="let post of cover.highlight">
             <div class="row-separator" *ngFor="let post of cover.highlight">
               <md-card (click)="openPost(post.id, post.title.rendered, post.categories['0'])" class="padding-clear cursor-pointer animated fadeIn wow" data-wow-offset="2.0s">
                 <div class="stretchy-wrapper text-title" [style.background-image]="getBackground(post.featured_media_url)" [ngStyle]="{'background-position': 'center', 'background-repeat': 'no-repeat', 'background-color': 'black'}"> 
@@ -20,8 +20,8 @@
             </div>
         </div> <!-- cover/highlight -->
         
-        <div fxLayout="column" fxFlex="38">  
-          <div fxLayout="row" fxLayout.lt-sm="column">
+        <div fxLayout="column" fxFlex="38" class="inner-row">  
+          <div class="margin-bottom-42" fxLayout="row" fxLayout.lt-sm="column">
             <div fxFlex="50" class="column row-separator" *ngFor="let post of cover.rowOne">
               <md-card class="padding-clear cursor-pointer animated fadeIn" (click)="openPost(post.id, post.title.rendered, post.categories['0'])">
                 <div class="stretchy-wrapper text-title" [style.background-image]="getBackground(post.featured_media_url)" [ngStyle]="{'background-position': 'center', 'background-repeat': 'no-repeat', 'background-color': 'black'}"> 
@@ -45,9 +45,9 @@
      
         </div> <!-- cover/small images -->
         
-        <div fxLayout="column" fxFlex="21">
-          <div id="twitterFeed" class="column row-separator">
-            <a class="twitter-timeline test" style="max-height:450px"  data-height="468px"  href="https://twitter.com/SpokeOnline">@spokeonline</a>
+        <div class="inner-row" fxLayout="column" fxFlex="21">
+          <div id="twitter-feed" class="column row-separator">
+            <a class="twitter-timeline test"  data-height="500px"  href="https://twitter.com/SpokeOnline">@spokeonline</a>
           </div>
         </div> <!-- cover/twitter -->
       

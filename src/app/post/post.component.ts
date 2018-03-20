@@ -3,6 +3,7 @@ import { MdDialogRef, MdDialog } from '@angular/material';
 import { User } from '../providers/user/user';
 import { Router } from '@angular/router';
 import { WordPress } from '../providers/wordpress/wordpress';
+import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 
 const FAVORITE: string = "favorite";
 const NOT_FAVORITE: string = "favorite_border";
@@ -21,12 +22,13 @@ export class PostComponent implements OnInit {
   catId;
   title;
   linkToShare;
+  linkForImage;
   modalLoad = false;
   fontSize = 16;
   favoriteIcon = NOT_FAVORITE;
   
   constructor( private wordpress: WordPress, private dialogRef: MdDialogRef<PostComponent>, 
-    private user: User, private router: Router) {
+    private user: User, private router: Router, private sanitizer: DomSanitizer) {
     setTimeout(() => { this.modalLoad = true }, 1000);
   }
 
@@ -47,6 +49,11 @@ export class PostComponent implements OnInit {
       this.reloadFavoriteIcon(this.post.id);
     });
     this.linkToShare = this.wordpress.website + id;
+  }
+
+  // function for Angular to sanitize background images from Wordpress 
+  getBackground(image) { 
+    return this.sanitizer.bypassSecurityTrustStyle(`url(${image})`);
   }
 
   loadRelatedPost(catId) {

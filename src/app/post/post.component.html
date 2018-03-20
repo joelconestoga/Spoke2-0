@@ -1,30 +1,35 @@
 <md-progress-bar mode="indeterminate" *ngIf="modalLoad==false"></md-progress-bar>
-<div fxLayout="column" id="openedPost" >
-<div>
+<div fxLayout="column" id="openedPost">
+    
+    <div *ngIf="modalLoad === true" fxLayout="column" class="post-body post-content-image" fxLayout="column" [style.background-image]="getBackground(post.featured_media_url)">
+    </div> <!-- Post featured image -->
+
+    <div>
     <md-toolbar class="my-post-navbar">
         <div class="title" fxLayout="row">
-            <h2 fxLayout="row" class="text-normal color-white" [innerHTML]="post?.title?.rendered | slice:0:75 | keepHtml"></h2>
+            <h2 style="white-space: pre-line !important" fxLayout="row" class="text-normal color-black content-title" [innerHTML]="post?.title?.rendered | slice:0:75 | keepHtml"></h2>
         </div>
+        
         <span class="fill-remaining-space"></span>
     
-        <div fxLayout="row" style="padding-bottom:8px">
+        <div class="post-buttons" fxLayout="row" fxLayout.lt-sm="row" style="padding-bottom:8px">
             <!-- THESE 2 BUTTONS ARE HERE FOR FURTHER IMPLEMENTATION OF INCREASE/DECREASE FONT SIZE INSIDE POST -->
             <div> 
                 <button md-icon-button class="color-white" (click)="decreaseFontSize()">
                     <div class="material-icons md-18 cursor-pointer">font_download</div>
                 </button>
             </div>
-            <div class="margin-right-10"> 
+            <div> 
                 <button md-icon-button class="color-white" (click)="increaseFontSize()">
                     <div class="material-icons md-24 cursor-pointer">font_download</div>
                 </button>
             </div>
-            <div class="margin-right-10">
+            <div>
                 <button md-icon-button [mdMenuTriggerFor]="menu" class="color-white">
                     <div class="material-icons cursor-pointer">share</div>
                 </button>
             </div>
-            <div class="margin-right-10"> 
+            <div> 
                 <button md-icon-button ng-disabled='favoriteIcon == ""' class="color-white" (click)="setOrRemoveFromFavorites(post)">
                     <div class="material-icons md-24 cursor-pointer">{{favoriteIcon}}</div>
                 </button>
@@ -43,7 +48,7 @@
                     [title]="title">
                 </share-buttons>
             </md-menu>  
-            <div class="margin-right-10"> 
+            <div> 
                 <button md-icon-button md-dialog-close class="color-white"><i class="material-icons md-32">close</i></button>
             </div>
         </div>

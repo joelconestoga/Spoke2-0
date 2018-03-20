@@ -11,7 +11,7 @@ export class WordPress {
   baseURL = "https://public-api.wordpress.com/wp/v2/sites/spoketest.wordpress.com/";
   postsUrl = this.baseURL + "posts/"; // url of the REST API json file for POSTS
   categoriesUrl = this.baseURL + "categories" // url of the REST API json file for CATEGORIES
-  // featuredImage = this.postsUrl + "posts._embedded" + "['wp:featuredmedia'][0].source_url"; // path to fetch the featured image of a post when the WP website is not using the 'Best REST API Featured Images' plugin
+  //featuredImage = this.postsUrl + "posts._embedded" + "['wp:featuredmedia'][0].source_url"; // path to fetch the featured image of a post when the WP website is not using the 'Best REST API Featured Images' plugin
 
   // gets the latest post. In the HTML it's the largest one displayed on top of the TOP STORIES page.  I did this only for design purposes, since I couldnt find a better way to arrange posts through ngFor
   getCoverHighlight() {   
