@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import { AF } from '../providers/af';
 import { HomeService } from '../home/home.service';
 import { Router } from '@angular/router';
+import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 
 const FAVORITE: string = "favorite";
 const NOT_FAVORITE: string = "favorite_border";
@@ -22,11 +23,12 @@ export class PostComponent implements OnInit {
   catId;
   title;
   linkToShare;
+  linkForImage;
   modalLoad = false;
   fontSize = 16;
   favoriteIcon = NOT_FAVORITE;
   
-  constructor( private service: HomeService, private dialogRef: MdDialogRef<PostComponent>, 
+  constructor( private service: HomeService, private sanitizer: DomSanitizer, private dialogRef: MdDialogRef<PostComponent>, 
     private afService: AF, private router: Router) {
     setTimeout(() => { this.modalLoad = true }, 1000);
   }
@@ -48,6 +50,11 @@ export class PostComponent implements OnInit {
       this.reloadFavoriteIcon(this.post.id);
     });
     this.linkToShare = this.service.website + id;
+  }
+
+  // function for Angular to sanitize background images from Wordpress 
+  getBackground(image) { 
+    return this.sanitizer.bypassSecurityTrustStyle(`url(${image})`);
   }
 
   loadRelatedPost(catId) {

@@ -290,15 +290,20 @@
   font-size: 14px;
   font-weight: 500; }
 
-.mat-toolbar,
 .mat-toolbar h1,
 .mat-toolbar h2,
 .mat-toolbar h3,
 .mat-toolbar h4,
 .mat-toolbar h5,
 .mat-toolbar h6 {
-  font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+  font: 500 22px/30px Raleway, "Helvetica Neue", sans-serif;
+  font-weight: bold;
   margin: 0; }
+
+.mat-toolbar {
+  font: 500 20px/25px Raleway, "Helvetica Neue", sans-serif;
+  margin: 0;
+}
 
 .mat-tooltip {
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -1137,3 +1142,19 @@ input.mat-input-element:-webkit-autofill + .mat-input-placeholder .mat-placehold
 
 .mat-tooltip {
   background: rgba(97, 97, 97, 0.9); }
+
+@media screen and (max-width: 599px) {
+    .mat-toolbar h1, .mat-toolbar h2, .mat-toolbar h3, .mat-toolbar h4, .mat-toolbar h5, .mat-toolbar h6 {
+    font: 200 15px/18px Raleway, "Helvetica Neue", sans-serif;
+    font-weight: bold;
+    margin: 0;
+    }
+}
+
+@media screen and (max-width: 959px) {
+    .mat-toolbar h1, .mat-toolbar h2, .mat-toolbar h3, .mat-toolbar h4, .mat-toolbar h5, .mat-toolbar h6 {
+    font: 200 15px/18px Raleway, "Helvetica Neue", sans-serif;
+    font-weight: bold;
+    margin: 0;
+    }
+}
