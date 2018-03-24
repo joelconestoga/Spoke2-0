@@ -27,6 +27,8 @@ import { PostComponent } from './post/post.component';
 import { Auth } from './providers/auth/auth';
 import { Database } from './providers/database/database';
 import { WordPress } from './providers/wordpress/wordpress';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { DialogsService } from './providers/services/dialogs.service';
 
 // FIREBASE config
 export const firebaseConfig = {
@@ -55,7 +57,8 @@ const routes: Routes = [
     // UrlparamComponent,
     LoginComponent,
     RegistrationComponent,
-    FavoritesComponent
+    FavoritesComponent,
+    ConfirmationComponent
   ],
   imports: [
     ScrollToModule.forRoot(),
@@ -82,13 +85,13 @@ const routes: Routes = [
     AngularFireDatabaseModule,
     FormsModule,    
   ],
-  providers: [WordPress, User,
+  providers: [WordPress, User, DialogsService,
     {provide: 'Persistence', useClass: User}, 
     {provide: 'Auth', useClass: Auth}, 
     {provide: 'Database', useClass: Database}, 
   ],
   bootstrap: [AppComponent],
-  entryComponents: [PostComponent],
+  entryComponents: [PostComponent, ConfirmationComponent],
   schemas: [ NO_ERRORS_SCHEMA ],  
 })
 export class AppModule { }

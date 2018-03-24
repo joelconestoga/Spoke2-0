@@ -358,7 +358,7 @@ body { margin: 0; font-family: Raleway, sans-serif; overflow: hidden; }
 .my-post-navbar { width: inherit; min-height: 55px !important; background-color: #bf9a64 !important; border-bottom: 1px solid lightgray !important; z-index: 11; }
 .my-post-navbar.mat-toolbar { width: inherit; padding-left: 0px !important; padding-right:0px !important; padding-top:10px !important; padding-bottom:10px !important; }
 .my-post-navbar .title { text-align: left; padding-left:24px; }
-.post-body { overflow: auto; max-height: calc(100vh - 350px); overflow-y: auto; padding-left: 24px; padding-bottom: 20px; line-height:1.6; !important; }
+.post-body { overflow: auto; max-height: calc(100vh - 350px); overflow-y: auto; padding-left: 24px; padding-bottom: 20px; line-height:1.6 !important; }
 
 .post-content-image {
     background-size: cover;
@@ -529,3 +529,60 @@ md-dialog-container.mat-dialog-container { padding: 0px !important; overflow: hi
     margin: 0;
     }
 }
+
+.loginmodal-container {
+    padding: 30px;
+    max-width: 350px;
+    width: 100% !important;
+    background-color: #F7F7F7;
+    margin: 0 auto;
+    border-radius: 2px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    font-family: roboto;
+  }
+  .loginmodal-container h1 {
+    text-align: center;
+    font-size: 1.8em;
+    font-family: roboto;
+  }
+  .loginmodal-submit {
+    /* border: 1px solid #3079ed; */
+    width: 100%;
+    border: 0px;
+    color: #fff;
+    text-shadow: 0 1px rgba(0,0,0,0.1);
+    background-color: #4d90fe;
+    padding: 17px 0px;
+    font-family: roboto;
+    font-size: 21px;
+     background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed));
+  }
+  .loginmodal-submit:hover {
+    /* border: 1px solid #2f5bb7; */
+    border: 0px;
+    text-shadow: 0 1px rgba(0,0,0,0.3);
+    background-color: #357ae8;
+    /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
+  }
+  .loginmodal-container a {
+    text-decoration: none;
+    color: #666;
+    font-weight: 400;
+    text-align: center;
+    display: inline-block;
+    opacity: 0.6;
+    transition: opacity ease 0.5s;
+  }
+  .dialog-container {
+    padding: 20px;
+    min-width: 300px;
+    max-width: 600px;
+    width: 100% !important;
+    background-color: #F7F7F7;
+    margin: 0 auto;
+    border-radius: 2px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    font-family: roboto;
+  }

@@ -1,0 +1,8 @@
+<div class="dialog-container">
+    
+  <h3>{{ title }}</h3>
+  <p>{{ message }}<p>
+
+  <button class="btn btn-md btn-primary pull-right" (click)="dialogRef.close(true)">{{ okLabel }}</button>
+  <button class="btn btn-md pull-right" (click)="dialogRef.close()">Cancel</button>
+</div>

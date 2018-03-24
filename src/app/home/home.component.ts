@@ -73,7 +73,7 @@ export class HomeComponent implements OnInit {
   }
 
   openPost(id, title, catId){ 
-    let dialogRef:MdDialogRef<PostComponent> = this.dialog.open(PostComponent, {disableClose:true});
+    let dialogRef:MdDialogRef<PostComponent> = this.dialog.open(PostComponent);
     dialogRef.componentInstance.initialize(id, catId, title);
   }
   

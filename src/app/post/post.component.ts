@@ -4,6 +4,7 @@ import { User } from '../providers/user/user';
 import { Router } from '@angular/router';
 import { WordPress } from '../providers/wordpress/wordpress';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { DialogsService } from '../providers/services/dialogs.service';
 
 const FAVORITE: string = "favorite";
 const NOT_FAVORITE: string = "favorite_border";
@@ -28,7 +29,9 @@ export class PostComponent implements OnInit {
   favoriteIcon = NOT_FAVORITE;
   
   constructor( private wordpress: WordPress, private dialogRef: MdDialogRef<PostComponent>, 
-    private user: User, private router: Router, private sanitizer: DomSanitizer) {
+    private user: User, private router: Router, private sanitizer: DomSanitizer,
+    private dialogsService: DialogsService) {
+
     setTimeout(() => { this.modalLoad = true }, 1000);
   }
 
@@ -86,8 +89,14 @@ export class PostComponent implements OnInit {
 
   setOrRemoveFromFavorites(post) {
     if(!this.user.isLoggedIn) {
-      this.dialogRef.close();
-      this.router.navigate(['/login']);
+      let self = this;
+      this.dialogsService.confirm("Log In", "Saving favourites requires login.", "Login")
+      .subscribe(function(ok) {
+        if (ok) {
+          self.dialogRef.close();
+          self.router.navigate(['/login']);
+        }
+      });
       return;
     }
     
