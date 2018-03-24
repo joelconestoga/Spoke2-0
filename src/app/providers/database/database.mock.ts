@@ -6,6 +6,13 @@ export class DatabaseMock implements IDatabase {
    public displayName;
    public email;
    public provider;
+   public result = null;
+
+   public firstName;
+   public lastName;
+   public program;
+   public campus;
+   public userUid;
 
    saveUserInfoFromOAuth(uid, displayName, email, provider) {
       this.uid = uid;
@@ -26,12 +33,19 @@ export class DatabaseMock implements IDatabase {
       throw new Error("Method not implemented.");
    }
 
-   getFavoritesKeys(userUid: any, callback: any) {
-      throw new Error("Method not implemented.");
+   getFavoritesKeys(userUid,callback) {
+    this.userUid = userUid;
+    callback(this.userUid);
    }
 
-   saveUserInfoFromForm(uid: any, firstName: any, lastName: any, email: any, program: any, campus: any, callback: any) {
-      throw new Error("Method not implemented.");
+   saveUserInfoFromForm(uid, firstName, lastName, email, program, campus, callback) {  
+    this.uid = uid;
+      this.firstName = firstName;
+      this.lastName = lastName;
+      this.email = email;
+      this.program = program;
+      this.campus = campus;
+      callback(this.result);
    }
 
 }

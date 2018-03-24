@@ -19,7 +19,7 @@ describe('User', () => {
                                                   "providerId":"ttt"
                                                 }
                         };
-      
+  
     let afdbMock = new DatabaseMock;
       
     component = new User(afAuthMock, afdbMock);
@@ -76,5 +76,106 @@ describe('User', () => {
     expect(didCalledBack).toBeTruthy();
   }); 
 
+  it('Should register with Email', () => {
+      
+    let afAuthMock = new AuthMock;
+    afAuthMock.result = { "user": {
+                                    "uid":"xxx",
+                                    "email":"yyy",
+                                    "password":"zzz",
+                                  },
+                          "additionalUserInfo": {
+                                                  "providerId":"ttt"
+                                                }
+                        };
+      
+    let afdbMock = new DatabaseMock;
+    let didCalledBack = false;
+      
+    component = new User(afAuthMock, null);
+
+    let mycallback = function(){
+      this.userUid = "xxx";
+      didCalledBack = true;
+    };
+    
+    component.registerUser("yyy","zzz",mycallback);
+
+    expect(component.userUid).toEqual("xxx");
+    expect(afAuthMock.email).toEqual("yyy");
+    expect(afAuthMock.password).toEqual("zzz");
+  }); 
+
+  it('Should login with Email', () => {
+      
+    let afAuthMock = new AuthMock;
+     afAuthMock.result = { "user": {
+                                    "uid":"xxx",
+                                  }
+                        }; 
+      
+    let afdbMock = new DatabaseMock;
+    let didCalledBack = false;
+      
+    component = new User(afAuthMock, null);
+
+    let mycallback = function(){
+      this.userUid = "xxx";
+      didCalledBack = true;
+    };
+    
+    component.loginWithEmail("yyy","zzz",mycallback);
+
+    expect(component.userUid).toEqual("xxx");
+    expect(afAuthMock.email).toEqual("yyy");
+    expect(afAuthMock.password).toEqual("zzz");
+  }); 
+
+  it('Should save info from Form', () => {
+      
+    let afAuthMock = new AuthMock;
+    let afdbMock = new DatabaseMock;
+    let didCalledBack = false;
+      
+    component = new User(null, afdbMock);
+
+    let mycallback = function(){
+      didCalledBack = true;
+    };
+    
+    component.saveUserInfoFromForm("aaa","bbb","ccc","ddd","eee","fff",mycallback);
+
+    expect(afdbMock.uid).toEqual("aaa");
+    expect(afdbMock.firstName).toEqual("bbb");
+    expect(afdbMock.lastName).toEqual("ccc");
+    expect(afdbMock.email).toEqual("ddd");
+    expect(afdbMock.program).toEqual("eee");
+    expect(afdbMock.campus).toEqual("fff");
+  }); 
+
+  it('Should get favourites', () => {
+      
+    let afAuthMock = new AuthMock;
+    let afdbMock = new DatabaseMock;
+    afdbMock.result = { "registeredUsers": {
+                                "userUid":"xxx"
+                              },
+                              "Favourites": {
+                                                      "FavouritesId":"ttt"
+                                                    }
+}; 
+    let didCalledBack = false;
+      
+    component = new User(afAuthMock, afdbMock);
+
+    let mycallback = function(userUid){
+      userUid = "xxx"; 
+    };
+    component.userUid = "xxx";
+    component.getFavoritesKeys(mycallback);
+
+    expect(component.userUid).toEqual("xxx");
+  }); 
+  
 });
  

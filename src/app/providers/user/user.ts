@@ -123,6 +123,7 @@ export class User implements IUser {
 
   getFavoritesKeys(callback) {
     this.getDatabase().getFavoritesKeys(this.userUid, callback);
+  
   }
 
   registerUser(email, password, callback) {
