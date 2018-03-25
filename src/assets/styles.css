@@ -529,7 +529,18 @@ md-dialog-container.mat-dialog-container { padding: 0px !important; overflow: hi
     margin: 0;
     }
 }
-
+.golden {
+    background-color: #b88e52;
+}
+.google-color {
+    background-color: #DB4C3F;
+}
+.facebook-color {
+    background-color: #3C5A96;
+}
+.white-font {
+    color: white;
+}
 .loginmodal-container {
     padding: 30px;
     max-width: 350px;
@@ -546,28 +557,9 @@ md-dialog-container.mat-dialog-container { padding: 0px !important; overflow: hi
     font-size: 1.8em;
     font-family: roboto;
   }
-  .loginmodal-submit {
-    /* border: 1px solid #3079ed; */
-    width: 100%;
-    border: 0px;
-    color: #fff;
-    text-shadow: 0 1px rgba(0,0,0,0.1);
-    background-color: #4d90fe;
-    padding: 17px 0px;
-    font-family: roboto;
-    font-size: 21px;
-     background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed));
-  }
-  .loginmodal-submit:hover {
-    /* border: 1px solid #2f5bb7; */
-    border: 0px;
-    text-shadow: 0 1px rgba(0,0,0,0.3);
-    background-color: #357ae8;
-    /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
-  }
   .loginmodal-container a {
     text-decoration: none;
-    color: #666;
+    color: #000;
     font-weight: 400;
     text-align: center;
     display: inline-block;

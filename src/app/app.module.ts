@@ -13,7 +13,6 @@ import { ScrollToModule } from 'ng2-scroll-to';
 import { AngularFontAwesomeModule } from 'angular-font-awesome/angular-font-awesome';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ShareButtonsModule } from 'ngx-sharebuttons';
-// import { UrlparamComponent } from './urlparam/urlparam.component';
 
 import 'hammerjs';
 import { LoginComponent } from './login/login.component';
@@ -42,7 +41,6 @@ export const firebaseConfig = {
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  // { path: ':id', component: UrlparamComponent }, // I don't know what is urlparam for, but it's preventing navigation to other pages
   { path: 'login', component: LoginComponent },  
   { path: 'registration', component: RegistrationComponent },  
   { path: 'favorites', component: FavoritesComponent },  
@@ -54,7 +52,6 @@ const routes: Routes = [
     HomeComponent,
     PostComponent,
     EscapeHtmlPipe,
-    // UrlparamComponent,
     LoginComponent,
     RegistrationComponent,
     FavoritesComponent,
