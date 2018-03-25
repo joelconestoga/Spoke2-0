@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { WordPress } from '../providers/wordpress/wordpress';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { DialogsService } from '../providers/services/dialogs.service';
+import { AppComponent } from '../app.component';
 
 const FAVORITE: string = "favorite";
 const NOT_FAVORITE: string = "favorite_border";
@@ -51,7 +52,7 @@ export class PostComponent implements OnInit {
       this.post = data;
       this.reloadFavoriteIcon(this.post.id);
     });
-    this.linkToShare = this.wordpress.website + id;
+    this.linkToShare = AppComponent.APP_DOMAIN + id;
   }
 
   // function for Angular to sanitize background images from Wordpress 

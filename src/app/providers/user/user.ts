@@ -40,7 +40,7 @@ export class User implements IUser {
 
     var callbackLoggedIn = function(auth) {
       console.log("Successfully Logged in.");
-      console.log(auth);
+      // console.log(auth);
       self.displayName = auth.displayName;
       self.email = auth.email;
       self.userUid = auth.uid;          

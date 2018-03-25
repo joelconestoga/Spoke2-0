@@ -11,6 +11,8 @@ import { DialogsService } from './providers/services/dialogs.service';
 })
 export class AppComponent implements OnInit {
 
+  public static APP_DOMAIN = "http://localhost:4200/";
+
   // empty array to store all categories
   public categories = [];
 

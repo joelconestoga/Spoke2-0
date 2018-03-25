@@ -14,22 +14,31 @@ import { WordPress } from '../providers/wordpress/wordpress';
 })
 export class HomeComponent implements OnInit {
 
+  // SPK_TODO: is this the only youtube video expected?
+  public static YOUTUBE_URL = "https://www.youtube.com/embed/+lastest?list=LLa3gR-CwiJQz_o3m7AUVdjg";  
+
   categories: any[];
   load: any = { per_page: 4 };
   category: any;
-  imageUrl: any;
   contentLoaded = true;
   forward; // controller of navigation arrows inside categories  
-  cover = { highlight: [], rowOne: [], rowTwo: [] }; // array which contains last published pots in the json form. // ** We still have to make it display the posts most viewed instead of the last posts published **
-  private mediaContentUrl = "http://spoketest.wordpress.com/wp-content/uploads/"; // base link to fetch media content  
+  
+  safeYoutubeUrl: SafeResourceUrl;
+
+  // array of last published posts in the json form. 
+  // SPK_TODO: ** We still have to make it display the posts most viewed instead of the last posts published **
+  cover = { highlight: [], rowOne: [], rowTwo: [] };
+
+  // base link to fetch media content
+  // private mediaContentUrl = "http://spoketest.wordpress.com/wp-content/uploads/";
 
   constructor(private wordpress: WordPress, private sanitizer: DomSanitizer, public dialog: MdDialog,
-    @Inject(PLATFORM_ID) private platformId: Object) {
-  }
+    @Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngOnInit() {
     this.loadCover();
     this.loadCategoriesWithPosts();
+    this.loadYoutube();
   }
   
   ngAfterViewInit() {    
@@ -81,6 +90,10 @@ export class HomeComponent implements OnInit {
     this.wordpress.getCategoriesWithPosts(this.load.per_page).subscribe(data => { 
       this.categories = data;
     });
+  }
+
+  loadYoutube() {
+    this.safeYoutubeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(HomeComponent.YOUTUBE_URL);
   }
 
   loadMore(event, category){

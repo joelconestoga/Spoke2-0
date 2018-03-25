@@ -62,7 +62,7 @@
       <div *ngFor="let cat of categories; let i = index" fxLayout="column" class="animated fadeIn">
         <div fxFlex *ngIf="i === 2">
           <h2 class="padding-left-20 cat-video-title">SpokeOnline on YouTube</h2>
-          <iframe  width="100%" height="800" src="https://www.youtube.com/embed/+lastest?list=LLa3gR-CwiJQz_o3m7AUVdjg" frameborder="0" allowfullscreen></iframe>
+          <iframe  width="100%" height="800" [src]="safeYoutubeUrl" frameborder="0" allowfullscreen></iframe>
         </div>
         <div fxFlex [id]="cat.name">
           <div fxLayout="row">
