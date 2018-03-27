@@ -1,39 +1,38 @@
 <md-progress-bar mode="indeterminate" *ngIf="modalLoad==false"></md-progress-bar>
-<div fxLayout="column" id="openedPost">
+<div class="row" id="openedPost">
     
-    <div *ngIf="modalLoad === true" fxLayout="column" class="post-body post-content-image" fxLayout="column" [style.background-image]="getBackground(post.featured_media_url)">
+    <div *ngIf="modalLoad === true" class="col-sm-12 post-body post-content-image" [style.background-image]="getBackground(post.featured_media_url)">
     </div> <!-- Post featured image -->
 
-    <div>
-    <md-toolbar class="my-post-navbar">
-        <div class="title" fxLayout="row">
-            <h2 style="white-space: pre-line !important" fxLayout="row" class="text-normal color-black content-title" [innerHTML]="post?.title?.rendered | slice:0:75 | keepHtml"></h2>
+    <div class="col-sm-12">
+    
+        
+    <div class="row display-flex my-post-navbar">
+        
+        <div class="col-sm-6 title" style="justify-content: flex-start">
+            <h2 style="white-space: pre-line !important; font-weight: bold;" class="text-normal color-black content-title" [innerHTML]="post?.title?.rendered | keepHtml"></h2>
         </div>
         
-        <span class="fill-remaining-space"></span>
     
-        <div class="post-buttons" fxLayout="row" fxLayout.lt-sm="row" style="padding-bottom:8px">
+        <div class="post-buttons col-sm-6" style="padding-bottom:8px">
             <!-- THESE 2 BUTTONS ARE HERE FOR FURTHER IMPLEMENTATION OF INCREASE/DECREASE FONT SIZE INSIDE POST -->
-            <div> 
+         
                 <button md-icon-button class="color-white" (click)="decreaseFontSize()">
                     <div class="material-icons md-18 cursor-pointer">font_download</div>
                 </button>
-            </div>
-            <div> 
+  
                 <button md-icon-button class="color-white" (click)="increaseFontSize()">
                     <div class="material-icons md-24 cursor-pointer">font_download</div>
                 </button>
-            </div>
-            <div>
+
                 <button md-icon-button [mdMenuTriggerFor]="menu" class="color-white">
                     <div class="material-icons cursor-pointer">share</div>
                 </button>
-            </div>
-            <div> 
+
                 <button md-icon-button ng-disabled='favoriteIcon == ""' class="color-white" (click)="setOrRemoveFromFavorites(post)">
                     <div class="material-icons md-24 cursor-pointer">{{favoriteIcon}}</div>
                 </button>
-            </div>
+
             <md-menu #menu="mdMenu" [overlapTrigger]="false">
                 <share-buttons
                     [pinterest]="false"
@@ -48,31 +47,25 @@
                     [title]="title">
                 </share-buttons>
             </md-menu>  
-            <div> 
+   
                 <button md-icon-button md-dialog-close class="color-white"><i class="material-icons md-32">close</i></button>
-            </div>
+      
         </div>
-    </md-toolbar>
-    <div *ngIf="modalLoad === true" fxLayout="row" fxLayout.lt-md="column" class="post-body">
-        <div fxFlex="75">
-            <div class="margin-top-30" style="margin-right: 24px;">
-                <div class="margin-top-10" style="overflow:auto; margin-bottom:20px"> 
-                    <div id="post-content" [ngStyle]="{'font-size': fontSize + 'px'}" [innerHTML]="post?.content?.rendered | keepHtml"></div>
-                </div>            
-            </div>
+
+    </div>
+    <div *ngIf="modalLoad === true" class="row post-body">
+        <div class="col-sm-9" id="post-content" [ngStyle]="{'font-size': fontSize + 'px'}" [innerHTML]="post?.content?.rendered | keepHtml" style="overflow:scroll; padding-top: 25px; padding-bottom: 200px">           
         </div>
-        <div fxFlex="25" class="border-left-light-gray padding-right-25 bg-color-grey-lighter" style="height:100%">
-            <div class="margin-top-30" style="margin-left: 24px;">
-                <div class="margin-top-10" style="overflow:auto; margin-bottom:20px"> 
-                    <div style="font-weight:600; margin-bottom: 20px"> Related Posts </div>
-                    <div fxLayout="column" *ngFor="let related of relatedPosts" style="margin-bottom: 15px;">
+        <div class="col-sm-3 border-left-light-gray padding-right-25 bg-color-grey-lighter" style="height:100%">
+                <div class="row"> 
+                    <div class="col-sm-12 margin-top-15" style="font-weight:600;"> Related Posts </div>
+                    <div class="col-sm-12 margin-top-15 padding-bottom-15" *ngFor="let related of relatedPosts">
                         <md-card (click)="loadPost(related.id, related.title.rendered)">
                             <img style="margin-bottom:0" md-card-image src="{{related.featured_media_url}}">
                             <h3 class="text-small padding-clear" [innerHTML]="related.title.rendered | keepHtml"></h3>
                         </md-card>
                     </div>
                 </div>            
-            </div>
         </div>
     </div>
 </div>
