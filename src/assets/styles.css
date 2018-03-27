@@ -2,12 +2,12 @@
 html, body { height: 100%; width: 100%; }
 body { margin: 0; font-family: Raleway, sans-serif; overflow: hidden; }
 
-.text-largest, .text-larger, .text-large, .text-normal, .text-small, .text-smaller, .text-smallest { font-family: 'Raleway', sans-serif; text-align: inherit; color: black; font-weight: 400; }
+.text-largest, .text-larger, .text-large, .text-normal, .text-small, .text-smaller, .text-smallest { font-family: 'Raleway', sans-serif; text-align: center; color: black; font-weight: 400; }
 .text-largest { font-size: 2.250em; }
 .text-larger { font-size: 1.750em; }
 .text-large { font-size: 1.375em; }
-.text-normal { font-size: 1.000em; }
-.text-small { font-size: 0.875em; }
+.text-normal { font-size: 1.500em; padding-bottom: 10px;}
+.text-small { font-size: 1.200em; margin-top: 10px;}
 .text-smaller { font-size: 0.750em; }
 .text-smallest { font-size: 0.625em; }
 
@@ -110,6 +110,10 @@ body { margin: 0; font-family: Raleway, sans-serif; overflow: hidden; }
 .color-deep-orange-darker { color: #bf360c !important; }
 .color-deep-orange-light { color: #ff8a65 !important; }
 .color-deep-orange-lighter { color: #ffab91 !important; }
+.color-gry { color: #bdbdbd; }
+a.color-gry:hover{
+    color: #9e9e9e;
+}
 .color-grey { color: #9e9e9e !important; }
 .color-grey-dark { color: #616161 !important; }
 .color-grey-darker { color: #212121 !important; }
@@ -302,6 +306,10 @@ body { margin: 0; font-family: Raleway, sans-serif; overflow: hidden; }
 .padding-10 { padding: 10px; }
 .padding-20 { padding: 20px; }
 
+.label2 {
+    font-weight: 200;
+}
+
 .pull-left { float: left; }
 .pull-right { float: right; }
 
@@ -347,7 +355,7 @@ body { margin: 0; font-family: Raleway, sans-serif; overflow: hidden; }
 .my-sidenav { width: 185px; }
 .my-sidenav .item { cursor: pointer; color: #616161; }
 .my-sidenav .item a { text-decoration: none !important; outline: 0 !important; color: #616161; cursor: pointer; font-weight: 400; font-family: Raleway,"Helvetica Neue",sans-serif; }
-.my-sidenav .item a:hover { color: #1976d2 !important; }
+.my-sidenav .item a:hover { color: #9e9e9e !important; }
 .my-sidenav .item .site-link { height: 100%; padding: 10px; font-size: 16px; }
 .my-sidenav .item .detail { text-align: center; padding-top: 7px; cursor: pointer; }
 .my-sidenav .item .detail:hover { color: #1976d2 !important; }
@@ -477,6 +485,8 @@ md-dialog-container.mat-dialog-container { padding: 0px !important; overflow: hi
     #openedPost { 
     max-height: 100%;
     max-width: 100%;
+    height: 1200px;
+    width: 900px;
     padding-bottom: 20px;
     position: fixed;
     background: white;
