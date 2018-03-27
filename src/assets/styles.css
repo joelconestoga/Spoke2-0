@@ -478,6 +478,14 @@ md-dialog-container.mat-dialog-container { padding: 0px !important; overflow: hi
     height: 100%;
 }
 
+.seperator {
+    width: 60px;
+    border-bottom: 3px solid #b88e52;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+
 /* styling the html radio player generated automatically by its script */
 #MusesRadioPlayer-HTML5-player-0 { z-index: 15; float: right !important; margin-right: 350px; margin-top:6px; }
 
