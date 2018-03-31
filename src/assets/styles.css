@@ -448,6 +448,9 @@ h2.cat-video-title { font-size: 1.375em; text-transform: uppercase; font-weight:
 md-dialog-container.mat-dialog-container { padding: 0px !important; overflow: hidden; }
 .custom-title{ min-height:3.75em; margin-top:0.1em; margin-bottom: 0.2em; margin-left:1em; margin-right:1em; font-size: 1em !important }
 
+.favorite-title{ min-width: 300px; min-height:3.75em; margin-top:0.1em; margin-bottom: 0.2em; margin-left:1em; margin-right:1em; font-size: 1em !important }
+.favorite-card{ min-width: 300px; max-width: 500px; min-height:3.75em;}
+
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }
 .material-icons.md-36 { font-size: 36px; }
