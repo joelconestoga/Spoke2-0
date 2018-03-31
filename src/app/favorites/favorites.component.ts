@@ -4,6 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MdDialogRef, MdDialog } from '@angular/material';
 import { PostComponent } from '../post/post.component';
 import { WordPress } from '../providers/wordpress/wordpress';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-favorites',
@@ -14,7 +15,8 @@ export class FavoritesComponent implements OnInit {
 
   public favorites: any[];
 
-  constructor(private wordpress: WordPress, private user: User, private sanitizer: DomSanitizer, private dialog: MdDialog) {}
+  constructor(private wordpress: WordPress, public user: User, private sanitizer: DomSanitizer, 
+    private dialog: MdDialog, private router: Router) {}
 
   ngOnInit() {
     this.loadFavorites();
@@ -23,14 +25,23 @@ export class FavoritesComponent implements OnInit {
   loadFavorites() {
     this.favorites = [];
     var self = this;
-    var callback = function(snapshot) {
+
+    var favoritesCallback = function(snapshot) {
       if (snapshot.val()) {
         var keys = Object.keys(snapshot.val());
         self.loadPostsForIds(keys);      
       }
     }
     
-    this.user.getFavoritesKeys(callback);            
+    var checkUserSessionCallback = function(isLoggedIn, email = "") {
+      if (isLoggedIn) {
+        self.user.getFavoritesKeys(favoritesCallback);            
+      } else {
+        self.router.navigate(['/']);
+      }
+    }
+
+    this.user.checkUserSession(checkUserSessionCallback);    
   }
 
   loadPostsForIds(keys) {
@@ -49,8 +60,7 @@ export class FavoritesComponent implements OnInit {
       if (row.length > 0) {
         self.favorites.push(row);
       }
-      console.log(self.favorites);
-      // self.favorites = data;
+      // console.log(self.favorites);
     });      
   }
 
@@ -59,10 +69,12 @@ export class FavoritesComponent implements OnInit {
   }
 
   openPost(id, title, catId){ 
-    let dialogRef:MdDialogRef<PostComponent> = this.dialog.open(PostComponent, {disableClose:true});
+    let dialogRef:MdDialogRef<PostComponent> = this.dialog.open(PostComponent);
     dialogRef.componentInstance.initialize(id, catId, title);
     dialogRef.afterClosed().subscribe(result => {
-      this.loadFavorites();
+      if (dialogRef.componentInstance.wasChanged) {
+        this.loadFavorites();
+      }
     });
   }
 

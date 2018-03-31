@@ -28,6 +28,7 @@ export class PostComponent implements OnInit {
   modalLoad = false;
   fontSize = 16;
   favoriteIcon = NOT_FAVORITE;
+  wasChanged: boolean = false;
   
   constructor( private wordpress: WordPress, private dialogRef: MdDialogRef<PostComponent>, 
     private user: User, private router: Router, private sanitizer: DomSanitizer,
@@ -89,6 +90,7 @@ export class PostComponent implements OnInit {
   }
 
   setOrRemoveFromFavorites(post) {
+    this.wasChanged = true;
     if(!this.user.isLoggedIn) {
       let self = this;
       this.dialogsService.confirm("Log In", "Saving favourites requires login.", "Login")

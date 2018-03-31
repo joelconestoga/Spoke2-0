@@ -24,6 +24,9 @@ export class HomeComponent implements OnInit {
   forward; // controller of navigation arrows inside categories  
   
   safeYoutubeUrl: SafeResourceUrl;
+  twitterHeight = 781;
+
+  // t: any;
 
   // array of last published posts in the json form. 
   // SPK_TODO: ** We still have to make it display the posts most viewed instead of the last posts published **
@@ -43,6 +46,8 @@ export class HomeComponent implements OnInit {
   
   ngAfterViewInit() {    
     this.loadTwitter();
+    // this.t = document.getElementById('twitter-widget');
+    // this.t.style.height = '1000';
   }
 
   loadTwitter() {
@@ -68,6 +73,12 @@ export class HomeComponent implements OnInit {
       }, 100);
     }
   }
+
+  // @HostListener('window:resize', ['$event'])
+  // onResize(event) {
+  //   let h = event.target.innerWidth - 1000;
+  //   this.t.attributes[1].value = h.toString();
+  // }
 
   // function for Angular to sanitize background images from Wordpress 
   getBackground(image) { 
