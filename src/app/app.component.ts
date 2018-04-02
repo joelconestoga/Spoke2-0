@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { AppService } from './app.service';
-import { AF } from './providers/af';
+import { User } from './providers/user/user';
 import { Router } from '@angular/router';
+import { WordPress } from './providers/wordpress/wordpress';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { DialogsService } from './providers/services/dialogs.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
+
+  public static APP_DOMAIN = "http://localhost:4200/";
 
   // empty array to store all categories
   public categories = [];
@@ -18,7 +22,8 @@ export class AppComponent implements OnInit {
   public userTooltip: string;
   public favoriteTooltip: string;
 
-  constructor(private service: AppService, public afService: AF, private router: Router) {}
+  constructor(private wordpress: WordPress, public user: User, private router: Router,
+    private dialogsService: DialogsService) {}
   
   ngOnInit() {
     this.loadCategoriesForMenu();
@@ -27,20 +32,41 @@ export class AppComponent implements OnInit {
 
   toggleAuthentication() {
     if (this.isLoggedIn) {
-      var self = this;
-      var callback = function(isLoggedId) {
-        self.isLoggedIn = false;
-        self.router.navigate(['']);
-      }
-      this.afService.logout(callback);
+      let self = this;
+
+      this.dialogsService.confirm("", "Would you like to log out?").subscribe(function(ok) {
+        if (ok) {
+          var callback = function(isLoggedId) {
+            self.isLoggedIn = false;
+            self.router.navigate(['']);
+          }
+          self.user.logout(callback);
+        }
+      });
     } else {
       this.router.navigate(['/login']);      
     }
   }
   
+  goToFavorites() {
+    if (this.isLoggedIn) {
+      this.router.navigate(['/favorites']);
+    } else {
+      if (this.router.url == "/login") { return; }
+
+      let self = this;
+      this.dialogsService.confirm("Log In", "Log in to see your favourites.", "Login")
+      .subscribe(function(ok) {
+        if (ok) {
+          self.router.navigate(['/login']);
+        }
+      });
+    }
+  }
+
   // loading all categories from the data set
   loadCategoriesForMenu() {
-    this.service.getCategories().subscribe(resData => { 
+    this.wordpress.getCategories().subscribe(resData => { 
       this.categories = resData;
     });
   }
@@ -57,7 +83,7 @@ export class AppComponent implements OnInit {
       self.favoriteTooltip = isLoggedIn ? "My favourites" : "Favourites (login required)";
     }
     
-    this.afService.checkUserSession(callback);
+    this.user.checkUserSession(callback);
   }
 
   play: false;

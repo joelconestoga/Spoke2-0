@@ -5,8 +5,10 @@
   <div fxLayout="row" class="session bg-color-gold animated fadeIn" id="cover">
     <div fxFlex="100" fxFlex.xs="100" class="margin-auto">
       
+      <!-- cover -->
       <div fxLayout="row" fxLayout.lt-lg="column" class="cover">
         
+        <!-- cover/highlight -->
         <div fxLayout="column" fxFlex="41" class="column inner-row" *ngFor="let post of cover.highlight">
             <div class="row-separator" *ngFor="let post of cover.highlight">
               <md-card (click)="openPost(post.id, post.title.rendered, post.categories['0'])" class="padding-clear cursor-pointer animated fadeIn wow" data-wow-offset="2.0s">
@@ -18,9 +20,12 @@
                 </div> 
               </md-card>
             </div>
-        </div> <!-- cover/highlight -->
+        </div>
         
+        <!-- cover/small images -->
         <div fxLayout="column" fxFlex="38" class="inner-row">  
+          
+          <!-- cover/small images/row 1 -->
           <div class="margin-bottom-42" fxLayout="row" fxLayout.lt-sm="column">
             <div fxFlex="50" class="column row-separator" *ngFor="let post of cover.rowOne">
               <md-card class="padding-clear cursor-pointer animated fadeIn" (click)="openPost(post.id, post.title.rendered, post.categories['0'])">
@@ -30,8 +35,9 @@
                 </div> 
               </md-card>
             </div>
-          </div> <!-- cover/small images/row 1 -->
+          </div> 
           
+          <!-- cover/small images/row 2 -->
           <div fxLayout="row" fxLayout.lt-sm="column">
             <div fxFlex="50" class="column row-separator" *ngFor="let post of cover.rowTwo">
               <md-card class="padding-clear cursor-pointer animated fadeIn" (click)="openPost(post.id, post.title.rendered, post.categories['0'])">
@@ -41,15 +47,16 @@
                 </div> 
               </md-card>
             </div>
-          </div> <!-- cover/small images/row 1 -->
+          </div> 
      
         </div> <!-- cover/small images -->
         
-        <div class="inner-row" fxLayout="column" fxFlex="21">
+        <!-- cover/twitter -->
+        <div class="inner-row" fxLayout="column" fxFlex="21" fxLayoutAlign="center stretch">
           <div id="twitter-feed" class="column row-separator">
             <a class="twitter-timeline test"  data-height="500px"  href="https://twitter.com/SpokeOnline">@spokeonline</a>
           </div>
-        </div> <!-- cover/twitter -->
+        </div>
       
       </div> <!-- cover -->
 
@@ -62,7 +69,7 @@
       <div *ngFor="let cat of categories; let i = index" fxLayout="column" class="animated fadeIn">
         <div fxFlex *ngIf="i === 2">
           <h2 class="padding-left-20 cat-video-title">SpokeOnline on YouTube</h2>
-          <iframe  width="100%" height="800" src="https://www.youtube.com/embed/+lastest?list=LLa3gR-CwiJQz_o3m7AUVdjg" frameborder="0" allowfullscreen></iframe>
+          <iframe  width="100%" height="800" [src]="safeYoutubeUrl" frameborder="0" allowfullscreen></iframe>
         </div>
         <div fxFlex [id]="cat.name">
           <div fxLayout="row">

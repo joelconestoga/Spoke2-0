@@ -5,7 +5,7 @@
 </div>
 
 <div class="modal-dialog">
-  <div class="registermodal-container">
+  <div class="loginmodal-container">
     <h1>Sign Up</h1><br>
     <form class="form-signin" (submit)="register($event)">
       
@@ -38,7 +38,7 @@
       </div>
 
       <br>
-      <button [disabled]="!fieldsOk" class="btn btn-md btn-primary btn-block" type="submit">Sign Up</button>
+      <button [disabled]="!fieldsOk" class="btn btn-lg btn-block golden white-font" type="submit">Sign Up</button>
     </form>
     <hr>
     <a [routerLink]="['/login']" style="cursor: pointer;">Already have an account? Sign in here.</a>

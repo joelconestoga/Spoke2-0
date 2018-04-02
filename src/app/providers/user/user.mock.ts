@@ -1,7 +1,7 @@
-import { Persistence } from "../providers/i.persistence";
+import { IUser } from "./i.user";
 
-export class AFMock implements Persistence {
-   getAf() {
+export class UserMock implements IUser {
+   getAuth() {
       new AngularFireAuthMock;
    }
    checkUserSession(callback: any) {
@@ -22,7 +22,7 @@ export class AFMock implements Persistence {
    removeFromFavorites(id: any, callback: any) {
       throw new Error("Method not implemented.");
    }
-   checkFavorite(id: any, callback: any) {
+   isFavorite(id: any, callback: any) {
       throw new Error("Method not implemented.");
    }
    getFavoritesKeys(callback: any) {

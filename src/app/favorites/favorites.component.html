@@ -1,28 +1,21 @@
+<br>
 <div fxLayout="row">
   <h2 class="cat-title padding-left-20 ">FAVOURITES</h2>
 </div>
 <br>
-<div fxLayout="row" class="session bg-color-gold animated fadeIn" id="cover">
-  <div fxFlex="100" fxFlex.xs="100" class="margin-auto">
-
-    <div fxLayout="row" fxLayout="column" class="cover">
-      
-      <div class="row-separator" *ngFor="let row of favorites">
-
-        <div fxLayout="row">
-          <div fxLayout="column" fxFlex="41" class="column" *ngFor="let fav of row">
-
-            <md-card (click)="openPost(fav.id, fav.title.rendered, fav.categories['0'])" class="padding-clear cursor-pointer animated fadeIn wow" data-wow-offset="2.0s">
-              <div class="stretchy-wrapper text-title" [style.background-image]="getBackground(fav.featured_media_url)" [ngStyle]="{'background-position': 'center', 'background-repeat': 'no-repeat', 'background-color': 'black'}"> 
-                <div style="z-index:15; background-color:white; bottom:0; position:absolute; width:inherit; padding-left:1em; padding-right:1em;"><h3 class="text-normal" [innerHTML]="fav.title.rendered | keepHtml"></h3></div>
-                <div class="stretchy-wrapper bx overlay-post"></div>                
-              </div> 
-            </md-card>
-          </div>
+<div fxLayout="row" class="session bg-color-gold animated fadeIn">
+  <div fxLayout="row" fxLayout="column">
+    <div class="row-separator" *ngFor="let row of favorites">  
+      <div fxLayout="row" fxLayoutWrap="wrap" fxLayoutGap.xs="0">
+        <div *ngFor="let fav of row" fxFlex.xs="98" style="display: block">
+          <md-card (click)="openPost(fav.id, fav.title.rendered, fav.categories['0'])" class="favorite-card padding-clear margin-15 cursor-pointer">
+            <div class="stretchy-wrapper text-title"  [style.background-image]="getBackground(fav.featured_media_url)" [ngStyle]="{'background-position': 'center', 'background-repeat': 'no-repeat', 'background-color': 'black'}"></div> 
+            <md-card-title class="favorite-title" >
+              <h3 class="text-normal" [innerHTML]="fav.title.rendered | keepHtml"></h3>
+            </md-card-title>
+          </md-card>
         </div>
-
-      </div>
-
-    </div>          
-  </div>
+      </div>                        
+    </div>
+  </div>          
 </div>

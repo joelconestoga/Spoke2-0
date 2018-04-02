@@ -366,7 +366,7 @@ a.color-gry:hover{
 .my-post-navbar { width: inherit; min-height: 55px !important; background-color: #bf9a64 !important; border-bottom: 1px solid lightgray !important; z-index: 11; }
 .my-post-navbar.mat-toolbar { width: inherit; padding-left: 0px !important; padding-right:0px !important; padding-top:10px !important; padding-bottom:10px !important; }
 .my-post-navbar .title { text-align: left; padding-left:24px; }
-.post-body { overflow: auto; max-height: calc(100vh - 350px); overflow-y: auto; padding-left: 24px; padding-bottom: 20px; line-height:1.6; !important; }
+.post-body { overflow: auto; max-height: calc(100vh - 350px); overflow-y: auto; padding-left: 24px; padding-bottom: 20px; line-height:1.6 !important; }
 
 .post-content-image {
     background-size: cover;
@@ -447,6 +447,9 @@ h2.cat-video-title { font-size: 1.375em; text-transform: uppercase; font-weight:
 .material-icons.nav-icons:hover { color:#2196f3 !important; }
 md-dialog-container.mat-dialog-container { padding: 0px !important; overflow: hidden; }
 .custom-title{ min-height:3.75em; margin-top:0.1em; margin-bottom: 0.2em; margin-left:1em; margin-right:1em; font-size: 1em !important }
+
+.favorite-title{ min-width: 300px; min-height:3.75em; margin-top:0.1em; margin-bottom: 0.2em; margin-left:1em; margin-right:1em; font-size: 1em !important }
+.favorite-card{ min-width: 300px; max-width: 500px; min-height:3.75em;}
 
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }
@@ -547,3 +550,52 @@ md-dialog-container.mat-dialog-container { padding: 0px !important; overflow: hi
     margin: 0;
     }
 }
+.golden {
+    background-color: #b88e52;
+}
+.google-color {
+    background-color: #DB4C3F;
+}
+.facebook-color {
+    background-color: #3C5A96;
+}
+.white-font {
+    color: white;
+}
+.loginmodal-container {
+    padding: 30px;
+    max-width: 350px;
+    width: 100% !important;
+    background-color: #F7F7F7;
+    margin: 0 auto;
+    border-radius: 2px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    font-family: roboto;
+  }
+  .loginmodal-container h1 {
+    text-align: center;
+    font-size: 1.8em;
+    font-family: roboto;
+  }
+  .loginmodal-container a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 400;
+    text-align: center;
+    display: inline-block;
+    opacity: 0.6;
+    transition: opacity ease 0.5s;
+  }
+  .dialog-container {
+    padding: 20px;
+    min-width: 300px;
+    max-width: 600px;
+    width: 100% !important;
+    background-color: #F7F7F7;
+    margin: 0 auto;
+    border-radius: 2px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    font-family: roboto;
+  }

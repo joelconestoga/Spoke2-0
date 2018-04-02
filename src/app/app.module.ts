@@ -13,21 +13,21 @@ import { ScrollToModule } from 'ng2-scroll-to';
 import { AngularFontAwesomeModule } from 'angular-font-awesome/angular-font-awesome';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ShareButtonsModule } from 'ngx-sharebuttons';
-// import { UrlparamComponent } from './urlparam/urlparam.component';
 
 import 'hammerjs';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { AngularFireModule } from 'angularfire2';
-import { AF } from './providers/af';
+import { User } from './providers/user/user';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 import { PostComponent } from './post/post.component';
-import { AppService } from './app.service';
-import { HomeService } from './home/home.service';
-import { AFAuth } from './providers/af.auth';
-import { AFDb } from './providers/af.db';
+import { Auth } from './providers/auth/auth';
+import { Database } from './providers/database/database';
+import { WordPress } from './providers/wordpress/wordpress';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { DialogsService } from './providers/services/dialogs.service';
 
 // FIREBASE config
 export const firebaseConfig = {
@@ -41,7 +41,6 @@ export const firebaseConfig = {
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  // { path: ':id', component: UrlparamComponent }, // I don't know what is urlparam for, but it's preventing navigation to other pages
   { path: 'login', component: LoginComponent },  
   { path: 'registration', component: RegistrationComponent },  
   { path: 'favorites', component: FavoritesComponent },  
@@ -53,10 +52,10 @@ const routes: Routes = [
     HomeComponent,
     PostComponent,
     EscapeHtmlPipe,
-    // UrlparamComponent,
     LoginComponent,
     RegistrationComponent,
-    FavoritesComponent
+    FavoritesComponent,
+    ConfirmationComponent
   ],
   imports: [
     ScrollToModule.forRoot(),
@@ -83,13 +82,13 @@ const routes: Routes = [
     AngularFireDatabaseModule,
     FormsModule,    
   ],
-  providers: [AppService, HomeService, AF,
-    {provide: 'Persistence', useClass: AF}, 
-    {provide: 'Auth', useClass: AFAuth}, 
-    {provide: 'Database', useClass: AFDb}, 
+  providers: [WordPress, User, DialogsService,
+    {provide: 'Persistence', useClass: User}, 
+    {provide: 'Auth', useClass: Auth}, 
+    {provide: 'Database', useClass: Database}, 
   ],
   bootstrap: [AppComponent],
-  entryComponents: [PostComponent],
+  entryComponents: [PostComponent, ConfirmationComponent],
   schemas: [ NO_ERRORS_SCHEMA ],  
 })
 export class AppModule { }

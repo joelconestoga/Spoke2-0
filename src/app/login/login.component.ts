@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
-import { AF } from '../providers/af';
+import { User } from '../providers/user/user';
 import { Router } from '@angular/router';
-import { Persistence } from '../providers/i.persistence';
+import { IUser } from '../providers/user/i.user';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +11,7 @@ import { Persistence } from '../providers/i.persistence';
 export class LoginComponent {
   public error: any;
   
-  constructor(@Inject('Persistence') private afService: Persistence, private router: Router) { }
+  constructor(@Inject('Persistence') private user: IUser, private router: Router) { }
 
   loginWithGoogle() {
     var self = this;
@@ -20,25 +20,27 @@ export class LoginComponent {
       self.router.navigate(['']);
     }
 
-    this.afService.loginWithGoogle(callback);
+    this.user.loginWithGoogle(callback);
   }
 
   loginWithFacebook() {
-    this.afService.loginWithFacebook().then((data) => {
-      this.router.navigate(['']);
-    })
+    var self = this;
+
+    var callback = function(isLoggedIn) {
+      self.router.navigate(['']);
+    }
+
+    this.user.loginWithFacebook(callback);
   }
 
   loginWithEmail(event, email, password){
     event.preventDefault();
-    this.afService.loginWithEmail(email, password).then(() => {
-      this.router.navigate(['']);
-    })
-      .catch((error: any) => {
-        if (error) {
-          this.error = error;
-          console.log(this.error);
-        }
-      });
+
+    var self = this;
+    var callback = function(user) {
+      self.router.navigate(['']);
+    }
+
+    this.user.loginWithEmail(email, password, callback);
   }
 }
