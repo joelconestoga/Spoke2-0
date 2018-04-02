@@ -1,9 +1,9 @@
 <br>
-<div fxLayout="row">
+<div fxLayout="row" class="bg-color-gold margin-bottom-20 block">
   <h2 class="cat-title padding-left-20 ">FAVOURITES</h2>
+  <div class="separator-black"></div>
 </div>
-<br>
-<div fxLayout="row" class="session bg-color-gold animated fadeIn">
+<div fxLayout="row" class="session animated fadeIn">
   <div fxLayout="row" fxLayout="column">
     <div class="row-separator" *ngFor="let row of favorites">  
       <div fxLayout="row" fxLayoutWrap="wrap" fxLayoutGap.xs="0">
@@ -19,3 +19,28 @@
     </div>
   </div>          
 </div>
+
+<!-- page footer -->
+  <div fxLayout="row"  class="bg-color-gold animated fadeIn padding-bottom-20 margin-top-30">
+    <div fxFlex="70" fxFlex.lt-md="100" class="margin-auto color-white">
+      <div fxLayout="row" fxLayout.lt-sm="column">
+        <div fxFlex="34" fxFlex.lt-sm class="padding-left-30 padding-right-30 margin-top-20">
+          <div class="text-large color-white">About Spoke</div>
+          <div class="padding-top-10 text-small color-white">Spoke Online is produced weekly during the school year by Conestoga College second-year journalism print students, faculty adviser Christina Jonas and new media technologist Michael Toll.</div>
+        </div>
+        <div fxFlex="33" fxFlex.lt-sm class="padding-left-30 padding-right-30 margin-top-20">
+          <div class="text-large color-white">Contact</div>
+          <div class="padding-top-10" style="text-align: center"><i class="material-icons">email</i><span> spoke@conestogac.on.ca </span></div>
+          <div style="text-align: center"><i class="material-icons">phone</i> 519-748-5220, ext. 3691</div>
+        </div>      
+        <div fxFlex="33" fxFlex.lt-sm class="padding-left-30 padding-right-30 margin-top-20">
+          <div class="text-large color-white">Social</div>
+          <div class="padding-top-10" style="text-align: center">
+            <a class="cursor-pointer margin-right-10 color-white" href="https://twitter.com/spokeonline" target="_blank"><i class="fa fa-2x fa-twitter-square" aria-hidden="true"></i></a>
+            <a class="cursor-pointer margin-right-10 color-white" href="https://www.facebook.com/spokeonline" target="_blank"><i class="fa fa-2x fa-facebook-square" aria-hidden="true"></i></a>
+            <a class="cursor-pointer color-white" href="https://www.youtube.com/user/SpokeOnline" target="_blank"><i class="fa fa-2x fa-youtube-square" aria-hidden="true"></i></a>
+          </div>
+        </div>       
+      </div>    
+    </div>
+  </div> <!-- page footer -->
