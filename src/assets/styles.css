@@ -366,7 +366,7 @@ a.color-gry:hover{
 .my-post-navbar { width: inherit; min-height: 55px !important; background-color: #bf9a64 !important; border-bottom: 1px solid lightgray !important; z-index: 11; }
 .my-post-navbar.mat-toolbar { width: inherit; padding-left: 0px !important; padding-right:0px !important; padding-top:10px !important; padding-bottom:10px !important; }
 .my-post-navbar .title { text-align: left; padding-left:24px; }
-.post-body { overflow: auto; max-height: calc(100vh - 350px); overflow-y: auto; padding-left: 24px; padding-bottom: 20px; line-height:1.6 !important; }
+.post-body { overflow: auto; max-height: calc(100vh - 350px); overflow-y: auto; padding-left: 24px; padding-bottom: 20px; line-height:1.6 !important; text-align: justify; }
 
 .post-content-image {
     background-size: cover;
@@ -422,7 +422,7 @@ h3.overlay-post-title.post-title.regular { position:absolute; z-index:3; top:50%
 
 #openedPost { max-height: 800px; padding-bottom:20px; }
 #post-content p { margin-top: 0 !important; }
-div.stretchy-wrapper { width: 100%; padding-bottom: 90%; /* 16:9 */ position: relative; }
+div.stretchy-wrapper { width: 100%; padding-bottom: 90%; /* 16:9 */ position: relative; height: 100%;}
 div.stretchy-wrapper > div { position: relative; }
 
 .bx { background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2), rgba(0,0,0,0.4), rgba(0,0,0,0.5), rgba(0,0,0,0.7), rgba(0,0,0,75), rgba(0,0,0,85), rgba(0,0,0,9)); width:100px; height:100px; position: relative; -webkit-transition: background .5s ease-out; -moz-transition: background .5s ease-out; -o-transition: background .5s ease-out; transition: background .5s ease-out; }
