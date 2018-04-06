@@ -157,25 +157,67 @@ describe('User', () => {
       
     let afAuthMock = new AuthMock;
     let afdbMock = new DatabaseMock;
-    afdbMock.result = { "registeredUsers": {
-                                "userUid":"xxx"
-                              },
-                              "Favourites": {
-                                                      "FavouritesId":"ttt"
-                                                    }
-}; 
     let didCalledBack = false;
       
     component = new User(afAuthMock, afdbMock);
 
     let mycallback = function(userUid){
-      userUid = "xxx"; 
+      component.userUid = "xxx";
     };
-    component.userUid = "xxx";
+    
     component.getFavoritesKeys(mycallback);
 
     expect(component.userUid).toEqual("xxx");
   }); 
+
+  it('Should remove post from favourites', () => {
+      
+    let afAuthMock = new AuthMock;
+    let afdbMock = new DatabaseMock;
+    let didCalledBack = false;
+
+    component = new User(afAuthMock, afdbMock);
+
+    let mycallback = function(userUid){
+      component.userUid = "xxx";
+    };
+    
+    component.removeFromFavorites("xxx",mycallback);
+
+    expect(component.userUid).toEqual("xxx");
+  });
   
+  it('Should save user info from oAuth', () => {
+      
+    let afAuthMock = new AuthMock;
+    let afdbMock = new DatabaseMock;
+      
+    component = new User(afAuthMock, afdbMock);
+
+    component.saveUserInfoFromOAuth("xxx","yyy","zzz","ttt");
+
+    expect(afdbMock.uid).toEqual("xxx");
+    expect(afdbMock.displayName).toEqual("yyy");
+    expect(afdbMock.email).toEqual("zzz");
+    expect(afdbMock.provider).toEqual("ttt");
+  }); 
+
+  it('Should set post as favourite', () => {
+      
+    let afAuthMock = new AuthMock;
+    let afdbMock = new DatabaseMock;
+      
+    component = new User(afAuthMock, afdbMock);
+    let mycallback = function(){
+
+      component.userUid = "xxx";
+    };
+
+    component.setFavorite("xxx",mycallback);
+
+    expect(component.userUid).toEqual("xxx");
+
+  }); 
+
 });
  

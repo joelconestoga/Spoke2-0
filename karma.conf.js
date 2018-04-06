@@ -4,7 +4,7 @@
 module.exports = function (config) {
   config.set({
     basePath: '',
-    frameworks: ['jasmine', '@angular/cli'],
+    frameworks: ['jasmine', 'karma-typescript' ,'@angular/cli'],
     plugins: [
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
@@ -19,10 +19,22 @@ module.exports = function (config) {
       reports: [ 'html', 'lcovonly' ],
       fixWebpackSourcePaths: true
     },
+    files: [
+      { pattern: "src/**/*.spec.ts" },
+      { pattern: "test/**/*.spec.ts" }
+  ],
+  
+  preprocessors: {
+      "**/*.spec.ts": ['coverage']
+  },
     angularCli: {
       environment: 'dev'
     },
-    reporters: ['progress', 'kjhtml'],
+    coverageReporter: {
+      type : 'html',
+      dir : 'coverage/'
+    },
+    reporters: ['progress', 'kjhtml','progress', 'karma-typescript'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,

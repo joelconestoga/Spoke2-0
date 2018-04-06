@@ -3,6 +3,7 @@ import { IDatabase } from "./i.database";
 export class DatabaseMock implements IDatabase {
 
    public uid;
+   public id;
    public displayName;
    public email;
    public provider;
@@ -13,6 +14,7 @@ export class DatabaseMock implements IDatabase {
    public program;
    public campus;
    public userUid;
+   public post;
 
    saveUserInfoFromOAuth(uid, displayName, email, provider) {
       this.uid = uid;
@@ -21,12 +23,16 @@ export class DatabaseMock implements IDatabase {
       this.provider = provider;
    }  
 
-   setFavorite(userUid: any, post: any, callback: any) {
-      throw new Error("Method not implemented.");
+   setFavorite(userUid, post, callback) {
+    this.userUid = userUid;
+    this.post = post;
+    callback(this.userUid);
    }
 
-   removeFromFavorites(userUid: any, id: any, callback: any) {
-      throw new Error("Method not implemented.");
+   removeFromFavorites(userUid, id, callback) {
+    this.userUid = userUid;
+    this.id = id;
+    callback(this.userUid);
    }
 
    isFavorite(userUid: any, id: any, callback: any) {
