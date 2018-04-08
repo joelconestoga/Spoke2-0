@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { User } from '../providers/user/user';
 import { Router } from '@angular/router';
+import { IUser } from '../providers/user/i.user';
 
 @Component({
   selector: 'app-registration',
@@ -26,7 +27,7 @@ export class RegistrationComponent {
   public fieldsOk: boolean = false;
   public isConestogaEmail: boolean = false;
   
-  constructor(private user: User, private router: Router) { 
+  constructor(@Inject('User') public user: IUser, private router: Router) { 
     this.firstName = "";
     this.lastName = "";
     this.email = "";

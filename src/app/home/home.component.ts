@@ -6,6 +6,7 @@ import { fadeInOutAnimation } from '../_animations/index';
 import { PostComponent } from '../post/post.component';
 import { isPlatformBrowser } from '@angular/common';
 import { WordPress } from '../providers/wordpress/wordpress';
+import { IWordPress } from '../providers/wordpress/i.wordpress';
 
 
 @Component({
@@ -35,8 +36,10 @@ export class HomeComponent implements OnInit {
   // base link to fetch media content
   // private mediaContentUrl = "http://spoketest.wordpress.com/wp-content/uploads/";
 
-  constructor(private wordpress: WordPress, private sanitizer: DomSanitizer, public dialog: MdDialog,
-    @Inject(PLATFORM_ID) private platformId: Object) { }
+  constructor(@Inject('WordPress') public wordpress: IWordPress, 
+              @Inject(PLATFORM_ID) private platformId: Object,
+              private sanitizer: DomSanitizer, 
+              public dialog: MdDialog) { }
 
   ngOnInit() {
     this.loadCover();

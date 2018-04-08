@@ -11,7 +11,7 @@ import { IUser } from '../providers/user/i.user';
 export class LoginComponent {
   public error: any;
   
-  constructor(@Inject('Persistence') private user: IUser, private router: Router) { }
+  constructor(@Inject('User') private user: IUser, private router: Router) { }
 
   loginWithGoogle() {
     var self = this;

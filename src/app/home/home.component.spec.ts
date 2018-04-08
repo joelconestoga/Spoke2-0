@@ -12,11 +12,12 @@ import { Jsonp } from '@angular/http/src/http';
 import { EscapeHtmlPipe } from '../_utils/keep-html.pipe';
 import { PostComponent } from '../post/post.component';
 import { WordPress } from '../providers/wordpress/wordpress';
+import { IWordPress } from '../providers/wordpress/i.wordpress';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
-  let service: WordPress;
+  let service: IWordPress;
   let spy: any;
   let backend: MockBackend;
 
@@ -25,7 +26,7 @@ describe('HomeComponent', () => {
       imports: [ MaterialModule],
       declarations: [ HomeComponent, EscapeHtmlPipe],
       providers: [ 
-        WordPress,
+        {provide: 'WordPress', useClass: WordPress},
         MockBackend,
         BaseRequestOptions,
         {

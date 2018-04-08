@@ -12,14 +12,15 @@ export class User implements IUser {
   public email: string;
 
   public userUid: string;
-  public isLoggedIn: boolean;
+  private _isLoggedIn: boolean;
 
   public auth: IAuth;
   public database: IDatabase;
 
   public shouldCallThisBack;
 
-  constructor(@Inject('Auth') auth: IAuth, @Inject('Database') database: IDatabase) {
+  constructor(@Inject('Auth') auth: IAuth, 
+              @Inject('Database') database: IDatabase) {
     
     this.auth = auth;
     this.database = database;
@@ -44,14 +45,14 @@ export class User implements IUser {
       self.displayName = auth.displayName;
       self.email = auth.email;
       self.userUid = auth.uid;          
-      self.isLoggedIn = true;
-      callback(self.isLoggedIn, self.email);
+      self._isLoggedIn = true;
+      callback(self._isLoggedIn, self.email);
     }
 
     var callbackNotLogged = function(auth) {
       console.log("Not Logged in.");
-      self.isLoggedIn = false;
-      callback(self.isLoggedIn, self.email);
+      self._isLoggedIn = false;
+      callback(self._isLoggedIn, self.email);
     }
 
     this.getAuth().checkUserSession(callbackLoggedIn, callbackNotLogged);
@@ -73,7 +74,7 @@ export class User implements IUser {
     this.getAuth().loginWithGoogle(myCallback);
     
     if (callback) {
-      callback(self.isLoggedIn);
+      callback(self._isLoggedIn);
     }
   }
   
@@ -93,7 +94,7 @@ export class User implements IUser {
     this.getAuth().loginWithFacebook(myCallback);
     
     if (callback) {
-      callback(self.isLoggedIn);
+      callback(self._isLoggedIn);
     }
   }
 
@@ -158,5 +159,8 @@ export class User implements IUser {
     this.getAuth().loginWithEmail(email, password, myCallback);
   }
 
+  isLoggedIn() {
+    return this._isLoggedIn;
+  }
 }
 

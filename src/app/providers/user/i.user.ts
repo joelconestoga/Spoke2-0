@@ -26,5 +26,6 @@ export interface IUser {
 
   loginWithEmail(email, password, callback);
 
+  isLoggedIn();
 }
 

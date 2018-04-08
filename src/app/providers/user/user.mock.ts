@@ -40,6 +40,9 @@ export class UserMock implements IUser {
    loginWithEmail(email: any, password: any) {
       throw new Error("Method not implemented.");
    }
+   isLoggedIn() {
+    throw new Error("Method not implemented.");
+   }
 }
 
 export class AngularFireAuthMock {

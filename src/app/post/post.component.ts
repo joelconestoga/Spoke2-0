@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { MdDialogRef, MdDialog } from '@angular/material';
 import { User } from '../providers/user/user';
 import { Router } from '@angular/router';
@@ -6,6 +6,8 @@ import { WordPress } from '../providers/wordpress/wordpress';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { DialogsService } from '../providers/services/dialogs.service';
 import { AppComponent } from '../app.component';
+import { IWordPress } from '../providers/wordpress/i.wordpress';
+import { IUser } from '../providers/user/i.user';
 
 const FAVORITE: string = "favorite";
 const NOT_FAVORITE: string = "favorite_border";
@@ -30,10 +32,12 @@ export class PostComponent implements OnInit {
   favoriteIcon = NOT_FAVORITE;
   wasChanged: boolean = false;
   
-  constructor( private wordpress: WordPress, private dialogRef: MdDialogRef<PostComponent>, 
-    private user: User, private router: Router, private sanitizer: DomSanitizer,
-    private dialogsService: DialogsService) {
-
+  constructor(@Inject('WordPress') public wordpress: IWordPress, 
+              @Inject('User') public user: IUser, 
+              private dialogRef: MdDialogRef<PostComponent>, 
+              private router: Router, 
+              private sanitizer: DomSanitizer,
+              private dialogsService: DialogsService) {
     setTimeout(() => { this.modalLoad = true }, 1000);
   }
 
@@ -78,7 +82,7 @@ export class PostComponent implements OnInit {
   }
 
   reloadFavoriteIcon(id) {
-    if(!this.user.isLoggedIn) {
+    if(!this.user.isLoggedIn()) {
       return;
     }
     var self = this;
@@ -91,7 +95,7 @@ export class PostComponent implements OnInit {
 
   setOrRemoveFromFavorites(post) {
     this.wasChanged = true;
-    if(!this.user.isLoggedIn) {
+    if(!this.user.isLoggedIn()) {
       let self = this;
       this.dialogsService.confirm("Log In", "Saving favourites requires login.", "Login")
       .subscribe(function(ok) {

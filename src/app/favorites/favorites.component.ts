@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { User } from '../providers/user/user';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MdDialogRef, MdDialog } from '@angular/material';
 import { PostComponent } from '../post/post.component';
 import { WordPress } from '../providers/wordpress/wordpress';
 import { Router } from '@angular/router';
+import { IWordPress } from '../providers/wordpress/i.wordpress';
+import { IUser } from '../providers/user/i.user';
 
 @Component({
   selector: 'app-favorites',
@@ -15,8 +17,9 @@ export class FavoritesComponent implements OnInit {
 
   public favorites: any[];
 
-  constructor(private wordpress: WordPress, public user: User, private sanitizer: DomSanitizer, 
-    private dialog: MdDialog, private router: Router) {}
+  constructor(@Inject('WordPress') public wordpress: IWordPress, 
+              @Inject('User') public user: IUser, private sanitizer: DomSanitizer, 
+              private dialog: MdDialog, private router: Router) {}
 
   ngOnInit() {
     this.loadFavorites();

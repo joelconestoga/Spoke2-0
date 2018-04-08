@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { User } from './providers/user/user';
 import { Router } from '@angular/router';
 import { WordPress } from './providers/wordpress/wordpress';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { DialogsService } from './providers/services/dialogs.service';
+import { IWordPress } from './providers/wordpress/i.wordpress';
+import { IUser } from './providers/user/i.user';
 
 @Component({
   selector: 'app-root',
@@ -22,8 +24,10 @@ export class AppComponent implements OnInit {
   public userTooltip: string;
   public favoriteTooltip: string;
 
-  constructor(private wordpress: WordPress, public user: User, private router: Router,
-    private dialogsService: DialogsService) {}
+  constructor(@Inject('WordPress') public wordpress: IWordPress, 
+              @Inject('User') public user: IUser, 
+              private router: Router,
+              private dialogsService: DialogsService) { }
   
   ngOnInit() {
     this.loadCategoriesForMenu();

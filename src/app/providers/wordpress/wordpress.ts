@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { IWordPress } from './i.wordpress';
 
 @Injectable()
-export class WordPress {
+export class WordPress implements IWordPress {
 
   public static WORDPRESS_URL = "https://public-api.wordpress.com/wp/v2/sites/spoketest.wordpress.com/";
   public static POSTS_URL = WordPress.WORDPRESS_URL + "posts/";
