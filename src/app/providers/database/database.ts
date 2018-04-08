@@ -10,8 +10,6 @@ export class Database implements IDatabase {
   saveUserInfoFromOAuth(uid, displayName, email, provider) {
     return this.afd.object('registeredUsers/' + uid).update( 
       { 
-        // firstName: firstName, 
-        // lastName: lastName, 
         displayName: displayName,
         email: email,
         provider: provider,

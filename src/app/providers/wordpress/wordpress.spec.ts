@@ -8,7 +8,7 @@ import { Jsonp } from '@angular/http/src/http';
 import { AnonymousSubject } from 'rxjs/Subject';
 import { WordPress } from './wordpress';
 
-describe('HomeService', () => {
+describe('WordPress', () => {
 
   let service: WordPress;
   let spy: any;

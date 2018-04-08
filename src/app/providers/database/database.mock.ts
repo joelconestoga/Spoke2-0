@@ -3,9 +3,18 @@ import { IDatabase } from "./i.database";
 export class DatabaseMock implements IDatabase {
 
    public uid;
+   public id;
    public displayName;
    public email;
    public provider;
+   public result = null;
+
+   public firstName;
+   public lastName;
+   public program;
+   public campus;
+   public userUid;
+   public post;
 
    saveUserInfoFromOAuth(uid, displayName, email, provider) {
       this.uid = uid;
@@ -14,24 +23,35 @@ export class DatabaseMock implements IDatabase {
       this.provider = provider;
    }  
 
-   setFavorite(userUid: any, post: any, callback: any) {
-      throw new Error("Method not implemented.");
+   setFavorite(userUid, post, callback) {
+    this.userUid = userUid;
+    this.post = post;
+    callback(this.userUid);
    }
 
-   removeFromFavorites(userUid: any, id: any, callback: any) {
-      throw new Error("Method not implemented.");
+   removeFromFavorites(userUid, id, callback) {
+    this.userUid = userUid;
+    this.id = id;
+    callback(this.userUid);
    }
 
    isFavorite(userUid: any, id: any, callback: any) {
       throw new Error("Method not implemented.");
    }
 
-   getFavoritesKeys(userUid: any, callback: any) {
-      throw new Error("Method not implemented.");
+   getFavoritesKeys(userUid,callback) {
+    this.userUid = userUid;
+    callback(this.userUid);
    }
 
-   saveUserInfoFromForm(uid: any, firstName: any, lastName: any, email: any, program: any, campus: any, callback: any) {
-      throw new Error("Method not implemented.");
+   saveUserInfoFromForm(uid, firstName, lastName, email, program, campus, callback) {  
+    this.uid = uid;
+      this.firstName = firstName;
+      this.lastName = lastName;
+      this.email = email;
+      this.program = program;
+      this.campus = campus;
+      callback(this.result);
    }
 
 }
