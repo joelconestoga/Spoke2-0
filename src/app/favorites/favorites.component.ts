@@ -18,8 +18,10 @@ export class FavoritesComponent implements OnInit {
   public favorites: any[];
 
   constructor(@Inject('WordPress') public wordpress: IWordPress, 
-              @Inject('User') public user: IUser, private sanitizer: DomSanitizer, 
-              private dialog: MdDialog, private router: Router) {}
+              @Inject('User') public user: IUser, 
+              private sanitizer: DomSanitizer, 
+              private dialog: MdDialog, 
+              private router: Router) {}
 
   ngOnInit() {
     this.loadFavorites();
@@ -63,7 +65,6 @@ export class FavoritesComponent implements OnInit {
       if (row.length > 0) {
         self.favorites.push(row);
       }
-      // console.log(self.favorites);
     });      
   }
 

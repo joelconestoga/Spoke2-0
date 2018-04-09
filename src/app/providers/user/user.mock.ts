@@ -1,48 +1,51 @@
 import { IUser } from "./i.user";
 
 export class UserMock implements IUser {
-   getAuth() {
-      new AngularFireAuthMock;
-   }
-   checkUserSession(callback: any) {
-      throw new Error("Method not implemented.");
-   }
-   loginWithGoogle() {
-      throw new Error("Method not implemented.");
-   }
-   loginWithFacebook() {
-      throw new Error("Method not implemented.");
-   }
-   logout(callback: any) {
-      throw new Error("Method not implemented.");
-   }
-   setFavorite(post: any, callback: any) {
-      throw new Error("Method not implemented.");
-   }
-   removeFromFavorites(id: any, callback: any) {
-      throw new Error("Method not implemented.");
-   }
-   isFavorite(id: any, callback: any) {
-      throw new Error("Method not implemented.");
-   }
-   getFavoritesKeys(callback: any) {
-      throw new Error("Method not implemented.");
-   }
-   registerUser(email: any, password: any) {
-      throw new Error("Method not implemented.");
-   }
-   saveUserInfoFromForm(uid: any, firstName: any, lastName: any, email: any, program: any, campus: any) {
-      throw new Error("Method not implemented.");
-   }
-   saveUserInfoFromOAuth(uid: any, displayName: any, email: any, provider: any) {
-      throw new Error("Method not implemented.");
-   }
-   loginWithEmail(email: any, password: any) {
-      throw new Error("Method not implemented.");
-   }
-   isLoggedIn() {
+
+  constructor(public favoriteKeys: any) { }
+  
+  getAuth() {
+    new AngularFireAuthMock;
+  }
+  checkUserSession(callback: any) {
+    return callback(true);
+  }
+  loginWithGoogle() {
     throw new Error("Method not implemented.");
-   }
+  }
+  loginWithFacebook() {
+    throw new Error("Method not implemented.");
+  }
+  logout(callback: any) {
+    throw new Error("Method not implemented.");
+  }
+  setFavorite(post: any, callback: any) {
+    throw new Error("Method not implemented.");
+  }
+  removeFromFavorites(id: any, callback: any) {
+    throw new Error("Method not implemented.");
+  }
+  isFavorite(id: any, callback: any) {
+    throw new Error("Method not implemented.");
+  }
+  getFavoritesKeys(callback: any) {
+    return callback(this.favoriteKeys);
+  }
+  registerUser(email: any, password: any) {
+    throw new Error("Method not implemented.");
+  }
+  saveUserInfoFromForm(uid: any, firstName: any, lastName: any, email: any, program: any, campus: any) {
+    throw new Error("Method not implemented.");
+  }
+  saveUserInfoFromOAuth(uid: any, displayName: any, email: any, provider: any) {
+    throw new Error("Method not implemented.");
+  }
+  loginWithEmail(email: any, password: any) {
+    throw new Error("Method not implemented.");
+  }
+  isLoggedIn() {
+    throw new Error("Method not implemented.");
+  }
 }
 
 export class AngularFireAuthMock {
