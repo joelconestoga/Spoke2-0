@@ -5,18 +5,24 @@ import { Observable } from "rxjs";
 
 export class WordPressMock implements IWordPress {
    
+   coverHighlight: any;
+   coverRowOne: any;
+   coverRowTwo: any;
+   categoriesWithPosts: any;
+   morePosts: any;
+
    public ids: any;
    
    constructor(public posts: any = null) { }
 
    getCoverHighlight() {
-      throw new Error("Method not implemented.");
+      return Observable.of(this.coverHighlight);
    }
    getCoverRowOne() {
-      throw new Error("Method not implemented.");
+      return Observable.of(this.coverRowOne);
    }
    getCoverRowTwo() {
-      throw new Error("Method not implemented.");
+      return Observable.of(this.coverRowTwo);
    }
    getPost(id: any) {
       throw new Error("Method not implemented.");
@@ -25,17 +31,17 @@ export class WordPressMock implements IWordPress {
       throw new Error("Method not implemented.");
    }
    getCategoriesWithPosts(per_page: any) {
-      throw new Error("Method not implemented.");
+      return Observable.of(this.categoriesWithPosts);
    }
    getCategoryPosts(id: any, offset: any, per_page: any) {
-      throw new Error("Method not implemented.");
+      return Observable.of(this.morePosts);
    }
    getRelatedPosts(catId: any) {
       throw new Error("Method not implemented.");
    }
    getPostsForIds(ids: any) {
       this.ids = ids;
-      return this.posts == null ? new EmptyObservable() : Observable.of(this.posts);;
+      return this.posts == null ? new EmptyObservable() : Observable.of(this.posts);
    }
    getPostsForIds_getParams() {
       return this.ids;
