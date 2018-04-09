@@ -12,7 +12,7 @@ export class User implements IUser {
   public email: string;
 
   public userUid: string;
-  private _isLoggedIn: boolean;
+  public _isLoggedIn: boolean;
 
   public auth: IAuth;
   public database: IDatabase;

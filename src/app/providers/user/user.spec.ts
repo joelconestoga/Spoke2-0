@@ -5,9 +5,53 @@ import { Database } from "../database/database";
 
 describe('User', () => {
 
-   let component: User;
+  let component: User;
 
-   it('Should login with google', () => {
+  it('checkUserSession LoggedIn', () => {
+
+    let callBackMock = function(logged, notLogged) {
+      if (!logged) {
+        throw new Error("Not logged!!");
+      }
+    }
+
+    let afAuthMock = new AuthMock;
+    afAuthMock.result = { "uid":"xxx",
+                          "displayName":"yyy",
+                          "email":"zzz",
+                        };
+
+    component = new User(afAuthMock, null);
+   
+    component.checkUserSession(callBackMock);
+
+    expect(component._isLoggedIn).toEqual(true);
+    expect(component.displayName).toEqual("yyy");
+    expect(component.email).toEqual("zzz");
+    expect(component.userUid).toEqual("xxx");
+  }); 
+
+  it('checkUserSession LoggedOut', () => {
+
+    let callBackMock = function(logged, notLogged) {
+      if (logged) {
+        throw new Error("Logged in!!");
+      }
+    }
+
+    let afAuthMock = new AuthMock;
+
+    component = new User(afAuthMock, null);
+   
+    component.checkUserSession(callBackMock);
+
+    expect(component._isLoggedIn).toEqual(false);
+    expect(component.displayName).toBeUndefined();
+    expect(component.email).toBeUndefined();
+    expect(component.userUid).toEqual("");
+  }); 
+
+  it('loginWithGoogle', () => {
       
     let afAuthMock = new AuthMock;
     afAuthMock.result = { "user": {
@@ -33,7 +77,7 @@ describe('User', () => {
     expect(afdbMock.provider).toEqual("ttt");
   }); 
  
-  it('Should login with Facebook', () => {
+  it('loginWithFacebook', () => {
       
     let afAuthMock = new AuthMock;
     afAuthMock.result = { "user": {
@@ -58,7 +102,7 @@ describe('User', () => {
     expect(afdbMock.email).toEqual("zzz");
   }); 
 
-  it('is able to logout', () => {
+  it('logout', () => {
       
     let afAuthMock = new AuthMock;
     let didCalledBack = false;
@@ -76,7 +120,7 @@ describe('User', () => {
     expect(didCalledBack).toBeTruthy();
   }); 
 
-  it('Should register with Email', () => {
+  it('registerUser', () => {
       
     let afAuthMock = new AuthMock;
     afAuthMock.result = { "user": {
@@ -106,7 +150,7 @@ describe('User', () => {
     expect(afAuthMock.password).toEqual("zzz");
   }); 
 
-  it('Should login with Email', () => {
+  it('loginWithEmail', () => {
       
     let afAuthMock = new AuthMock;
      afAuthMock.result = { "user": {
@@ -131,7 +175,7 @@ describe('User', () => {
     expect(afAuthMock.password).toEqual("zzz");
   }); 
 
-  it('Should save info from Form', () => {
+  it('saveUserInfoFromForm', () => {
       
     let afAuthMock = new AuthMock;
     let afdbMock = new DatabaseMock;
@@ -153,7 +197,39 @@ describe('User', () => {
     expect(afdbMock.campus).toEqual("fff");
   }); 
 
-  it('Should get favourites', () => {
+  it('isFavorite True', () => {
+      
+    let afdbMock = new DatabaseMock;
+    afdbMock.favorites.push(22);
+      
+    component = new User(null, afdbMock);
+
+    let mycallback = function(isFavorite){
+      if (!isFavorite) {
+        throw new Error("Should be favourite!!");
+      }
+    };
+    
+    component.isFavorite(22, mycallback);
+  }); 
+
+  it('isFavorite False', () => {
+      
+    let afdbMock = new DatabaseMock;
+    afdbMock.favorites.push(22);
+      
+    component = new User(null, afdbMock);
+
+    let mycallback = function(isFavorite){
+      if (isFavorite) {
+        throw new Error("Should not be favourite!!");
+      }
+    };
+    
+    component.isFavorite(123, mycallback);
+  }); 
+
+  it('getFavoritesKeys', () => {
       
     let afAuthMock = new AuthMock;
     let afdbMock = new DatabaseMock;
@@ -170,7 +246,7 @@ describe('User', () => {
     expect(component.userUid).toEqual("xxx");
   }); 
 
-  it('Should remove post from favourites', () => {
+  it('removeFromFavorites', () => {
       
     let afAuthMock = new AuthMock;
     let afdbMock = new DatabaseMock;
@@ -187,7 +263,7 @@ describe('User', () => {
     expect(component.userUid).toEqual("xxx");
   });
   
-  it('Should save user info from oAuth', () => {
+  it('saveUserInfoFromOAuth', () => {
       
     let afAuthMock = new AuthMock;
     let afdbMock = new DatabaseMock;
@@ -202,7 +278,7 @@ describe('User', () => {
     expect(afdbMock.provider).toEqual("ttt");
   }); 
 
-  it('Should set post as favourite', () => {
+  it('setFavorite', () => {
       
     let afAuthMock = new AuthMock;
     let afdbMock = new DatabaseMock;

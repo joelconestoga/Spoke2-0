@@ -1,4 +1,5 @@
 import { IDatabase } from "./i.database";
+import { Observable } from "rxjs";
 
 export class DatabaseMock implements IDatabase {
 
@@ -15,6 +16,7 @@ export class DatabaseMock implements IDatabase {
    public campus;
    public userUid;
    public post;
+   public favorites = [];
 
    saveUserInfoFromOAuth(uid, displayName, email, provider) {
       this.uid = uid;
@@ -36,7 +38,7 @@ export class DatabaseMock implements IDatabase {
    }
 
    isFavorite(userUid: any, id: any, callback: any) {
-      throw new Error("Method not implemented.");
+    return Observable.of(callback(this.favorites.indexOf(id) > -1));
    }
 
    getFavoritesKeys(userUid,callback) {

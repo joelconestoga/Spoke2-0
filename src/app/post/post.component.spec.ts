@@ -3,7 +3,7 @@ import { UserMock } from "../providers/user/user.mock";
 import { WordPressMock } from "../providers/wordpress/wordpress.mock";
 
 
-describe('User', () => {
+describe('PostComponent', () => {
 
    let component: PostComponent;
 

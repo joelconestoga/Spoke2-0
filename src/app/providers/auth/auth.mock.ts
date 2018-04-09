@@ -17,11 +17,11 @@ export class AuthMock implements IAuth {
    }
      
    checkUserSession(callbackLoggedIn, callbackNotLogged) {
-      if(this.auth == null) {
-         callbackNotLogged(this.auth);
+      if(this.result == null) {
+         callbackNotLogged(this.result);
       }
       else {
-         callbackLoggedIn(this.auth);
+         callbackLoggedIn(this.result);
       }
    }
 
