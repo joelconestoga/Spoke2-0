@@ -10,6 +10,7 @@ export class WordPressMock implements IWordPress {
    coverRowTwo: any;
    categoriesWithPosts: any;
    morePosts: any;
+   relatedPostsMock: any;
 
    public ids: any;
    
@@ -25,7 +26,7 @@ export class WordPressMock implements IWordPress {
       return Observable.of(this.coverRowTwo);
    }
    getPost(id: any) {
-      throw new Error("Method not implemented.");
+      return Observable.of(this.posts[id]);
    }
    getCategories() {
       throw new Error("Method not implemented.");
@@ -37,7 +38,7 @@ export class WordPressMock implements IWordPress {
       return Observable.of(this.morePosts);
    }
    getRelatedPosts(catId: any) {
-      throw new Error("Method not implemented.");
+      return Observable.of(this.relatedPostsMock);
    }
    getPostsForIds(ids: any) {
       this.ids = ids;

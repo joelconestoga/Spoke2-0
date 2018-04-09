@@ -125,7 +125,7 @@ export class PostComponent implements OnInit {
       }
     };
     this.disableFavoriteButton();
-    this.user.removeFromFavorites(this.post.id, callback);
+    this.user.removeFromFavorites(post.id, callback);
   }
 
   setAsFavorite(post) {

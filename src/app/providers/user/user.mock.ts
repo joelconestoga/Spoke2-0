@@ -1,8 +1,13 @@
 import { IUser } from "./i.user";
+import { Observable } from "rxjs";
 
 export class UserMock implements IUser {
 
-  constructor(public favoriteKeys: any) { }
+  _isLoggedIn = false;
+  favorites = [];
+  persistenceError = null;
+
+  constructor(public favoriteKeys: any = null) { }
   
   getAuth() {
     new AngularFireAuthMock;
@@ -20,13 +25,13 @@ export class UserMock implements IUser {
     throw new Error("Method not implemented.");
   }
   setFavorite(post: any, callback: any) {
-    throw new Error("Method not implemented.");
+    return Observable.of(callback(this.persistenceError));
   }
   removeFromFavorites(id: any, callback: any) {
-    throw new Error("Method not implemented.");
+    return Observable.of(callback(this.persistenceError));
   }
   isFavorite(id: any, callback: any) {
-    throw new Error("Method not implemented.");
+    return Observable.of(callback(this.favorites.indexOf(id) > -1));
   }
   getFavoritesKeys(callback: any) {
     return callback(this.favoriteKeys);
@@ -44,7 +49,7 @@ export class UserMock implements IUser {
     throw new Error("Method not implemented.");
   }
   isLoggedIn() {
-    throw new Error("Method not implemented.");
+    return this._isLoggedIn;
   }
 }
 
