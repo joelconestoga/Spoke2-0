@@ -1,25 +1,38 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { RegistrationComponent } from './registration.component';
 
 describe('RegistrationComponent', () => {
+  
   let component: RegistrationComponent;
-  let fixture: ComponentFixture<RegistrationComponent>;
 
-  // beforeEach(async(() => {
-  //   TestBed.configureTestingModule({
-  //     declarations: [ RegistrationComponent ]
-  //   })
-  //   .compileComponents();
-  // }));
+  it('validate', () => {
 
-  // beforeEach(() => {
-  //   fixture = TestBed.createComponent(RegistrationComponent);
-  //   component = fixture.componentInstance;
-  //   fixture.detectChanges();
-  // });
+    component = new RegistrationComponent(null, null);
 
-  // it('should be created', () => {
-  //   expect(component).toBeTruthy();
-  // });
+    component.validate(null, 'firstName');
+    component.validate(null, 'lastName');
+    component.validate(null, 'email');
+    component.validate(null, 'password');
+    component.validate(null, 'confirmation');
+
+    expect(component.fieldsAreValid()).toBeFalsy();
+    expect(component.fieldsAreNotEmpty()).toBeFalsy();
+    expect(component.passwordConfirmed()).toBeFalsy();
+
+    component.firstName = "joel";
+    component.lastName = "matsu";
+    component.email = "joel@a.com";
+    component.password = "123456";
+    component.confirmation = "123456";
+
+    component.validate(null, 'firstName');
+    component.validate(null, 'lastName');
+    component.validate(null, 'email');
+    component.validate(null, 'password');
+    component.validate(null, 'confirmation');
+
+    expect(component.fieldsAreValid()).toBeTruthy();
+    expect(component.fieldsAreNotEmpty()).toBeTruthy();
+    expect(component.passwordConfirmed()).toBeTruthy();
+  }); 
+  
 });
