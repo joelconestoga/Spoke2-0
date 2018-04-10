@@ -6,8 +6,8 @@ import { IWordPress } from './i.wordpress';
 @Injectable()
 export class WordPress implements IWordPress {
 
-  // public static WORDPRESS_URL = "https://public-api.wordpress.com/wp/v2/sites/spoketest.wordpress.com/";
-  public static WORDPRESS_URL = "http://dev.spokeonline.com/wp-json/wp/v2/posts";
+  public static WORDPRESS_URL = "https://public-api.wordpress.com/wp/v2/sites/spoketest.wordpress.com/";
+  // public static WORDPRESS_URL = "http://dev.spokeonline.com/wp-json/wp/v2/posts";
   public static POSTS_URL = WordPress.WORDPRESS_URL + "posts";
   public static CATEGORIES_URL = WordPress.WORDPRESS_URL + "categories";
   
