@@ -3,6 +3,7 @@ import { User } from '../providers/user/user';
 import { Router } from '@angular/router';
 import { IUser } from '../providers/user/i.user';
 
+/** This class is responsible for all the logic behind Registration page. */
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -10,21 +11,36 @@ import { IUser } from '../providers/user/i.user';
 })
 export class RegistrationComponent {
   
+  /** @hidden*/
   firstName: string;
+  /** @hidden*/
   lastName: string;
+  /** @hidden*/
   email: string;
+  /** @hidden*/
   password: string;
+  /** @hidden*/
   confirmation: string;
+  /** @hidden*/
   program: string;
+  /** @hidden*/
   campus: string;
   
+  /** @hidden*/
   public error: any;
+  /** @hidden*/
   public firstNameInvalid: boolean = false;
+  /** @hidden*/
   public lastNameInvalid: boolean = false;
+  /** @hidden*/
   public emailInvalid: boolean = false;
+  /** @hidden*/
   public passwordInvalid: boolean = false;
+  /** @hidden*/
   public confirmationInvalid: boolean = false;
+  /** @hidden*/
   public fieldsOk: boolean = false;
+  /** @hidden*/
   public isConestogaEmail: boolean = false;
   
   constructor(@Inject('User') public user: IUser, private router: Router) { 
@@ -37,6 +53,7 @@ export class RegistrationComponent {
     this.campus = "";
   }
   
+  /** Register a new user on Firebase. If it succeeds, persist the rest of the user data on Firebase and redirect to Home page. */
   register(event) {
     event.preventDefault();
     
@@ -53,6 +70,7 @@ export class RegistrationComponent {
     this.user.registerUser(self.email, self.password, registrationCallback);
   }
 
+  /** Validates all the entry fields. */
   validate(event, field) {
     switch(field) {
       case 'firstName': {
@@ -83,16 +101,19 @@ export class RegistrationComponent {
     this.fieldsOk = this.fieldsAreValid() && this.fieldsAreNotEmpty() && this.passwordConfirmed();
   }
 
+  /** Checks the consistency of every data input. */
   fieldsAreValid() {
     return !this.firstNameInvalid && !this.lastNameInvalid && !this.emailInvalid &&
     !this.passwordInvalid && !this.confirmationInvalid;
   }
 
+  /** Checks for missing information. */
   fieldsAreNotEmpty() {
     return this.firstName != "" && this.lastName != "" &&
     this.email != "" && this.password != "" && this.confirmation != "";
   }
 
+  /** Checks for password/confirmation consistency. */
   passwordConfirmed() {
     return this.password == this.confirmation && this.password != "";
   }

@@ -8,6 +8,9 @@ import { Router } from '@angular/router';
 import { IWordPress } from '../providers/wordpress/i.wordpress';
 import { IUser } from '../providers/user/i.user';
 
+/**
+ * This class has all the logic behind the Favourites page.
+ */
 @Component({
   selector: 'app-favorites',
   templateUrl: './favorites.component.html',
@@ -15,6 +18,7 @@ import { IUser } from '../providers/user/i.user';
 })
 export class FavoritesComponent implements OnInit {
 
+  /** List of Favourites. */
   public favorites: any[];
 
   constructor(@Inject('WordPress') public wordpress: IWordPress, 
@@ -23,10 +27,15 @@ export class FavoritesComponent implements OnInit {
               private dialog: MdDialog, 
               private router: Router) {}
 
+  //** Loads the user's Favourites on initialization. */
   ngOnInit() {
     this.loadFavorites();
   }
 
+  /** 
+   * First check if the user is logged in. Then retrieves the user's favourites ids from Firebase.
+   * Finally, retrieve the posts from WordPress by using the obtained ids.
+   */
   loadFavorites() {
     this.favorites = [];
     var self = this;
@@ -49,6 +58,11 @@ export class FavoritesComponent implements OnInit {
     this.user.checkUserSession(checkUserSessionCallback);    
   }
 
+  /**
+   * Request real posts from WordPress by passing the ids.
+   * Keep the Favourites in rows of 4.
+   * @param keys 
+   */
   loadPostsForIds(keys) {
     var self = this;
     this.wordpress.getPostsForIds(keys).subscribe(data => { 
@@ -68,10 +82,20 @@ export class FavoritesComponent implements OnInit {
     });      
   }
 
+  /**
+   * Get the image for a post.
+   * @param image 
+   */
   getBackground(image) { 
     return this.sanitizer.bypassSecurityTrustStyle(`url(${image})`);
   }
 
+  /**
+   * Open the dialog that shows all the details of a Post.
+   * @param id 
+   * @param title 
+   * @param catId 
+   */
   openPost(id, title, catId){ 
     let dialogRef:MdDialogRef<PostComponent> = this.dialog.open(PostComponent);
     dialogRef.componentInstance.initialize(id, catId, title);

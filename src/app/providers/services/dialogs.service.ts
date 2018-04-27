@@ -3,6 +3,9 @@ import { MdDialogRef, MdDialog, MdDialogConfig } from '@angular/material';
 import { Injectable } from '@angular/core';
 import { ConfirmationComponent } from '../../confirmation/confirmation.component';
 
+/**
+ * Provides a service for asking the user any confirmation, by opening a Dialog.
+ */
 @Injectable()
 export class DialogsService {
 

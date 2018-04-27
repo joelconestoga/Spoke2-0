@@ -8,7 +8,9 @@ import { isPlatformBrowser } from '@angular/common';
 import { WordPress } from '../providers/wordpress/wordpress';
 import { IWordPress } from '../providers/wordpress/i.wordpress';
 
-
+/**
+ * This class has all the logic behind the Home page. It loads all the Categories and Posts presented.
+ */
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -16,21 +18,26 @@ import { IWordPress } from '../providers/wordpress/i.wordpress';
 export class HomeComponent implements OnInit {
 
   // SPK_TODO: is this the only youtube video expected?
+  /** YouTube URL. */
   public static YOUTUBE_URL = "https://www.youtube.com/embed/+lastest?list=LLa3gR-CwiJQz_o3m7AUVdjg";  
 
+  /** @hidden*/
   categories: any[];
+  /** How many posts should be loaded per page: 4 */
   load: any = { per_page: 4 };
+  /** @hidden*/
   category: any;
+  /** @hidden*/
   contentLoaded = true;
-  forward; // controller of navigation arrows inside categories  
-  
+  /** Help the navigation arrows inside categories. */
+  forward;
+  /** Used to load YouTube URL safely. */
   safeYoutubeUrl: SafeResourceUrl;
+  /** @hidden*/
   twitterHeight = 781;
 
-  // t: any;
-
-  // array of last published posts in the json form. 
   // SPK_TODO: ** We still have to make it display the posts most viewed instead of the last posts published **
+  /** Array of last published posts in the json form. */
   cover = { highlight: [], rowOne: [], rowTwo: [] };
 
   // base link to fetch media content
@@ -41,18 +48,23 @@ export class HomeComponent implements OnInit {
               private sanitizer: DomSanitizer, 
               public dialog: MdDialog) { }
 
+  /**
+   * At the initialization, load all Categories with respective Posts.
+   */
   ngOnInit() {
     this.loadCover();
     this.loadCategoriesWithPosts();
     this.loadYoutube();
   }
   
+  /** Loads the Twitter. */
   ngAfterViewInit() {    
     this.loadTwitter();
     // this.t = document.getElementById('twitter-widget');
     // this.t.style.height = '1000';
   }
 
+  /** Javascript specific for loading Twitter Widget. */
   loadTwitter() {
     if (isPlatformBrowser(this.platformId)) {
       setTimeout(function() { 
@@ -83,33 +95,37 @@ export class HomeComponent implements OnInit {
   //   this.t.attributes[1].value = h.toString();
   // }
 
-  // function for Angular to sanitize background images from Wordpress 
+  /** Function for Angular to sanitize background images from Wordpress. */
   getBackground(image) { 
     return this.sanitizer.bypassSecurityTrustStyle(`url(${image})`);
   }
 
-  // method to subscribe to posts to be displayed in the cover section
+  /** Loads the Cover, which is composed by the Highlight(big image) and the two rows of small images. */
   loadCover() {
       this.wordpress.getCoverHighlight().subscribe(data => this.cover.highlight = data);
       this.wordpress.getCoverRowOne().subscribe(data => this.cover.rowOne = data);
       this.wordpress.getCoverRowTwo().subscribe(data => this.cover.rowTwo = data);
   }
 
+  /** Open a Dialog to present the details of a Post. */
   openPost(id, title, catId){ 
     let dialogRef:MdDialogRef<PostComponent> = this.dialog.open(PostComponent);
     dialogRef.componentInstance.initialize(id, catId, title);
   }
   
+  /** Loads Categories with respective posts - 4 per page. */
   loadCategoriesWithPosts(){
     this.wordpress.getCategoriesWithPosts(this.load.per_page).subscribe(data => { 
       this.categories = data;
     });
   }
 
+  /** Loads the YouTube video. */
   loadYoutube() {
     this.safeYoutubeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(HomeComponent.YOUTUBE_URL);
   }
 
+  /** Used by the arrows, to load next page of Posts for a specific Category. */
   loadMore(event, category){
     event.stopPropagation();
     this.wordpress.getCategoryPosts(category.id, category.offset, this.load.per_page).subscribe(data => {
@@ -119,6 +135,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  /** Used by the arrows, to load previous page of Posts for a specific Category. */
   loadPrevious(event, category) {
     event.stopPropagation();
     this.wordpress.getCategoryPosts(category.id, category.offset - (this.load.per_page * 2), this.load.per_page).subscribe(data => {
@@ -128,10 +145,12 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  /** Arrows support. */
   mouseEnter(name) {
     this.forward = name;
   }
 
+  /** Arrows support. */
   mouseLeave(name) {
     this.forward = name;
   }

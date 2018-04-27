@@ -1,10 +1,11 @@
 # Spoke
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.3.
+- [Angular CLI Instalation](https://github.com/angular/angular-cli#installation)
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng serve` from the project folder to start the dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
@@ -18,12 +19,10 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Generating Documentation
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+You need to install [Typedoc](http://typedoc.org/guides/installation/) by running `npm install typedoc --global`. To generate the documentation, run `typedoc --out ./documentation --mode file --target ES6 ./src --excludeExternals --exclude "**/*+(mock|pipe)*"`
+- The HTML files will be generated in the `documentation` folder. Start navigation at `index.html`.
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-"# Spoke2.0" 
+

@@ -1,3 +1,6 @@
+/**
+ * Interface for User service. This interface allows to Unit Test classes that depend on User service, by accepting UserMock injection.
+ */
 export interface IUser {
 
   getAuth();

@@ -4,19 +4,28 @@ import { IAuth } from "../auth/i.auth";
 import { IDatabase } from "../database/i.database";
 import { IUser } from "./i.user";
 
-
+/**
+ * This class is reponsible for all operations related to the User (Registration, Authentication, Persistence).
+ */
 @Injectable()
 export class User implements IUser {
 
+  /** @hidden*/
   public displayName: string;
+  /** @hidden*/
   public email: string;
 
+  /** @hidden*/
   public userUid: string;
+  /** @hidden*/
   public _isLoggedIn: boolean;
 
+  /** @hidden*/
   public auth: IAuth;
+  /** @hidden*/
   public database: IDatabase;
 
+  /** @hidden*/
   public shouldCallThisBack;
 
   constructor(@Inject('Auth') auth: IAuth, 
@@ -28,14 +37,17 @@ export class User implements IUser {
     this.userUid = "";
   }
 
+  /** Retrieves the Auth service. */
   getAuth() {
     return this.auth;
   }
 
+  /** Retrieves the Database service. */
   getDatabase() {
     return this.database;
   }
 
+  /** Checks if there's a current session for any User. */
   checkUserSession(callback) {
     var self = this;
 
@@ -58,6 +70,7 @@ export class User implements IUser {
     this.getAuth().checkUserSession(callbackLoggedIn, callbackNotLogged);
   }
 
+  /** Calls the Auth service to log in with Google account. If succeeds, save the user's details on Firebase. */
   loginWithGoogle(callback) {
     var self = this;
     
@@ -78,6 +91,7 @@ export class User implements IUser {
     }
   }
   
+  /** Calls the Auth service to log in with Facebook account. If succeeds, save the user's details on Firebase.*/
   loginWithFacebook(callback) {
     var self = this;
 
@@ -98,6 +112,7 @@ export class User implements IUser {
     }
   }
 
+  /** Calls the Auth service to log out of the current session. */
   logout(callback) {
     var self = this;
 
@@ -110,18 +125,22 @@ export class User implements IUser {
     callback();
   }
 
+  /** Set a post as Favourite on Firebase. */
   setFavorite(post, callback) {
     this.getDatabase().setFavorite(this.userUid, post, callback);
   }
 
+  /** Remove a post from Favourite on Firebase. */
   removeFromFavorites(id, callback) {
     this.getDatabase().removeFromFavorites(this.userUid, id, callback);
   }
 
+  /** Checks if a post is Favourite on Firebase. */
   isFavorite(id, callback) {
     this.getDatabase().isFavorite(this.userUid, id, callback);
   }
 
+  /** Retrieve all persisted Posts ids which are the user's Favourite from Firebase. */
   getFavoritesKeys(callback) {
     this.getDatabase().getFavoritesKeys(this.userUid, callback);
   }
@@ -138,15 +157,18 @@ export class User implements IUser {
     this.getAuth().registerUser(email, password, myCallback);
   }
 
+  /** Calls the Database service to save the user details from Registration Form on Firebase. */
   saveUserInfoFromForm(uid, firstName, lastName, email, program, campus, callback) {
     var self = this;
     this.getDatabase().saveUserInfoFromForm(uid, firstName, lastName, email, program, campus, callback);
   }
 
+  /** Calls the Database service to save the user details from OAuth(Google/Facebook) on Firebase. */
   saveUserInfoFromOAuth(uid, displayName, email, provider) {
     this.getDatabase().saveUserInfoFromOAuth(uid, displayName, email, provider);
   }
 
+  /** Calls the Auth service to initiate a new session for the current user. */
   loginWithEmail(email, password, callback) {
     var self = this;
     this.shouldCallThisBack = callback;
@@ -159,6 +181,7 @@ export class User implements IUser {
     this.getAuth().loginWithEmail(email, password, myCallback);
   }
 
+  /** Checks if there's a user logged in. */
   isLoggedIn() {
     return this._isLoggedIn;
   }

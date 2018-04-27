@@ -46,6 +46,9 @@ const routes: Routes = [
   { path: 'favorites', component: FavoritesComponent },  
 ];
 
+/**
+ * Application Module, where the Providers are configurated to be injected for every class.
+ */
 @NgModule({
   declarations: [
     AppComponent,
